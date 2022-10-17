@@ -5,9 +5,9 @@ import { Route, Routes } from "react-router-dom";
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
-import ContributorList from "./components/contributorList";
-import EditContributor from "./components/editContributor";
-import CreateContributor from "./components/createContributor";
+import ContributorList from "./components/project-notes/contributorList";
+import EditContributor from "./components/project-notes/editContributor";
+import CreateContributor from "./components/project-notes/createContributor";
 
 const App = () => {
   return (
