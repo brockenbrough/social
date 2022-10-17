@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
+import NavbarContributor from "./navbarContributor";
 
 // Edit Component
 export default function EditContributor() {
@@ -68,6 +69,7 @@ export default function EditContributor() {
   // This following section will display the form that takes input from the user to update the data.
   return (
     <div>
+      <NavbarContributor/>
       <h3>Update Record</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">

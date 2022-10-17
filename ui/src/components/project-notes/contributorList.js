@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavbarContributor from "./navbarContributor";
 
 // The contributor component
 const Contributor = (props) => (
@@ -7,7 +8,7 @@ const Contributor = (props) => (
     <td>{props.record.name}</td>
     <td>{props.record.position}</td>
     <td>
-      <Link className="btn btn-link" to={`/editContributor/${props.record._id}`}>Edit</Link> |
+      <Link className="btn btn-link" to={`/project-notes/editContributor/${props.record._id}`}>Edit</Link> |
       <button className="btn btn-link"
         onClick={() => {
           props.deleteContributor(props.record._id);
@@ -80,6 +81,7 @@ export default function ContributorList() {
   // doing a lot of work.
   return (
     <div>
+      <NavbarContributor/>
       <h3>Contributors List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>

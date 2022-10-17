@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
 
 // Here, we display our Navbar
-export default function Navbar() {
+export default function NavbarContributor() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,8 +16,8 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">
-                Home
+              <NavLink className="nav-link" to="/project-notes/contributors">
+                Contributors
               </NavLink>
             </li>
           </ul>
@@ -26,8 +26,8 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/project-notes/contributors">
-                About
+              <NavLink className="nav-link" to="/project-notes/create">
+                New Contributor
               </NavLink>
             </li>
           </ul>

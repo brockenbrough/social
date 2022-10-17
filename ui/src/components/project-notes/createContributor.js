@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import NavbarContributor from "./navbarContributor";
 
 export default function CreateContributor() {
   // We define the state for the form.
@@ -45,6 +46,7 @@ export default function CreateContributor() {
   // We refer to the functions we defined above for handling form changes.
   return (
     <div>
+      <NavbarContributor/>
       <h3>Create Contributor</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
