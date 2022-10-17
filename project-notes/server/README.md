@@ -1,4 +1,10 @@
-# mern-stack-example
+# 
+# Project-Notes Service
+# 
+# This service tracks information about the development of the Social
+# Media App.  For example, the students that contributed to the project are
+# recorded by this service in MongoDB.
+ 
 Mern Stack code for the [Mern Tutorial](https://www.mongodb.com/languages/mern-stack-tutorial)
 
 [![CI](https://github.com/mongodb-developer/mern-stack-example/actions/workflows/main.yaml/badge.svg)](https://github.com/mongodb-developer/mern-stack-example/actions/workflows/main.yaml)
