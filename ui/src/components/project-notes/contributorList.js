@@ -1,3 +1,4 @@
+//This is a comment about imports
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavbarContributor from "./navbarContributor";
@@ -95,3 +96,5 @@ export default function ContributorList() {
     </div>
   );
 }
+
+//A comment made to test staging, committing, and pushing - Uk
