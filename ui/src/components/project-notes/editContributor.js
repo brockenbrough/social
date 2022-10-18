@@ -36,7 +36,7 @@ export default function EditContributor() {
 
     return;
   }, [params.id, navigate]);
-
+// methods
   // These methods will update the state properties.
   // The value is an object like {name: "Jose"} identifying field and new value.
   function updateForm(value) {
