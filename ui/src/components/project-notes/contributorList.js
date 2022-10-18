@@ -31,7 +31,7 @@ export default function ContributorList() {
     // Define a function to get records. We are going to call it below.
     // We use async keyword so we can later say "await" to block on finish.
     async function getRecords() {
-      const response = await fetch(`http://localhost:5000/project_notes/contributor/`);
+      const response = await fetch(`http://localhost:8095/project_notes/contributor/`);
 
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
@@ -50,7 +50,7 @@ export default function ContributorList() {
 
   // A method to delete a contributor
   async function deleteContributor(id) {
-    await fetch(`http://localhost:5000/project_notes/contributor/${id}`, {
+    await fetch(`http://localhost:8095/project_notes/contributor/${id}`, {
       method: "DELETE"
     });
 
