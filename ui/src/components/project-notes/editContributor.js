@@ -36,7 +36,7 @@ export default function EditContributor() {
 
     return;
   }, [params.id, navigate]);
-
+// methodss
   // These methods will update the state properties.
   // The value is an object like {name: "Jose"} identifying field and new value.
   function updateForm(value) {
@@ -70,7 +70,7 @@ export default function EditContributor() {
   return (
     <div>
       <NavbarContributor/>
-      <h3>Update Record</h3>
+      <h4>Update YO MOMMA'S Record</h4>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name: </label>
