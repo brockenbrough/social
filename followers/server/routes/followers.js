@@ -1,9 +1,9 @@
 const express = require("express");
 
-// projectNotesRoutes is an instance of the express router.
+// followerRoutes is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /project_notes.
-const projectNotesRoutes = express.Router();
+// The router will be added as a middleware and will take control of requests starting with path /followers.
+const followerRoutes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
@@ -13,8 +13,8 @@ const ObjectId = require("mongodb").ObjectId;
 
 
 // This section will help you get a list of all the contributors.
-projectNotesRoutes.route("/project_notes/contributor").get(function (req, res) {
-  let db_connect = dbo.getDb("project_notes");
+followerRoutes.route("/followers/contributor").get(function (req, res) {
+  let db_connect = dbo.getDb("followers");
   db_connect
     .collection("contributors")
     .find({})
@@ -25,7 +25,7 @@ projectNotesRoutes.route("/project_notes/contributor").get(function (req, res) {
 });
 
 // This section will help you get a single contributor by id
-projectNotesRoutes.route("/project_notes/contributor/:id").get(function (req, res) {
+followerRoutes.route("/followers/contributor/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect
@@ -37,7 +37,7 @@ projectNotesRoutes.route("/project_notes/contributor/:id").get(function (req, re
 });
 
 // This section will help you create a new contributor.
-projectNotesRoutes.route("/project_notes/contributor/add").post(function (req, response) {
+followerRoutes.route("/followers/contributor/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     name: req.body.name,
@@ -51,7 +51,7 @@ projectNotesRoutes.route("/project_notes/contributor/add").post(function (req, r
 });
 
 // This section will help you update a contributor by id.
-projectNotesRoutes.route("/project_notes/contributor/update/:id").post(function (req, response) {
+followerRoutes.route("/followers/contributor/update/:id").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   let newvalues = {
@@ -71,7 +71,7 @@ projectNotesRoutes.route("/project_notes/contributor/update/:id").post(function 
 });
 
 // This section will help you delete a contributor
-projectNotesRoutes.route("/project_notes/contributor/:id").delete((req, response) => {
+followerRoutes.route("/followers/contributor/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect.collection("contributors").deleteOne(myquery, function (err, obj) {
@@ -81,4 +81,4 @@ projectNotesRoutes.route("/project_notes/contributor/:id").delete((req, response
   });
 });
 
-module.exports = projectNotesRoutes;
+module.exports = followerRoutes;
