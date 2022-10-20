@@ -1,0 +1,31 @@
+{
+  "name": "userservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tochey/User_Service.git"
+  },
+  "author": "user service team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tochey/User_Service/issues"
+  },
+  "homepage": "https://github.com/Tochey/User_Service#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5",
+    "zod": "^3.19.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
