@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavbarContributor from "./navbarContributor";
 
+// Adding new method
 // The contributor component
 const Contributor = (props) => (
   <tr>
@@ -97,4 +98,5 @@ export default function ContributorList() {
   );
 }
 
+//Evan bum Comment
 //A comment made to test staging, committing, and pushing - Uk
