@@ -1,0 +1,18 @@
+POST http://localhost:8080/user/signup
+Content-Type: application/json 
+
+{
+    "username" : "tochiamanze",
+    "email" : "cdon@gmail.com",
+    "password" : "tochi12345"
+}
+
+###
+
+POST http://localhost:8080/user/login
+Content-Type: application/json 
+
+{
+    "username" : "tochiamanze",
+    "password" : "tochi12345"
+}
