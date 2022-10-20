@@ -12,11 +12,11 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-// This section will help you get a list of all the contributors.
-projectNotesRoutes.route("/project_notes/contributor").get(function (req, res) {
-  let db_connect = dbo.getDb("project_notes");
+// This section will help you get a list of all the views.
+statisticsRoutes.route("/statistics/views").get(function (req, res) {
+  let db_connect = dbo.getDb("statistics");
   db_connect
-    .collection("contributors")
+    .collection("views")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
