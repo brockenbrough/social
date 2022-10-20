@@ -10,7 +10,7 @@ export default function Home() {
   // This following section will display the form that takes input from the user to update the data.
   return (
     <div>
-      <h1>Welcome to the amazing Social Media App!</h1>
+      <h1>Welcome to the Social Media App part 2!</h1>
     </div>
   );
 }
