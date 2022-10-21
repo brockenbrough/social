@@ -13,10 +13,10 @@ const ObjectId = require("mongodb").ObjectId;
 
 
 // This section will help you get a list of all the followers.
-followerRoutes.route("/following/followers").get(function (req, res) {
+followerRoutes.route("/followers").get(function (req, res) {
   let db_connect = dbo.getDb("following");
   db_connect
-    .collection("followerList")
+    .collection("followers")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -25,11 +25,11 @@ followerRoutes.route("/following/followers").get(function (req, res) {
 });
 
 // This section will help you get a single follower by id
-followerRoutes.route("/following/followers/:id").get(function (req, res) {
+followerRoutes.route("/followers/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect
-      .collection("followerList")
+      .collection("followers")
       .findOne(myquery, function (err, result) {
         if (err) throw err;
         res.json(result);
@@ -37,32 +37,30 @@ followerRoutes.route("/following/followers/:id").get(function (req, res) {
 });
 
 // This section will help you create a new follower.
-followerRoutes.route("/following/followers/add").post(function (req, response) {
+followerRoutes.route("/followers/follow").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
+    userId: req.body.userId,
+    targetUserId: req.body.targetUserId,
   };
-  db_connect.collection("followerList").insertOne(myobj, function (err, res) {
+  db_connect.collection("followers").insertOne(myobj, function (err, res) {
     if (err) throw err;
     response.json(res);
   });
 });
 
 // This section will help you update a follower by id.
-followerRoutes.route("/following/followers/update/:id").post(function (req, response) {
+followerRoutes.route("/followers/update/:id").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   let newvalues = {
     $set: {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+      userId: req.body.userId,
+      targetUserId: req.body.targetUserId,
     },
   };
   db_connect
-    .collection("followerList")
+    .collection("followers")
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
       console.log("1 document updated");
@@ -71,10 +69,10 @@ followerRoutes.route("/following/followers/update/:id").post(function (req, resp
 });
 
 // This section will help you delete a follower
-followerRoutes.route("/following/followers/:id").delete((req, response) => {
+followerRoutes.route("/followers/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
-  db_connect.collection("followerList").deleteOne(myquery, function (err, obj) {
+  db_connect.collection("followers").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
     response.json(obj);
