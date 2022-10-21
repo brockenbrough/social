@@ -1,0 +1,12 @@
+POST http://localhost:8085/following/followers/add
+Content-Type: application/json 
+
+{
+    "userId" : "Jerry",
+    "followers" : ["Bob", "Billy", "Tim"]
+}
+
+###
+
+GET http://localhost:8085/following/followers
+Content-Type: application/json
