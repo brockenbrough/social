@@ -3,7 +3,7 @@ const express = require("express");
 // projectNotesRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /project_notes.
-const projectNotesRoutes = express.Router();
+const statisticsRoutes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
@@ -24,6 +24,31 @@ statisticsRoutes.route("/statistics/views").get(function (req, res) {
     });
 });
 
+// This section will help you get a list of all likes associated with a post.
+statisticsRoutes.route("/statistics/likes").get(function (req, res) {
+  let db_connect = dbo.getDb("statistics");
+  db_connect
+    .collection("likes")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
+// This section will allow the service to create a like for a post.
+statisticsRoutes.route("/statistics/createLike").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    postID: req.body.postID,
+    userID: req.body.userID,
+  };
+  db_connect.collection("likes").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
+/*
 // This section will help you get a single contributor by id
 projectNotesRoutes.route("/project_notes/contributor/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
@@ -79,6 +104,6 @@ projectNotesRoutes.route("/project_notes/contributor/:id").delete((req, response
     console.log("1 document deleted");
     response.json(obj);
   });
-});
+});*/
 
-module.exports = projectNotesRoutes;
+module.exports = statisticsRoutes;
