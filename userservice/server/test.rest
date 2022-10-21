@@ -30,3 +30,9 @@ Content-Type: application/json
     "userId" : "6346044aeaec8d57081e85ae"
 }
 
+GET  http://localhost:8080/user/getUser
+Content-Type: application/json 
+
+{
+    "userId" : "634edb2a16710b2cda6fb378"
+}
