@@ -48,6 +48,27 @@ statisticsRoutes.route("/statistics/:userID/likes/:postID").post(function (req, 
     response.json(res);
   });
 });
+
+//Creates a View for a post.
+statisticsRoutes.route("/statistics/:userID/:postID").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    postID: req.body.postID,
+    userID: req.body.userID,
+  };
+  db_connect.collection("views").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
+
+
+module.exports = statisticsRoutes;
+
+
+
+
+
 /*
     These are not to be used, they are just templates for now and will be deleted in the future.
     Please disreguard these functions.
@@ -108,4 +129,4 @@ projectNotesRoutes.route("/project_notes/contributor/:id").delete((req, response
   });
 });*/
 
-module.exports = statisticsRoutes;
+
