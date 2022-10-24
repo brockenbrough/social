@@ -12,8 +12,8 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-// This section will help you get a list of all the views.
-statisticsRoutes.route("/statistics/views").get(function (req, res) {
+// This section will help you get a list of all the views of a post.
+statisticsRoutes.route("/statistics/:postID/views").get(function (req, res) {
   let db_connect = dbo.getDb("statistics");
   db_connect
     .collection("views")
@@ -25,7 +25,7 @@ statisticsRoutes.route("/statistics/views").get(function (req, res) {
 });
 
 // This section will help you get a list of all likes associated with a post.
-statisticsRoutes.route("/statistics/likes").get(function (req, res) {
+statisticsRoutes.route("/statistics/:postID/likes").get(function (req, res) {
   let db_connect = dbo.getDb("statistics");
   db_connect
     .collection("likes")
@@ -37,7 +37,7 @@ statisticsRoutes.route("/statistics/likes").get(function (req, res) {
 });
 
 // This section will allow the service to create a like for a post.
-statisticsRoutes.route("/statistics/createLike").post(function (req, response) {
+statisticsRoutes.route("/statistics/:userID/likes/:postID").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     postID: req.body.postID,
@@ -49,6 +49,8 @@ statisticsRoutes.route("/statistics/createLike").post(function (req, response) {
   });
 });
 /*
+    These are not to be used, they are just templates for now and will be deleted in the future.
+    Please disreguard these functions.
 // This section will help you get a single contributor by id
 projectNotesRoutes.route("/project_notes/contributor/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
