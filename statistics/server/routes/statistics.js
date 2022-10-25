@@ -50,7 +50,7 @@ statisticsRoutes.route("/statistics/likes/").post(function (req, response) {
 });
 
 //Creates a View for a post.
- statisticsRoutes.route("/statistics/:userID/:postID").post(function (req, response) {
+ statisticsRoutes.route("/statistics/view").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     postID: req.body.postID,
