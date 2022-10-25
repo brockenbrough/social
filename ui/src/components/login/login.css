@@ -1,0 +1,17 @@
+div {
+    margin: 5px;
+  }
+  
+  label {
+    display: inline-block;;
+    width: 100px;
+  }
+  
+  input {
+    outline: none;
+  }
+
+  .error-field {
+    color : red;
+    font-size: bold ;
+  }
