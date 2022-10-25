@@ -31,7 +31,7 @@ projectPostRoutes.route("/posts/:id").get(function (req, res) {
   db_connect
       .collection("posts")
       .findOne(myquery, function (err, result) {
-        if (err) throw err;
+        if(result === null) return res.status(404).json("PostId could not be found")
         res.json(result);
       });
 });
@@ -55,15 +55,13 @@ projectPostRoutes.route("/posts/update/:id").put(function (req, response) {
   let myquery = { _id: ObjectId( req.params.id )};
   let newvalues = {
     $set: {
-      author: req.body.author,
       content: req.body.content
     },
   };
   db_connect
     .collection("posts")
     .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-      console.log("1 document updated");
+      if(res === null) return res.status(404).json("PostId could not be found")
       response.json(res);
     });
 });
@@ -73,8 +71,6 @@ projectPostRoutes.route("/posts/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect.collection("posts").deleteOne(myquery, function (err, obj) {
-    // if (err) throw err;
-    // console.log("1 document deleted");
     if(obj.deletedCount === 0) return response.status(404).json("PostId could not be found")
     response.json(obj);
   });
