@@ -7,8 +7,8 @@ POST http://localhost:8085/followers/follow
 Content-Type: application/json 
 
 {
-    "userId" : "Jerry",
-    "followers" :"Tim"
+    "userId" : "Jackson",
+    "followers" : "Bryan"
 }
 
 ###

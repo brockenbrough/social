@@ -28,7 +28,7 @@ followerRoutes.route("/followers").get(function (req, res) {
     });
 });
 
-// Possible other way of following someone, I'm not sure if this is good. Will discuss in class.
+// To follow someone, it should not accept any duplicates. Needs a body with userId and followers(targetUserId)
 followerRoutes.route("/followers/follow").post(function (req, response) {
 
   const createFollower = new followerModel({
@@ -47,7 +47,7 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
           .collection("followers")
           .findOneAndUpdate(
             { userId: req.body.userId },
-            { $push: { followers: req.body.followers } },
+            { $addToSet: { followers: req.body.followers } },
             function (err, res) {
               if (err) throw err;
               console.log("Follower added to "+req.body.userId);
@@ -86,6 +86,7 @@ followerRoutes.route("/followers/:id").get(function (req, res) {
       .collection("followers")
       .findOne(myquery, function (err, result) {
         if (err) throw err;
+        if (result === null) return res.status(404).json("User doesn't exist.");
         console.log("All followers from user: "+req.params.id);
         res.json(result);
       });
