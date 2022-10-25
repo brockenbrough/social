@@ -2,11 +2,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 8095;
+const port = process.env.PORT || 8089;
 app.use(cors());
 app.use(express.json());
-app.use(require("./routes/project-notes"));
-// get driver connection
+app.use(require("./routes/comments"));
+// get driver connectinodon
 const dbo = require("./db/conn");
  
 app.listen(port, () => {
