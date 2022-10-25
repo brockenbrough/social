@@ -11,7 +11,6 @@ import Home from "./components/home";
 import ContributorList from "./components/project-notes/contributorList";
 import EditContributor from "./components/project-notes/editContributor";
 import CreateContributor from "./components/project-notes/createContributor";
-import CreateComment from "./components/comment-services/CreateComment";
 
 
 //test change
@@ -20,19 +19,12 @@ const App = () => {
     <div>
       <Navbar />
       <div style={{ margin: 20 }}>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route
-            path="/project-notes/contributors"
-            element={<ContributorList />}
-          />
-          <Route
-            path="/project-notes/editContributor/:id"
-            element={<EditContributor />}
-          />
-          <Route path="/project-notes/create" element={<CreateContributor />} />
-          <Route path="/comment-services/create" element={<CreateComment />} />
-        </Routes>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/project-notes/contributors" element={<ContributorList />} />
+        <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
+        <Route path="/project-notes/create" element={<CreateContributor />} />
+      </Routes>
       </div>
     </div>
   );

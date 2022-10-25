@@ -1,3 +1,7 @@
 /node_modules
+<<<<<<< HEAD
+=======
+config.env
+>>>>>>> 7dd5211a24eb8f76e69f4fcea519f41ffa6f1c51
 /build
 /coverage
