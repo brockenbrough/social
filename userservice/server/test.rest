@@ -30,7 +30,8 @@ Content-Type: application/json
     "userId" : "6346044aeaec8d57081e85ae"
 }
 
-GET  http://localhost:8080/user/getUser
+###
+GET  http://localhost:8080/user/getUserById
 Content-Type: application/json 
 
 {

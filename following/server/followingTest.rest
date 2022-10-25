@@ -1,12 +1,48 @@
-POST http://localhost:8085/following/followers/add
+
+GET http://localhost:8085/followers
+Content-Type: application/json
+
+###
+
+POST http://localhost:8085/followers/follow
 Content-Type: application/json 
 
 {
     "userId" : "Jerry",
-    "followers" : ["Bob", "Billy", "Tim"]
+    "targetUserId" :"Tim"
 }
 
 ###
 
-GET http://localhost:8085/following/followers
+GET http://localhost:8085/followers2
 Content-Type: application/json
+
+###
+
+POST http://localhost:8085/followers2/follow
+Content-Type: application/json 
+
+{
+    "userId" : "Ty",
+    "followers" : "Jordan"
+}
+
+###
+
+DELETE http://localhost:8085/followers2/63575669364ae08648dde858
+Content-Type: application/json 
+
+{
+    "userId" : "Ty",
+    "followers" : "Tom"
+}
+
+
+###
+GET http://localhost:8085/followers2/63575669364ae08648dde858
+Content-Type: application/json 
+
+{
+    "userId" : "Ty"
+}
+
