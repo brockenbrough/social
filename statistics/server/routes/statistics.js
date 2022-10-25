@@ -37,7 +37,7 @@ statisticsRoutes.route("/statistics/:postID/likes").get(function (req, res) {
 });
 
 // This section will allow the service to create a like for a post.
-statisticsRoutes.route("/statistics/:userID/likes/:postID").post(function (req, response) {
+statisticsRoutes.route("/statistics/likes/").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     postID: req.body.postID,
