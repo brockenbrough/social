@@ -80,7 +80,7 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
 });
 	
 
-// Possible other way to delete a follower, will discuss in class.
+// To delete a follower, needs a body.
 followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
   let db_connect = dbo.getDb();
   //let myquery = { _id: ObjectId( req.params.id )};
