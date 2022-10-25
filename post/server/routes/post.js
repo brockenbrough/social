@@ -25,7 +25,7 @@ projectPostRoutes.route("/posts/post").get(function (req, res) {
 });
 
 // This section will help you get a list of all the posts from a single user.
-projectPostRoutes.route("/posts/post/:id/:postid").get(function (req, res) {
+/*projectPostRoutes.route("/posts/post/:id/:postid").get(function (req, res) {
   let db_connect = dbo.getDb("posts");
   db_connect
     .collection("posts")
@@ -34,7 +34,7 @@ projectPostRoutes.route("/posts/post/:id/:postid").get(function (req, res) {
       if (err) throw err;
       res.json(result);
     });
-});
+});*/
 
 // This section will help you get a single post by id
 projectPostRoutes.route("/posts/post/:id").get(function (req, res) {
@@ -52,7 +52,6 @@ projectPostRoutes.route("/posts/post/:id").get(function (req, res) {
 projectPostRoutes.route("/posts/post/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    name: req.body.name,
     content: req.body.content
   };
   db_connect.collection("posts").insertOne(myobj, function (err, res) {
@@ -67,7 +66,6 @@ projectPostRoutes.route("/posts/post/update/:id").put(function (req, response) {
   let myquery = { _id: ObjectId( req.params.id )};
   let newvalues = {
     $set: {
-      name: req.body.name,
       content: req.body.content
     },
   };

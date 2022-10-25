@@ -12,8 +12,8 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-// This section will help you get a list of all the views.
-statisticsRoutes.route("/statistics/views").get(function (req, res) {
+// This section will help you get a list of all the views of a post.
+statisticsRoutes.route("/statistics/:postID/views").get(function (req, res) {
   let db_connect = dbo.getDb("statistics");
   db_connect
     .collection("views")
@@ -25,7 +25,7 @@ statisticsRoutes.route("/statistics/views").get(function (req, res) {
 });
 
 // This section will help you get a list of all likes associated with a post.
-statisticsRoutes.route("/statistics/likes").get(function (req, res) {
+statisticsRoutes.route("/statistics/:postID/likes").get(function (req, res) {
   let db_connect = dbo.getDb("statistics");
   db_connect
     .collection("likes")
@@ -37,7 +37,7 @@ statisticsRoutes.route("/statistics/likes").get(function (req, res) {
 });
 
 // This section will allow the service to create a like for a post.
-statisticsRoutes.route("/statistics/createLike").post(function (req, response) {
+statisticsRoutes.route("/statistics/:userID/likes/:postID").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     postID: req.body.postID,
@@ -48,7 +48,39 @@ statisticsRoutes.route("/statistics/createLike").post(function (req, response) {
     response.json(res);
   });
 });
+
+//Creates a View for a post.
+ statisticsRoutes.route("/statistics/:userID/:postID").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    postID: req.body.postID,
+    userID: req.body.userID,
+  };
+  db_connect.collection("views").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
+// This section will help you delete a like
+statisticsRoutes.route("/statistics/:userID/likes/:postID").delete((req, response) => {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId( req.params.id )};
+  db_connect.collection("likes").deleteOne(myquery, function (err, obj) {
+    if (err) throw err;
+    console.log("1 document deleted");
+    response.json(obj);
+  });
+});
+
+module.exports = statisticsRoutes;
+
+
+
+
+
 /*
+    These are not to be used, they are just templates for now and will be deleted in the future.
+    Please disreguard these functions.
 // This section will help you get a single contributor by id
 projectNotesRoutes.route("/project_notes/contributor/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
@@ -106,4 +138,4 @@ projectNotesRoutes.route("/project_notes/contributor/:id").delete((req, response
   });
 });*/
 
-module.exports = statisticsRoutes;
+
