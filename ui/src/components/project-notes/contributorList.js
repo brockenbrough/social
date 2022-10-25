@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavbarContributor from "./navbarContributor";
+import getUserInfo from '../../utilities/decodeJwt'
 
+
+// Adding new method
 // The contributor component
 const Contributor = (props) => (
   <tr>
@@ -21,11 +24,14 @@ const Contributor = (props) => (
   </tr>
 );
 
+
+
 // The ContributorList component.  This is the main component in this file.
 export default function ContributorList() {
+  const [user, setUser] = useState({})
   const [contributors, setContributors] = useState([]);
   // Hook useState - we are saying: call our state 'records' and use 'setRecords' to change it's value.
-
+  
   // This method fetches the records from the database.
   // Hook useEffect - this hook is used to invoke something after rendering.
   useEffect(() => {
@@ -33,33 +39,34 @@ export default function ContributorList() {
     // We use async keyword so we can later say "await" to block on finish.
     async function getRecords() {
       const response = await fetch(`http://localhost:8095/project_notes/contributor/`);
-
+      
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
         window.alert(message);
         return;
       }
-
+      
       const fetchedRecords = await response.json();
       setContributors(fetchedRecords);  // update state.  when state changes, we automatically re-render.
     }
-
+    
     getRecords();   // Now that we defined it, call the function. 
-
+    setUser(getUserInfo())
+    
     return; 
   }, [contributors.length]);  // If record length ever changes, this useEffect() is automatically called.
-
+  
   // A method to delete a contributor
   async function deleteContributor(id) {
     await fetch(`http://localhost:8095/project_notes/contributor/${id}`, {
       method: "DELETE"
     });
-
+    
     // We're going to patch up our state by removing the records corresponding to id in our current state.
     const newRecords = contributors.filter((el) => el._id !== id);
     setContributors(newRecords);  // This causes a re-render because we change state.
   }
-
+  
   // This method will map out the records on the table.
   // Records.map means for each item in 'records' do something.
   // In our case we're return a presentation tag that will invoke rendering on a record.
@@ -76,6 +83,7 @@ export default function ContributorList() {
       );
     });
   }
+  if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
   // This following section will display the table with the records of individuals.
   // This is what RecordList returns: a rendering.  Notice that recordList() is
