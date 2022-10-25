@@ -52,7 +52,6 @@ projectPostRoutes.route("/posts/post/:id").get(function (req, res) {
 projectPostRoutes.route("/posts/post/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    name: req.body.name,
     content: req.body.content
   };
   db_connect.collection("posts").insertOne(myobj, function (err, res) {
@@ -67,7 +66,6 @@ projectPostRoutes.route("/posts/post/update/:id").put(function (req, response) {
   let myquery = { _id: ObjectId( req.params.id )};
   let newvalues = {
     $set: {
-      name: req.body.name,
       content: req.body.content
     },
   };

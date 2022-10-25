@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react"; 
 import { useParams, useNavigate } from "react-router";
 
 // Edit Component
@@ -14,3 +14,4 @@ export default function Home() {
     </div>
   );
 }
+

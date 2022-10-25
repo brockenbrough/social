@@ -1,0 +1,13 @@
+button{
+    margin-left: 10px;
+    padding: 7px;
+    font-weight: bolder;
+}
+
+.signup-btn {
+    color: blue;
+}
+
+.login-btn{
+    color: purple;
+}
