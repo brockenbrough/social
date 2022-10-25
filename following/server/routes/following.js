@@ -78,7 +78,7 @@ followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
   });
 });
 
-// This section will help you GET all followers from a user by id.
+// This section will help you GET all followers from a user by id. Should have error handling.
 followerRoutes.route("/followers/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
