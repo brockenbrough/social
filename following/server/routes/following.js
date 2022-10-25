@@ -28,20 +28,7 @@ followerRoutes.route("/followers").get(function (req, res) {
     });
 });
 
-// This section will help you create a new follower.
-// followerRoutes.route("/followers/follow").post(function (req, response) {
-//   let db_connect = dbo.getDb();
-//   let myobj = {
-//     userId: req.body.userId,
-//     targetUserId: req.body.targetUserId,
-//   };
-//   db_connect.collection("followers").insertOne(myobj, function (err, res) {
-//     if (err) throw err;
-//     response.json(res);
-//   });
-// });
-
-// Possible other way of following someone, I'm not sure if this is good. Will discuss in class.
+// To follow someone, it should not accept any duplicates. Needs a body with userId and followers(targetUserId)
 followerRoutes.route("/followers/follow").post(function (req, response) {
 
   const createFollower = new followerModel({
@@ -60,7 +47,7 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
           .collection("followers")
           .findOneAndUpdate(
             { userId: req.body.userId },
-            { $push: { followers: req.body.followers } },
+            { $addToSet: { followers: req.body.followers } },
             function (err, res) {
               if (err) throw err;
               console.log("Follower added to "+req.body.userId);
@@ -91,19 +78,7 @@ followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
   });
 });
 
-
-// This section will help you DELETE a follower by id.
-// followerRoutes.route("/followers/:id").delete((req, response) => {
-//   let db_connect = dbo.getDb();
-//   let myquery = { _id: ObjectId( req.params.id )};
-//   db_connect.collection("followers").deleteOne(myquery, function (err, obj) {
-//     if (err) throw err;
-//     console.log("1 document deleted");
-//     response.json(obj);
-//   });
-// });
-
-// This section will help you GET all followers from a user by id.
+// This section will help you GET all followers from a user by id. Should have error handling.
 followerRoutes.route("/followers/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
@@ -111,28 +86,10 @@ followerRoutes.route("/followers/:id").get(function (req, res) {
       .collection("followers")
       .findOne(myquery, function (err, result) {
         if (err) throw err;
+        if (result === null) return res.status(404).json("User doesn't exist.");
         console.log("All followers from user: "+req.params.id);
         res.json(result);
       });
 });
-
-// This section will help you update a follower by id.
-// followerRoutes.route("/followers/update/:id").post(function (req, response) {
-//   let db_connect = dbo.getDb();
-//   let myquery = { _id: ObjectId( req.params.id )};
-//   let newvalues = {
-//     $set: {
-//       userId: req.body.userId,
-//       targetUserId: req.body.targetUserId,
-//     },
-//   };
-//   db_connect
-//     .collection("followers")
-//     .updateOne(myquery, newvalues, function (err, res) {
-//       if (err) throw err;
-//       console.log("1 document updated");
-//       response.json(res);
-//     });
-// });
 
 module.exports = followerRoutes;
