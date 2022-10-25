@@ -1,4 +1,3 @@
 ###
 get http://localhost:8093/feed
-Content-Type: application/json
 ###

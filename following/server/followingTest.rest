@@ -7,8 +7,8 @@ POST http://localhost:8085/followers/follow
 Content-Type: application/json 
 
 {
-    "userId" : "Jerry",
-    "targetUserId" :"Tim"
+    "userId" : "Jackson",
+    "followers" : "Bryan"
 }
 
 ###
@@ -21,6 +21,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8085/followers2/63575669364ae08648dde858
+GET http://localhost:8085/followers/63580abed2ebe5d28acdbe56
 Accept: application/json 
 
+###
