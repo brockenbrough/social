@@ -35,6 +35,7 @@ CommentRoutes.route("/comments/comment/:id").get(function (req, res) {
 // This section will help you create a new contributor.
 CommentRoutes.route("/comments/comment/add").post(function (req, response) {
   let db_connect = dbo.getDb();
+
   let myobj = {
     postId: req.body.postId,
     commentContent: req.body.commentContent,

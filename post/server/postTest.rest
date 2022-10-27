@@ -14,7 +14,7 @@ POST http://localhost:8083/posts/post/
 Content-Type: application/json 
 
 {
-    "userId" : "Dog",
+    "userId" : "Dog 2",
     "content": "I am a testing body in .rest"
     
 }
