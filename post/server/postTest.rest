@@ -1,5 +1,5 @@
 
-//Get All Posts
+//Get All the Posts
 GET http://localhost:8083/posts/post
 Content-Type: application/json
 
