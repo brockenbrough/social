@@ -28,6 +28,17 @@ followerRoutes.route("/followers").get(function (req, res) {
     });
 });
 
+followerRoutes.route("/following").get(function (req, res) {
+  let db_connect = dbo.getDb("following");
+  db_connect
+    .collection("followees")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
 // To follow someone, it should not accept any duplicates. Needs a body with userId and followers(targetUserId)
 followerRoutes.route("/followers/follow").post(function (req, response) {
   if (req.body.userId == null || req.body.userId == "")
