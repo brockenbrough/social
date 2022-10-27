@@ -1,3 +1,6 @@
+// POST ENGINNER: JEAN TOKAM/ MARCKUS UK /  KHANH NGUYEN
+
+
 const express = require("express");
 const date = new Date();
 let day = date.getDate();
@@ -10,6 +13,10 @@ hour = (hour > 12)? hour -12 : hour;
 hour = (hour == '00')? 12 : hour;
 let minute = date.getMinutes();
 let currentDate = `${month}-${day}-${year} ${hour}:${minute} ${suffix}`;
+
+
+
+
 
 // projectPostRoutes is an instance of the express router.
 // We use it to define our routes.
