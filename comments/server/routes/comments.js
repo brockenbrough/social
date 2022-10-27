@@ -1,8 +1,9 @@
 const express = require("express");
-// projectNotesRoutes is an instance of the express router.
+
+// CommentRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /project_notes.
-const commentsRoutes = express.Router();
+const CommentRoutes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
@@ -10,9 +11,9 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 
-// This section will help you get a list of all the contributors.
-commentsRoutes.route("/comments/ comment").get(function (req, res) {
-  let db_connect = dbo.getDb("commentsRoutes");
+// This section will help you get a list of all the comments.
+CommentRoutes.route("/comments/comment").get(function (req, res) {
+  let db_connect = dbo.getDb("comments");
   db_connect
     .collection("comments")
     .find({})
@@ -23,22 +24,22 @@ commentsRoutes.route("/comments/ comment").get(function (req, res) {
 });
 
 // This section will help you get a single contributor by id
-commentsRoutes.route("/comments/comment:id").get(function (req, res) {
+CommentRoutes.route("/comments/comment/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
-  db_connect
-      .collection("comments")
-      .findOne(myquery, function (err, result) {
-        if (err) throw err;
-        res.json(result);
-      });
+  let myquery = { _id: ObjectId(req.params.id) };
+  db_connect.collection("comments").findOne(myquery, function (err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
 });
 
 // This section will help you create a new contributor.
-commentsRoutes.route("/comments/comment/add").post(function (req, response) {
+CommentRoutes.route("/comments/comment/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    
+    postId: req.body.postId,
+    commentContent: req.body.commentContent,
+    userId: req.body.userId,
   };
   db_connect.collection("comments").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -46,14 +47,46 @@ commentsRoutes.route("/comments/comment/add").post(function (req, response) {
   });
 });
 
-// This section will help you update a contributor by id.
-commentsRoutes.route("/comments/comment/update/:id").post(function (req, response) {
+// This section will help you create a new contributor.
+CommentRoutes.route("/comments/comment/add").post(function (req, response) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myobj = {
+    postId: req.body.postId,
+    commentContent: req.body.commentContent,
+    userId: req.body.userId,
+  };
+  db_connect.collection("comments").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
+
+// Reply to a comment.
+CommentRoutes.route("/comments/comment/reply/:id").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    postId: req.body.postId,
+    commentContent: req.body.commentContent,
+    userId: req.body.userId,
+  };
+  db_connect.collection("comments").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
+
+
+// This section will help you update a comment by id.
+CommentRoutes.route("/comments/comment/update/:id").put(function (
+  req,
+  response
+) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
     $set: {
+      commentContent: req.body.commentContent
 
-    comment: req.body.comment,
     },
   };
   db_connect
@@ -66,9 +99,9 @@ commentsRoutes.route("/comments/comment/update/:id").post(function (req, respons
 });
 
 // This section will help you delete a contributor
-commentsRoutes.route("/comments/ comment/:id").delete((req, response) => {
+CommentRoutes.route("/comments/comment/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection("comments").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
@@ -76,4 +109,4 @@ commentsRoutes.route("/comments/ comment/:id").delete((req, response) => {
   });
 });
 
-module.exports = commentsRoutes;
+module.exports = CommentRoutes;

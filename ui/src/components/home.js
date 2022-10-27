@@ -69,9 +69,7 @@ export default function Home() {
           {/* </form> */}
 
       </div>
-=======
       <h1>Welcome to the Social Media App part 2!</h1>
->>>>>>> 7dd5211a24eb8f76e69f4fcea519f41ffa6f1c51
     </div>
   );
 }
