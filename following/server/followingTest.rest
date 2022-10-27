@@ -3,11 +3,12 @@ GET http://localhost:8085/followers
 Accept: application/json 
 
 # 5.2.1
+###
 POST http://localhost:8085/followers/follow
 Content-Type: application/json 
 
 {
-    "userId" : "Jackson",
+    "userId" : "Jack",
     "targetUserId" : "Bryan"
 }
 
