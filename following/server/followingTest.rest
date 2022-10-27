@@ -1,6 +1,6 @@
 # 5.2.3
 GET http://localhost:8085/followers
-Content-Type: application/json
+Accept: application/json 
 
 # 5.2.1
 POST http://localhost:8085/followers/follow
