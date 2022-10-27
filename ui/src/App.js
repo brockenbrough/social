@@ -11,9 +11,6 @@ import Home from "./components/home";
 import ContributorList from "./components/project-notes/contributorList";
 import EditContributor from "./components/project-notes/editContributor";
 import CreateContributor from "./components/project-notes/createContributor";
-import LandingPage from './components/landingpage/Landingpage'
-import Login from './components/login/Login'
-import Signup from './components/register/Register'
 
 
 //test change
@@ -23,9 +20,7 @@ const App = () => {
       <Navbar />
       <div style={{ margin: 20 }}>
       <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
