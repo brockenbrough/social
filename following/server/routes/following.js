@@ -30,10 +30,14 @@ followerRoutes.route("/followers").get(function (req, res) {
 
 // To follow someone, it should not accept any duplicates. Needs a body with userId and followers(targetUserId)
 followerRoutes.route("/followers/follow").post(function (req, response) {
+  if (req.body.userId == null || req.body.userId == "")
+    return response.status(400).json("Invalid parameters for userId.");
+  if (req.body.targetUserId == null || req.body.targetUserId == "")
+    return response.status(400).json("Invalid parameters for targetUserId.");
 
   const createFollower = new followerModel({
     userId: req.body.userId,
-    followers: req.body.followers,
+    followers: req.body.targetUserId,
   });
 
   let db_connect = dbo.getDb();
@@ -47,11 +51,11 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
           .collection("followers")
           .findOneAndUpdate(
             { userId: req.body.userId },
-            { $addToSet: { followers: req.body.followers } },
-            function (err, res) {
+            { $addToSet: { followers: req.body.targetUserId } },
+            function (err, result) {
               if (err) throw err;
-              console.log("Follower added to "+req.body.userId);
-              response.json(res);
+              console.log("Follower added to " + req.body.userId);
+              response.json(result);
             }
           );
       } else {
@@ -59,7 +63,7 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
           .collection("followers")
           .insertOne(createFollower, function (err, res) {
             if (err) throw err;
-            console.log("Created new User "+req.body.userId+",and added followers.");
+            console.log("Created new User " + req.body.userId + ",and added followers.");
             response.json(res);
           });
       }
@@ -69,9 +73,15 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
 
 // To delete a follower, needs a body.
 followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
+
+  if (req.body.userId == null || req.body.userId == "")
+    return response.status(400).json("Invalid parameters for userId.");
+  if (req.body.targetUserId == null || req.body.targetUserId == "")
+    return response.status(400).json("Invalid parameters to DELETE targetUserId.");
+
   let db_connect = dbo.getDb();
   //let myquery = { _id: ObjectId( req.params.id )};
-  db_connect.collection("followers").updateOne({userId: req.body.userId}, {$pull: {followers: req.body.followers}},function (err, obj) {
+  db_connect.collection("followers").updateOne({userId: req.body.userId}, {$pull: {followers: req.body.targetUserId}},function (err, obj) {
     if (err) throw err;
     console.log("A follower(s) has been deleted from "+req.body.userId);
     response.json(obj);
