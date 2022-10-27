@@ -1,4 +1,4 @@
-// POST ENGINNER: JEAN TOKAM/ MARCKUS UK /  KHANH NGUYEN
+// POSTS ENGINNER: JEAN TOKAM/ MARCKUS UK /  KHANH NGUYEN
 
 
 const express = require("express");
