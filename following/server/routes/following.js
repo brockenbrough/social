@@ -16,17 +16,14 @@ const ObjectId = require("mongodb").ObjectId;
 const followerModel = require('../model/followerModel')
 
 
+
 // This section will help you get a list of all the followers.
-followerRoutes.route("/followers").get(function (req, res) {
-  let db_connect = dbo.getDb("following");
-  db_connect
-    .collection("followers")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-});
+followerRoutes.get("/followers", async (req, res) => {
+  const followers = await followerModel.find()
+console.log("fedfeef")
+  return res.json(followers)
+})
+  
 
 followerRoutes.route("/following").get(function (req, res) {
   let db_connect = dbo.getDb("following");
