@@ -1,28 +1,35 @@
 const express = require("express");
+const axios = require("axios");
+const router = express.Router();
 
-// feedRoutes is an instance of the express router.
-// We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /project_notes.
-const feedRoutes = express.Router();
-
-// This will help us connect to the database
-const dbo = require("../db/conn");
-
-// This help convert the id from string to ObjectId for the _id.
-const ObjectId = require("mongodb").ObjectId;
-
-
-// This section will help you get a list of all the posts.
-feedRoutes.route("/feed").get(function (req, res) {
-  let db_connect = dbo.getDb("feed");
-  db_connect
-    .collection("feed")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
+// This section will get a list of all the post ids.
+router.route("/feed").get(async function (req, res) {
+  const response = await axios.get("http://localhost:8083/posts/post");
+  const posts = response.data;
+  var ids = [];
+  for (i = 0; i < posts.length; i++) {
+    ids[i] = posts[i]._id;
+  }
+  let obj = {
+    "feed" : ids
+  }
+  res.json(obj);
 });
 
+router.route("/feed/:startingPosition/:pageSize").get(async function (req, res) {
+  const response = await axios.get("http://localhost:8083/posts/post");
+  const posts = response.data;
+  var ids = [];
+  const startingPosition = parseInt(req.params.startingPosition);
+  const pageSize = parseInt(req.params.pageSize);
+  for (i = 0; i < posts.length; i++) {
+    ids[i] = posts[i]._id;
+  }
+  const page = ids.slice(startingPosition, startingPosition + pageSize);
+  let obj = {
+    "feed" : page
+  }
+  res.json(obj);
+});
 
-module.exports = feedRoutes;
+module.exports = router;

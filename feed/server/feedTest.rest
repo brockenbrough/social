@@ -1,0 +1,8 @@
+###
+get http://localhost:8093/feed
+###
+get http://localhost:8093/feed/userId
+###
+get http://localhost:8093/feed/0/5
+###
+get http://localhost:8093/feed/5/5

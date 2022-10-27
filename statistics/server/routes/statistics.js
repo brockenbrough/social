@@ -1,6 +1,6 @@
 const express = require("express");
 
-// projectNotesRoutes is an instance of the express router.
+// statisticsRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /project_notes.
 const statisticsRoutes = express.Router();
@@ -12,8 +12,8 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-// This section will help you get a list of all the views of a post.
-statisticsRoutes.route("/statistics/:postID/views").get(function (req, res) {
+// This section will help you get a list of all views made on the application.
+statisticsRoutes.route("/statistics/views").get(function (req, res) {
   let db_connect = dbo.getDb("statistics");
   db_connect
     .collection("views")
@@ -24,8 +24,8 @@ statisticsRoutes.route("/statistics/:postID/views").get(function (req, res) {
     });
 });
 
-// This section will help you get a list of all likes associated with a post.
-statisticsRoutes.route("/statistics/:postID/likes").get(function (req, res) {
+// This section will help you get a list of all likes made on the application.
+statisticsRoutes.route("/statistics/likes").get(function (req, res) {
   let db_connect = dbo.getDb("statistics");
   db_connect
     .collection("likes")
@@ -37,7 +37,7 @@ statisticsRoutes.route("/statistics/:postID/likes").get(function (req, res) {
 });
 
 // This section will allow the service to create a like for a post.
-statisticsRoutes.route("/statistics/:userID/likes/:postID").post(function (req, response) {
+statisticsRoutes.route("/statistics/likes").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     postID: req.body.postID,
@@ -50,7 +50,7 @@ statisticsRoutes.route("/statistics/:userID/likes/:postID").post(function (req, 
 });
 
 //Creates a View for a post.
- statisticsRoutes.route("/statistics/:userID/:postID").post(function (req, response) {
+ statisticsRoutes.route("/statistics/view").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     postID: req.body.postID,
@@ -61,15 +61,28 @@ statisticsRoutes.route("/statistics/:userID/likes/:postID").post(function (req, 
     response.json(res);
   });
 });
+
 // This section will help you delete a like
 statisticsRoutes.route("/statistics/:userID/likes/:postID").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect.collection("likes").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
-    console.log("1 document deleted");
+    console.log("Like deleted");
     response.json(obj);
   });
+});
+
+//Function to allow lookup of a user's likes. 
+statisticsRoutes.route("/statistics/likes/:userID").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId( req.params.id )};
+  db_connect
+      .collection("likes")
+      .findOne(myquery, function (err, result) {
+        if (err) throw err;
+        res.json(result);
+      });
 });
 
 module.exports = statisticsRoutes;
