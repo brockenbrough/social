@@ -47,10 +47,10 @@ export default function Home() {
   return (
     <div>
       <h1>Welcome to the amazing Social Media App!</h1>
-      <br></br>
+      {/* <br></br>
       <h3>Add a Comment</h3>
       {/* <form onSubmit={this.onSubmit} > */}
-      <div className="form-group">
+      {/* <div className="form-group">
         <textarea
           rows="5"
           required
@@ -68,8 +68,10 @@ export default function Home() {
         </div>
           {/* </form> */}
 
-      </div>
-      <h1>Welcome to the Social Media App part 2!</h1>
+      {/* </div>
+      <h1>Welcome to the Social Media App part 2!</h1> */}
+
+       
     </div>
   );
 }
