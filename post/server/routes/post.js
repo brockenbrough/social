@@ -51,7 +51,7 @@ projectPostRoutes.route("/posts/:id").get(function (req, res) {
 projectPostRoutes.route("/posts/post/").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    author: req.body.author,
+    userId: req.body.userId,
     content: req.body.content,
     date: currentDate
   };

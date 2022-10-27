@@ -1,0 +1,33 @@
+
+//Get All Posts
+GET http://localhost:8083/posts/post
+Content-Type: application/json
+
+//Get a post by id
+###
+GET http://localhost:8083/posts/:id
+Content-Type: application/json
+
+//Create a Post
+###
+POST http://localhost:8083/posts/post/
+Content-Type: application/json 
+
+{
+    "userId" : "Dog",
+    "content": "I am a testing body in .rest"
+    
+}
+
+//Delete a Post
+###
+DELETE http://localhost:8083/posts/:id
+Content-Type: application/json 
+
+
+//Update a Post
+###
+PUT http://localhost:8083/posts/update/:id
+Accept: application/json 
+
+###
