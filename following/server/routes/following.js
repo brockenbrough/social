@@ -26,13 +26,6 @@ followerRoutes.route("/followers").get(function (req, res) {
       if (err) throw err;
       res.json(result);
     });
-  db_connect
-    .collection("blocked")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
 });
 
 // To follow someone, it should not accept any duplicates. Needs a body with userId and followers(targetUserId)
