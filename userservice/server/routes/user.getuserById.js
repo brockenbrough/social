@@ -13,7 +13,7 @@ router.get("/getUserById", async (req, res) => {
       console.log(err);
     }
     if (user==null) {
-      res.status(404).send("404: Not found.");
+      res.status(404).send("userId does not exist.");
     } 
     else {
       return res.json(user);
