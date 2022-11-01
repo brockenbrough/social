@@ -12,7 +12,7 @@ const followerSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { collection: "followers" }
+  { collection: "followerList" }
 );
 
-module.exports = mongoose.model('followers', followerSchema)
+module.exports = mongoose.model('followerList', followerSchema)
