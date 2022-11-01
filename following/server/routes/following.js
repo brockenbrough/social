@@ -143,7 +143,7 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
     });
 });
 
-// Delete a follower
+// Unfollow a User
 followerRoutes.route("/followers/unfollow").delete((req, response) => {
 
   if (req.body.userId == null || req.body.userId == "")
