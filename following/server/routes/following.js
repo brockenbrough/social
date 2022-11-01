@@ -43,6 +43,7 @@ followerRoutes.route("/following").get(function (req, res) {
     });
 });
 
+// Idk
 followerRoutes.route("/followers/followUser").post(function (req, response) {
 
   if (req.body.userId == null || req.body.userId == "")
