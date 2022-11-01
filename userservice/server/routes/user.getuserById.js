@@ -11,7 +11,11 @@ router.get("/getUserById", async (req, res) => {
   newUserModel.findById(userId, function (err, user) {
     if (err) {
       console.log(err);
-    } else {
+    }
+    if (user==null) {
+      res.status(404).send("404: Not found.");
+    } 
+    else {
       return res.json(user);
     }
   });
