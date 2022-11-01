@@ -19,8 +19,7 @@ const followingModel = require('../model/followingModel')
 
 
 
-// This section will help you get a list of all the followers.
-
+// Retrives a list of all users and their followers.
 followerRoutes.route("/followers").get(function (req, res) {
   let db_connect = dbo.getDb("following");
   db_connect
@@ -32,6 +31,7 @@ followerRoutes.route("/followers").get(function (req, res) {
     });
 });
 
+// Retrives a list of all users and their followees.
 followerRoutes.route("/following").get(function (req, res) {
   let db_connect = dbo.getDb("following");
   db_connect
@@ -41,6 +41,34 @@ followerRoutes.route("/following").get(function (req, res) {
       if (err) throw err;
       res.json(result);
     });
+});
+
+// Retrives all the followers of a user by id.
+followerRoutes.route("/followers/:id").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = req.params.id
+  db_connect
+      .collection("followers")
+      .findOne({ userId: req.params.id }, function (err, result) {
+        if (err) throw err;
+        if (result === null) return res.status(404).json("User doesn't exist.");
+        console.log("All followers from user: "+req.params.id);
+        res.json(result);
+      });
+});
+
+// Retrives all the followees of a user by id.
+followerRoutes.route("/following/:id").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = req.params.id
+  db_connect
+      .collection("following")
+      .findOne({ userId: req.params.id }, function (err, result) {
+        if (err) throw err;
+        if (result === null) return res.status(404).json("User doesn't exist.");
+        console.log("All followers from user: "+req.params.id);
+        res.json(result);
+      });
 });
 
 // Follow a user
@@ -115,7 +143,7 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
     });
 });
 
-// To delete a follower, needs a body.
+// Delete a follower
 followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
 
   if (req.body.userId == null || req.body.userId == "")
@@ -134,34 +162,6 @@ followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
     if (err) throw err;
     console.log("A following(s) has been deleted from "+req.body.targetUserId);
   });
-});
-
-// This section will help you GET all followers from a user by id. Should have error handling.
-followerRoutes.route("/followers/:id").get(function (req, res) {
-  let db_connect = dbo.getDb();
-  let myquery = req.params.id
-  db_connect
-      .collection("followers")
-      .findOne({ userId: req.params.id }, function (err, result) {
-        if (err) throw err;
-        if (result === null) return res.status(404).json("User doesn't exist.");
-        console.log("All followers from user: "+req.params.id);
-        res.json(result);
-      });
-});
-
-// Retrives all the followees of a user
-followerRoutes.route("/following/:id").get(function (req, res) {
-  let db_connect = dbo.getDb();
-  let myquery = req.params.id
-  db_connect
-      .collection("following")
-      .findOne({ userId: req.params.id }, function (err, result) {
-        if (err) throw err;
-        if (result === null) return res.status(404).json("User doesn't exist.");
-        console.log("All followers from user: "+req.params.id);
-        res.json(result);
-      });
 });
 
 module.exports = followerRoutes;
