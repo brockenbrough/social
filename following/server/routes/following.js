@@ -19,7 +19,7 @@ const followingModel = require('../model/followingModel')
 
 
 
-// Retrives a list of all users and their followers.
+// Retrieves a list of all users and their followers.
 followerRoutes.route("/followers").get(function (req, res) {
   let db_connect = dbo.getDb("following");
   db_connect
@@ -31,7 +31,7 @@ followerRoutes.route("/followers").get(function (req, res) {
     });
 });
 
-// Retrives a list of all users and their followees.
+// Retrieves a list of all users and who they are following.
 followerRoutes.route("/following").get(function (req, res) {
   let db_connect = dbo.getDb("following");
   db_connect
@@ -43,10 +43,9 @@ followerRoutes.route("/following").get(function (req, res) {
     });
 });
 
-// Retrives all the followers of a user by id.
+// Retrieves all the followers of a user by id.
 followerRoutes.route("/followers/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
-  let myquery = req.params.id
   db_connect
       .collection("followers")
       .findOne({ userId: req.params.id }, function (err, result) {
@@ -57,10 +56,9 @@ followerRoutes.route("/followers/:id").get(function (req, res) {
       });
 });
 
-// Retrives all the followees of a user by id.
+// Retrieves all the users that a certain user is following by id.
 followerRoutes.route("/following/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
-  let myquery = req.params.id
   db_connect
       .collection("following")
       .findOne({ userId: req.params.id }, function (err, result) {
@@ -143,16 +141,15 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
     });
 });
 
-// Unfollow a User
-followerRoutes.route("/followers/unfollow").delete((req, response) => {
+// To delete a follower from the User's follower list. Similar to a block, but able to delete a User's follower.
+followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
 
   if (req.body.userId == null || req.body.userId == "")
     return response.status(400).json("Invalid parameters for userId.");
   if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).json("Invalid parameters to DELETE targetUserId.");
+    return response.status(400).json("Invalid parameters to DELETE targetUserId from follower list.");
 
   let db_connect = dbo.getDb();
-  //let myquery = { _id: ObjectId( req.params.id )};
   db_connect.collection("followers").updateOne({userId: req.body.userId}, {$pull: {followers: req.body.targetUserId}},function (err, obj) {
     if (err) throw err;
     console.log("A follower(s) has been deleted from "+req.body.userId);
@@ -160,6 +157,26 @@ followerRoutes.route("/followers/unfollow").delete((req, response) => {
   });
   db_connect.collection("following").updateOne({userId: req.body.targetUserId}, {$pull: {following: req.body.userId}},function (err, obj) {
     if (err) throw err;
+    console.log("A following(s) has been deleted from "+req.body.targetUserId);
+  });
+});
+
+// Unfollow a User from the User's following list, similar to delete a follower, but now the opposite. 
+followerRoutes.route("/followers/unfollowUser").delete((req, response) => {
+
+  if (req.body.userId == null || req.body.userId == "")
+    return response.status(400).json("Invalid parameters for userId.");
+  if (req.body.targetUserId == null || req.body.targetUserId == "")
+    return response.status(400).json("Invalid parameters to UNFOLLOW targetUserId from following list.");
+
+  let db_connect = dbo.getDb();
+  db_connect.collection("followers").updateOne({userId: req.body.targetUserId}, {$pull: {followers: req.body.userId}},function (err, obj) {
+    if (err) throw err;
+    console.log("A follower(s) has been deleted from "+req.body.userId);
+  });
+  db_connect.collection("following").updateOne({userId: req.body.userId}, {$pull: {following: req.body.targetUserId}},function (err, obj) {
+    if (err) throw err;
+    response.json(obj);
     console.log("A following(s) has been deleted from "+req.body.targetUserId);
   });
 });
