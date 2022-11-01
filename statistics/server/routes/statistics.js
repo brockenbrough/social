@@ -63,8 +63,9 @@ statisticsRoutes.route("/statistics/likes").post(function (req, response) {
 });
 
 // This section will help you delete a like
-statisticsRoutes.route("/statistics/:userID/likes/:postID").delete((req, response) => {
+statisticsRoutes.route("/statistics/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
+  console.log( req.params.id);
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect.collection("likes").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
