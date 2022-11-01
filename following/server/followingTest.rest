@@ -3,12 +3,25 @@ GET http://localhost:8085/following
 Content-Type: application/json
 
 ###
+GET http://localhost:8085/following2
+Content-Type: application/json
+
+###
 POST http://localhost:8085/followers/follow
 Content-Type: application/json 
 
 {
     "userId" : "Jackson",
     "targetUserId" : "Jerry"
+}
+
+###
+POST http://localhost:8085/followers/followUser
+Content-Type: application/json 
+
+{
+    "userId" : "Larry",
+    "targetUserId" : "John"
 }
 
 ###
