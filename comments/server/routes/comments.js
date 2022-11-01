@@ -1,5 +1,6 @@
 const express = require("express");
 
+// Date of comment
 var currentDate = new Date();
 
 // CommentRoutes is an instance of the express router.
