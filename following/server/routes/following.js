@@ -144,7 +144,7 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
 });
 
 // Delete a follower
-followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
+followerRoutes.route("/followers/unfollow").delete((req, response) => {
 
   if (req.body.userId == null || req.body.userId == "")
     return response.status(400).json("Invalid parameters for userId.");
