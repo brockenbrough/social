@@ -43,8 +43,8 @@ followerRoutes.route("/following").get(function (req, res) {
     });
 });
 
-// Idk
-followerRoutes.route("/followers/followUser").post(function (req, response) {
+// Follow a user
+followerRoutes.route("/followers/follow").post(function (req, response) {
 
   if (req.body.userId == null || req.body.userId == "")
     return response.status(400).send({ message: "Invalid parameters for userId."});
@@ -115,50 +115,6 @@ followerRoutes.route("/followers/followUser").post(function (req, response) {
     });
 });
 
-// To follow someone, it should not accept any duplicates. Needs a body with userId and followers(targetUserId)
-followerRoutes.route("/followers/follow").post(function (req, response) {
-
-  if (req.body.userId == null || req.body.userId == "")
-    return response.status(400).send({ message: "Invalid parameters for userId."});
-  if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).send({ message: "Invalid parameters for targetUserId."});
-
-  const createFollower = new followerModel({
-    userId: req.body.userId,
-    followers: req.body.targetUserId,
-  });
-
-  let db_connect = dbo.getDb();
-
-  db_connect
-    .collection("followers")
-    .findOne({ userId: req.body.userId }, function (err, res) {
-      if (err) throw err;
-      if (res) {
-        db_connect
-          .collection("followers")
-          .findOneAndUpdate(
-            { userId: req.body.userId },
-            { $addToSet: { followers: req.body.targetUserId } },
-            function (err, result) {
-              if (err) throw err;
-              console.log("Follower added to " + req.body.userId);
-              response.json(result);
-            }
-          );
-      } else {
-        db_connect
-          .collection("followers")
-          .insertOne(createFollower, function (err, res) {
-            if (err) throw err;
-            console.log("Created new User " + req.body.userId + ",and added followers.");
-            response.json(res);
-          });
-      }
-    });
-});
-	
-
 // To delete a follower, needs a body.
 followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
 
@@ -194,6 +150,7 @@ followerRoutes.route("/followers/:id").get(function (req, res) {
       });
 });
 
+// Retrives all the followees of a user
 followerRoutes.route("/following/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = req.params.id
