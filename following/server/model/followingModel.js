@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //user schema/model
-const followerSchema = new mongoose.Schema(
+const followingSchema = new mongoose.Schema(
   {
     userId: {
         type: String,
@@ -15,4 +15,4 @@ const followerSchema = new mongoose.Schema(
   { collection: "following" }
 );
 
-module.exports = mongoose.model('following', followerSchema)
+module.exports = mongoose.model('following', followingSchema)
