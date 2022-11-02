@@ -14,18 +14,24 @@ async function getLikes() {
   return response.data;
 }
 
+//Gets views from statistics service API
+async function getViews() {
+  const response = await axios.get("http://localhost:8087/statistics/views");
+  return response.data;
+}
+
 //Feed sorting algorithm
 //Takes an array of post ID strings as input and returns post IDs in a sorted array of strings
 async function sortPosts(posts) {
   const likes = await getLikes();
+  const views = await getViews();
 
   var weights = [];
-  var sortedIDs = [];
-
   for (i = 0; i < posts.length; i++) {
     let postObj = {
       "postID" : posts[i],
       "likes" : 0,
+      "views" : 0,
       "weight" : 0
     };
     weights.push(postObj);
@@ -47,6 +53,7 @@ async function sortPosts(posts) {
     return b.weight - a.weight;
   });
 
+  var sortedIDs = [];
   for (i = 0; i < posts.length; i++) {
     sortedIDs[i] = weights[i].postID;
   }
