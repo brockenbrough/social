@@ -37,16 +37,21 @@ async function sortPosts(posts) {
     weights.push(postObj);
   }
 
-  for (i = 0; i < likes.length; i++) {
-    for (j = 0; j < posts.length; j++) {
-      if (likes[i].postID == posts[j]) {
-        weights[j].likes += 1;
+  for (i = 0; i < posts.length; i++) {
+    for (j = 0; j < likes.length; j++) {
+      if (likes[j].postID == posts[i]) {
+        weights[i].likes += 1;
+      }
+    }
+    for (j = 0; j < views.length; j++) {
+      if (views[j].postID == posts[i]) {
+        weights[i].views += 1;
       }
     }
   }
 
   for (i = 0; i < weights.length; i++) {
-    weights[i].weight = weights[i].likes;
+    weights[i].weight = weights[i].likes + weights[i].views;
   }
 
   weights.sort(function(a, b){
