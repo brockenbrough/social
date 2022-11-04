@@ -35,5 +35,13 @@ GET  http://localhost:8080/user/getUserById
 Content-Type: application/json 
 
 {
-    "userId" : "634edb2a16710b2cda6fb378"
+    "userId" : "635ab8dfc407faf9f73deaf1"
+}
+
+###
+GET  http://localhost:8080/user/getUserById
+Content-Type: application/json 
+
+{
+    "userId" : "634edb2a16710b2cda6fb370"
 }
