@@ -11,4 +11,9 @@ const like = new mongoose.Schema({
         required: true,
         label: "postId",
     },
+    date: {
+        type: Date, 
+        required: true,
+        label: "dateOfLike"
+    }
 })
