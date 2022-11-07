@@ -1,5 +1,41 @@
 const express = require("express");
+const statisticsRoutes = express.Router();
 
+const likeModel = require("../models/like");
+
+let date = Date.now();
+
+
+
+
+
+
+
+
+
+module.exports = statisticsRoutes;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 // statisticsRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /project_notes.
