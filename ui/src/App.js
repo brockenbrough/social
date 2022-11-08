@@ -1,7 +1,9 @@
-import React from "react";
+import React from "react"; 
+import Comments from "./comments/Comments";
 
 // We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
 /*
 VIKY'S COMMENT IS HERE
 */
@@ -15,12 +17,12 @@ import LandingPage from './components/landingpage/Landingpage'
 import Login from './components/login/Login'
 import Signup from './components/register/Register'
 
+
 //test change
 const App = () => {
   return (
-    <div>
+    <>
       <Navbar />
-      <div style={{ margin: 20 }}>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route exact path="/login" element={<Login />} />
@@ -29,8 +31,7 @@ const App = () => {
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
       </Routes>
-      </div>
-    </div>
+      </>
   );
 };
 

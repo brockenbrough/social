@@ -10,7 +10,7 @@ const Landingpage = () => {
     return (
         <div>
             <h1>
-                User Service Api Endpoint</h1>
+                Welcome to the CSC 351 SM APP</h1>
             <Link to={'/signup'}>
                 <button className='signup-btn'>
                     Signup
@@ -22,7 +22,7 @@ const Landingpage = () => {
             </button>
             </Link>
             <br />
-            <h4>Already Logged in? <span><Link to={'/project-notes/contributors'}><a href='#'>Click Here</a></Link></span></h4>
+        
         </div>
     )
 }
