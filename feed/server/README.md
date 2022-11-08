@@ -33,3 +33,6 @@ npm start
 ## Disclaimer
 
 Use at your own risk; not a supported MongoDB product
+
+## install multer
+npm install multer --save
