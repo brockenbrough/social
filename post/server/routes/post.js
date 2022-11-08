@@ -2,7 +2,6 @@
 const express = require("express");
 var currentDate = new Date();
 
-
 // projectPostRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /posts.
@@ -14,6 +13,44 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 
+
+// This will help upload images
+const multer = require('multer');
+// storage engine
+const storage = multer.diskStorage({
+  destination: function (req, file, cb){
+    cb(null, './upload');
+
+  },
+  filename: function (req, file,cb){
+    cb(null, file.originalname ); 
+  }
+});
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if(allowedFileTypes.includes(file.mimetype)) {
+      cb(null, true);
+  } else {
+      cb(null, false);
+  }
+}
+
+let upload = multer({storage, fileFilter});
+
+// This section will help you create a new post with images.
+projectPostRoutes.post("/posts/images", upload.single('images'),function (req, response) {  //console.log(req.file);
+  let db_connect = dbo.getDb();
+  let myobj = {
+    userId: req.body.userId,
+    content: req.body.content,
+    image: req.file.filename,
+    date: currentDate
+  };
+  db_connect.collection("posts").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
 
 // This section will help you get a list of all the posts.
 projectPostRoutes.route("/posts/post").get(function (req, res) {

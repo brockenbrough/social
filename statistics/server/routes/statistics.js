@@ -1,5 +1,50 @@
 const express = require("express");
+const route = express.Router();
 
+const likeSchema = require("../models/like");
+
+
+route.post('/likes', async(req,res) => {
+  const now = new Date()
+  //Creating a timestamp object to pass to 
+  const userLike = {
+    userId: req.body.userId,
+    postId: req.body.postId,
+    date: now,
+  };
+
+  try{
+   const response =  await likeSchema.create(userLike);
+    res.send(response);
+  } catch { 
+    res.status(400).send({ message: "Error trying to create new Like" });
+  }
+});
+
+
+module.exports = route;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 // statisticsRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /project_notes.
@@ -63,8 +108,9 @@ statisticsRoutes.route("/statistics/likes").post(function (req, response) {
 });
 
 // This section will help you delete a like
-statisticsRoutes.route("/statistics/:userID/likes/:postID").delete((req, response) => {
+statisticsRoutes.route("/statistics/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
+  console.log( req.params.id);
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect.collection("likes").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
