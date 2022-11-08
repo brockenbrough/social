@@ -1,8 +1,16 @@
 ###
+//all the feed displayed
 get http://localhost:8093/feed
 ###
+//feed displayed for logged in user
 get http://localhost:8093/feed/userId
 ###
+//pagination
 get http://localhost:8093/feed/0/5
 ###
+//pagination
 get http://localhost:8093/feed/5/5
+##
+//logged in user
+get http://localhost:8093/feed/63613ff65c27261c8c9e1f29
+##
