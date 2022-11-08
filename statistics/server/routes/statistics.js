@@ -1,28 +1,25 @@
 const express = require("express");
 const route = express.Router();
 
-const like = require("../models/Like");
+const likeSchema = require("../models/like");
 
 
 route.post('/likes', async(req,res) => {
+  const now = new Date()
   //Creating a timestamp object to pass to 
-  const createLike = new like({
+  const userLike = {
     userId: req.body.userId,
     postId: req.body.postId,
-  });
+    date: now,
+  };
 
   try{
-    await createLike.save();
-    res.send(createLike);
+   const response =  await likeSchema.create(userLike);
+    res.send(response);
   } catch { 
     res.status(400).send({ message: "Error trying to create new Like" });
   }
 });
-
-
-
-
-
 
 
 module.exports = route;

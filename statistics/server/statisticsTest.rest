@@ -5,13 +5,13 @@ Content-Type: application/json
 GET http://localhost:8087/statistics/views
 Content-Type: application/json
 ###
-
 POST http://localhost:8087/statistics/likes
 Content-Type: application/json
+Accept: application/json
 
 {
-    "userID": "Joseph",
-    "postID": "12346789", 
+    userId : "teste",
+    postId : "uhasuhas"
 }
 ###
 
