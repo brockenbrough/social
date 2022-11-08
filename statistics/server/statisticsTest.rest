@@ -11,7 +11,7 @@ Content-Type: application/json
 
 {
     "userID": "Joseph",
-    "postID": "123456789"
+    "postID": "12346789"
 }
 ###
 
