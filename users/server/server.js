@@ -9,7 +9,7 @@ const dbConnection = require('./config/db.config')
 const editUser = require('./routes/user.editUser')
 
 require('dotenv').config();
-const SERVER_PORT = 8080
+const SERVER_PORT = 8081
 
 dbConnection()
 app.use(cors({origin: '*'}))
