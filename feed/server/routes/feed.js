@@ -1,5 +1,6 @@
 const express = require("express");
 const axios = require("axios");
+const { response } = require("express");
 const router = express.Router();
 
 //Gets posts from post service API
@@ -114,4 +115,22 @@ router.route("/feed/:startingPosition/:pageSize").get(async function (req, res) 
   res.json(obj);
 });
 
+//gets a list of the users that are followed from the logged in user
+async function getFollowing(userId) {
+const response = await axios.get(`http://localhost:8085/following/${userId}`);
+
+  return response.data?.following;
+}
+
+//get posts from a specific user
+async function getUsersPosts(){
+ //iterate throught the list of the users from getFollowing
+ //and display their posts
+}
+//returns sorted feed for the loged in user
+router.route("/feed/:userId").get(async function (req, res) {
+//shows the feed
+});
+
+getFollowing("63613ff65c27261c8c9e1f29")
 module.exports = router;
