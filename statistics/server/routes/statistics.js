@@ -2,6 +2,7 @@ const express = require("express");
 const route = express.Router();
 
 const likeSchema = require("../models/like");
+const viewSchema=require("../models/view");
 
 //Alows a user to like a post
 route.post('/likes', async(req,res) => {
@@ -18,6 +19,19 @@ route.post('/likes', async(req,res) => {
     res.send(response);
   } catch { 
     res.status(400).send({ message: "Error trying to create new Like" });
+  }
+});
+route.post('/views',async(req,res)=>{
+  const userView={
+    userId: req.body.userId,
+    postId: req.body.postId,
+  };
+
+  try{
+    const response=await viewSchema.create(userView);
+    res.send(response);
+  }catch{
+    res.status(400).send({message:"Error trying to create new View"});
   }
 });
 

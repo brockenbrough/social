@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"; 
+import Comments from "./comments/Comments";
 
 // We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
@@ -15,6 +16,7 @@ import CreateContributor from "./components/project-notes/createContributor";
 import LandingPage from './components/landingpage/Landingpage'
 import Login from './components/login/Login'
 import Signup from './components/register/Register'
+
 
 //test change
 const App = () => {
