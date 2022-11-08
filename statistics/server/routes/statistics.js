@@ -1,22 +1,19 @@
 const express = require("express");
-const statisticsRoutes = express.Router();
+const route = express.Router();
 
-const likeModel = require("../models/like");
+const like = require("../models/Like");
 
 
-statisticsRoutes.post('/statistics/likes', async(req,res) => {
+route.post('/likes', async(req,res) => {
   //Creating a timestamp object to pass to 
-  let now = Date.now();
-  const{userId,postId,date} = req.body
-  const createLike = new likeModel({
-    userId: userId,
-    postId: postId,
-    date: now,
+  const createLike = new like({
+    userId: req.body.userId,
+    postId: req.body.postId,
   });
 
   try{
-    const saveNewLike = await createLike.save();
-    res.send(saveNewLike);
+    await createLike.save();
+    res.send(createLike);
   } catch { 
     res.status(400).send({ message: "Error trying to create new Like" });
   }
@@ -28,7 +25,7 @@ statisticsRoutes.post('/statistics/likes', async(req,res) => {
 
 
 
-module.exports = statisticsRoutes;
+module.exports = route;
 
 
 
