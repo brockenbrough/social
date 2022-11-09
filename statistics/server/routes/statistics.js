@@ -20,18 +20,6 @@ route.post('/views',async(req,res)=>{
   }
 });
 
-//returns a list of all likes
-route.get('/likes', async(req,res) => {
-  const likes = await likeSchema.find()
-  return res.json(likes)
-})
-
-//returns a list of posts that an individual user liked
-route.get('/likes/:userId', async(req,res) => {
-  const likes = await likeSchema.find({userId: req.params.userId}) 
-  return res.json(likes)
-})
-
 //Alows a user to like a post
 route.post('/likes', async(req,res) => {
   //Creating a timestamp object to pass to 
@@ -49,6 +37,30 @@ route.post('/likes', async(req,res) => {
     res.status(400).send({ message: "Error trying to create new Like" });
   }
 });
+
+//returns a list of all likes
+route.get('/likes', async(req,res) => {
+  const likes = await likeSchema.find()
+  return res.json(likes)
+})
+
+//returns a list of posts that an individual user liked
+route.get('/likes/:userId', async(req,res) => {
+  const likes = await likeSchema.find({userId: req.params.userId}) 
+  return res.json(likes)
+})
+
+
+
+route.delete('/likes/:userId', async(req,res) => {
+  try{
+    const response = await likeSchema.deleteOne({userId: req.params.userId})
+    res.send(response)
+    console.log("Like Deleted.")
+  }catch{
+    res.status(400).send({ message: "Like does not exist." });
+  }
+})
 
 module.exports = route;
 
