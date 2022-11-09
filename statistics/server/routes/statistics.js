@@ -5,22 +5,7 @@ const likeSchema = require("../models/like");
 const viewSchema=require("../models/view");
 
 
-route.post('/likes', async(req,res) => {
-  const now = new Date()
-  //Creating a timestamp object to pass to 
-  const userLike = {
-    userId: req.body.userId,
-    postId: req.body.postId,
-    date: now,
-  };
 
-  try{
-   const response =  await likeSchema.create(userLike);
-    res.send(response);
-  } catch { 
-    res.status(400).send({ message: "Error trying to create new Like" });
-  }
-});
 route.post('/views',async(req,res)=>{
   const userView={
     userId: req.body.userId,
@@ -35,6 +20,47 @@ route.post('/views',async(req,res)=>{
   }
 });
 
+//Alows a user to like a post
+route.post('/likes', async(req,res) => {
+  //Creating a timestamp object to pass to 
+  const now = new Date()
+  const userLike = {
+    userId: req.body.userId,
+    postId: req.body.postId,
+    date: now,
+  };
+
+  try{
+   const response =  await likeSchema.create(userLike);
+    res.send(response);
+  } catch { 
+    res.status(400).send({ message: "Error trying to create new Like" });
+  }
+});
+
+//returns a list of all likes
+route.get('/likes', async(req,res) => {
+  const likes = await likeSchema.find()
+  return res.json(likes)
+})
+
+//returns a list of posts that an individual user liked
+route.get('/likes/:userId', async(req,res) => {
+  const likes = await likeSchema.find({userId: req.params.userId}) 
+  return res.json(likes)
+})
+
+
+
+route.delete('/likes/:userId', async(req,res) => {
+  try{
+    const response = await likeSchema.deleteOne({userId: req.params.userId})
+    res.send(response)
+    console.log("Like Deleted.")
+  }catch{
+    res.status(400).send({ message: "Like does not exist." });
+  }
+})
 
 module.exports = route;
 
