@@ -19,6 +19,7 @@ const followingModel = require('../model/followingModel')
 
 
 
+
 // Retrieves a list of all users and their followers.
 followerRoutes.get('/followers', async (req, res) => {
     const followers = await followerModel.find();
