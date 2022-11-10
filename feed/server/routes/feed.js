@@ -5,7 +5,7 @@ const router = express.Router();
 
 //Gets posts from post service API
 async function getPosts() {
-  const response = await axios.get("http://localhost:8083/posts/post");
+  const response = await axios.get("http://localhost:8083/posts/getAllPosts");
   console.log(response.data)
   return response.data;
 }
