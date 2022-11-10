@@ -62,6 +62,7 @@ followerRoutes.post('/followers/follow', async (req, res) => {
     }
   }
 
+  
 });
 
 // Follow a user
