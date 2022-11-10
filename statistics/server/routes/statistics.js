@@ -6,7 +6,7 @@ const viewSchema=require("../models/view");
 
 
 
-route.post('/views',async(req,res)=>{
+route.post('/views/view',async(req,res)=>{
   const userView={
     userId: req.body.userId,
     postId: req.body.postId,
@@ -14,14 +14,20 @@ route.post('/views',async(req,res)=>{
 
   try{
     const response=await viewSchema.create(userView);
-    res.send(response);
-  }catch{
+    res.send(response).json("user has viewed this post");
+  }catch(err){
     res.status(400).send({message:"Error trying to create new View"});
   }
 });
 
+route.get('/views',async(req,res)=>{
+  const response = await viewSchema.find({postId : req.body.postId}).count();
+  res.status(200).json(response);
+
+})
+
 //Alows a user to like a post
-route.post('/likes', async(req,res) => {
+route.post('/likes/like', async(req,res) => {
   //Creating a timestamp object to pass to 
   const now = new Date()
   const userLike = {
@@ -29,33 +35,36 @@ route.post('/likes', async(req,res) => {
     postId: req.body.postId,
     date: now,
   };
+    const likes = await likeSchema.findOne({userId: userLike.userId, postId : userLike.postId});
+console.log(likes)
+    if(likes){
+      return res.status(404).json("Post has been liked by user already")
 
-  try{
-   const response =  await likeSchema.create(userLike);
-    res.send(response);
-  } catch { 
-    res.status(400).send({ message: "Error trying to create new Like" });
-  }
+    }else{
+      const response = await likeSchema.create(userLike)
+      return res.status(200).json(response)
+    }
 });
 
 //returns a list of all likes
 route.get('/likes', async(req,res) => {
   const likes = await likeSchema.find()
-  return res.json(likes)
-})
+  return res.status(200).json(likes)
+});
 
 //returns a list of posts that an individual user liked
 route.get('/likes/:userId', async(req,res) => {
   const likes = await likeSchema.find({userId: req.params.userId}) 
-  return res.json(likes)
-})
+  return res.status(200).json(likes)
+});
 
 
 
-route.delete('/likes/:userId', async(req,res) => {
+route.delete('/likes/unLike', async(req,res) => {
+
   try{
-    const response = await likeSchema.deleteOne({userId: req.params.userId})
-    res.send(response)
+    const response = await likeSchema.deleteOne({userId: req.body.userId , postId : req.body.postId})
+    res.status(200).json(response);
     console.log("Like Deleted.")
   }catch{
     res.status(400).send({ message: "Like does not exist." });

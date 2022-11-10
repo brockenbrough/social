@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 
 module.exports = () =>{
   const databaseParams = { 
