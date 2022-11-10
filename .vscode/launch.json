@@ -18,6 +18,34 @@
             "request": "launch",
             "type": "node-terminal"
         },
+        {
+            "cwd": "${workspaceFolder}/comments/server",
+            "command": "npm start",
+            "name": "comments: npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "cwd": "${workspaceFolder}/feed/server",
+            "command": "npm start",
+            "name": "feed: npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "cwd": "${workspaceFolder}/statistics/server",
+            "command": "npm start",
+            "name": "statistics: npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "cwd": "${workspaceFolder}/users/server",
+            "command": "npm start",
+            "name": "users: npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
 
     ]
 }

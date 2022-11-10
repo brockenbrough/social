@@ -1,16 +1,11 @@
-###
-//all the feed displayed
+### Full feed returned
 get http://localhost:8093/feed
-###
-//feed displayed for logged in user
+### Full feed returned for logged in user
 get http://localhost:8093/feed/userId
-###
-//pagination
+### Paginated feed returned (page 1)
 get http://localhost:8093/feed/0/5
-###
-//pagination
+### Paginated feed returned (page 2)
 get http://localhost:8093/feed/5/5
-##
-//logged in user
+### Full feed returned for logged in user
 get http://localhost:8093/feed/63613ff65c27261c8c9e1f29
-##
+###
