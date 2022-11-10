@@ -31,8 +31,7 @@ const App = () => {
         <Route path="/project-notes/create" element={<CreateContributor />} />
         <Route path="/feed" element={<Feed />} />
       </Routes>
-      </div>
-    </div>
+    </>
   );
 };
 
