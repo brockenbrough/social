@@ -1,0 +1,5 @@
+
+//Get all the developers
+GET 
+Content-Type: application/json
+
