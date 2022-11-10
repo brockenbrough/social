@@ -19,6 +19,7 @@ import Feed from './components/feed/Feed';
 import EditUserPage from "./components/edituser/edituserpage";
 import PublicProfile from "./components/publicprofile/publicprofile";
 
+import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
 //test change
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/edituserpage" element={<EditUserPage />} />
+        <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
