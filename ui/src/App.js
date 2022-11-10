@@ -17,6 +17,7 @@ import Login from './components/login/Login'
 import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/edituser/edituserpage";
+import PublicProfile from "./components/publicprofile/publicprofile";
 
 //test change
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path = "/publicprofile" element = {<PublicProfile/>} />
       </Routes>
     </>
   );
