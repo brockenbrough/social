@@ -46,12 +46,6 @@ followerRoutes.get('/following/:id', (req, res) => {
     .catch(err => res.status(404).json({ User: 'No user found.' }));
 });
 
-
-
-// Old Code Below
-
-
-
 // Follow a user
 followerRoutes.route("/followers/follow").post(function (req, response) {
 
@@ -62,67 +56,90 @@ followerRoutes.route("/followers/follow").post(function (req, response) {
 
   const createFollowing = new followingModel({
     userId: req.body.userId,
-    following: req.body.targetUserId,
+    following: req.body.targetUserId
   });
+  const following = await followingModel.findOne({userId: req.body.userId})
 
-  const createFollower = new followerModel({
-    userId: req.body.targetUserId,
-    followers: req.body.userId,
-  });
+  if(following){
+    followingModel.updateOne({userId: req.body.userId}, {$addToSet: {following: req.body.targetUserId}})
+  }else{
+    const saveFollowingUser = await followingUser.save()
+    res.send(saveFollowingUser);
+  }
 
-  let db_connect = dbo.getDb();
-
-  db_connect
-    .collection("following")
-    .findOne({ userId: req.body.userId }, function (err, res) {
-      if (err) throw err;
-      if (res) {
-        db_connect
-          .collection("following")
-          .findOneAndUpdate(
-            { userId: req.body.userId },
-            { $addToSet: { following: req.body.targetUserId } },
-            function (err, result) {
-              if (err) throw err;
-              console.log("Following " + req.body.userId);
-              response.json(result);
-            }
-          );
-      } else {
-        db_connect
-          .collection("following")
-          .insertOne(createFollowing, function (err, res) {
-            if (err) throw err;
-            console.log("Created new User " + req.body.userId + ",and added to following.");
-            response.json(res);
-          });
-      }
-    });
-    db_connect
-    .collection("followers")
-    .findOne({ userId: req.body.targetUserId }, function (err, res) {
-      if (err) throw err;
-      if (res) {
-        db_connect
-          .collection("followers")
-          .findOneAndUpdate(
-            { userId: req.body.targetUserId },
-            { $addToSet: { followers: req.body.userId } },
-            function (err, result) {
-              if (err) throw err;
-              console.log("Followers " + req.body.targetUserId);
-            }
-          );
-      } else {
-        db_connect
-          .collection("followers")
-          .insertOne(createFollower, function (err, res) {
-            if (err) throw err;
-            console.log("Created new User " + req.body.targetUserId + ",and added to followers.");
-          });
-      }
-    });
 });
+
+// Follow a user
+// followerRoutes.route("/followers/follow").post(function (req, response) {
+
+//   if (req.body.userId == null || req.body.userId == "")
+//     return response.status(400).send({ message: "Invalid parameters for userId."});
+//   if (req.body.targetUserId == null || req.body.targetUserId == "")
+//     return response.status(400).send({ message: "Invalid parameters for targetUserId."});
+
+//   const createFollowing = new followingModel({
+//     userId: req.body.userId,
+//     following: req.body.targetUserId,
+//   });
+
+//   const createFollower = new followerModel({
+//     userId: req.body.targetUserId,
+//     followers: req.body.userId,
+//   });
+
+//   let db_connect = dbo.getDb();
+
+//   db_connect
+//     .collection("following")
+//     .findOne({ userId: req.body.userId }, function (err, res) {
+//       if (err) throw err;
+//       if (res) {
+//         db_connect
+//           .collection("following")
+//           .findOneAndUpdate(
+//             { userId: req.body.userId },
+//             { $addToSet: { following: req.body.targetUserId } },
+//             function (err, result) {
+//               if (err) throw err;
+//               console.log("Following " + req.body.userId);
+//               response.json(result);
+//             }
+//           );
+//       } else {
+//         db_connect
+//           .collection("following")
+//           .insertOne(createFollowing, function (err, res) {
+//             if (err) throw err;
+//             console.log("Created new User " + req.body.userId + ",and added to following.");
+//             response.json(res);
+//           });
+//       }
+//     });
+//     db_connect
+//     .collection("followers")
+//     .findOne({ userId: req.body.targetUserId }, function (err, res) {
+//       if (err) throw err;
+//       if (res) {
+//         db_connect
+//           .collection("followers")
+//           .findOneAndUpdate(
+//             { userId: req.body.targetUserId },
+//             { $addToSet: { followers: req.body.userId } },
+//             function (err, result) {
+//               if (err) throw err;
+//               console.log("Followers " + req.body.targetUserId);
+//             }
+//           );
+//       } else {
+//         db_connect
+//           .collection("followers")
+//           .insertOne(createFollower, function (err, res) {
+//             if (err) throw err;
+//             console.log("Created new User " + req.body.targetUserId + ",and added to followers.");
+//           });
+//       }
+//     });
+// });
 
 // To delete a follower from the User's follower list. Similar to a block, but able to delete a User's follower.
 followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
