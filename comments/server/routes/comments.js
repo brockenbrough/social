@@ -1,5 +1,5 @@
+ 
 const express = require("express");
-
 var currentDate = new Date();
 
 // CommentRoutes is an instance of the express router.
@@ -36,23 +36,7 @@ CommentRoutes.route("/comments/comment/:id").get(function (req, res) {
   });
 });
 
-// This section will help you create a new contributor.
-CommentRoutes.route("/comments/comment/add").post(function (req, response) {
-  let db_connect = dbo.getDb();
-
-  let myobj = {
-    postId: req.body.postId,
-    commentContent: req.body.commentContent,
-    userId: req.body.userId,
-    Date: currentDate,
-  };
-  db_connect.collection("comments").insertOne(myobj, function (err, res) {
-    if (err) throw err;
-    response.json(res);
-  });
-});
-
-// This section will help you create a new contributor.
+// This section will help you create a new comment.
 CommentRoutes.route("/comments/comment/add").post(function (req, response) {
   let db_connect = dbo.getDb();
 
@@ -69,7 +53,7 @@ CommentRoutes.route("/comments/comment/add").post(function (req, response) {
 });
 
 // Reply to a comment.
-CommentRoutes.route("/comments/comment/reply/:id").post(function (
+CommentRoutes.route("/comments/reply/add/:id").post(function (
   req,
   response
 ) {
@@ -78,6 +62,7 @@ CommentRoutes.route("/comments/comment/reply/:id").post(function (
   let myobj = {
     postId: req.body.postId,
     commentContent: req.body.commentContent,
+    replyComment: req.body.replyComment,
     userId: req.body.userId,
     Date: currentDate,
   };

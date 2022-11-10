@@ -1,5 +1,90 @@
 const express = require("express");
+const route = express.Router();
 
+const likeSchema = require("../models/like");
+const viewSchema=require("../models/view");
+
+
+
+route.post('/views',async(req,res)=>{
+  const userView={
+    userId: req.body.userId,
+    postId: req.body.postId,
+  };
+
+  try{
+    const response=await viewSchema.create(userView);
+    res.send(response);
+  }catch{
+    res.status(400).send({message:"Error trying to create new View"});
+  }
+});
+
+//Alows a user to like a post
+route.post('/likes', async(req,res) => {
+  //Creating a timestamp object to pass to 
+  const now = new Date()
+  const userLike = {
+    userId: req.body.userId,
+    postId: req.body.postId,
+    date: now,
+  };
+
+  try{
+   const response =  await likeSchema.create(userLike);
+    res.send(response);
+  } catch { 
+    res.status(400).send({ message: "Error trying to create new Like" });
+  }
+});
+
+//returns a list of all likes
+route.get('/likes', async(req,res) => {
+  const likes = await likeSchema.find()
+  return res.json(likes)
+})
+
+//returns a list of posts that an individual user liked
+route.get('/likes/:userId', async(req,res) => {
+  const likes = await likeSchema.find({userId: req.params.userId}) 
+  return res.json(likes)
+})
+
+
+
+route.delete('/likes/:userId', async(req,res) => {
+  try{
+    const response = await likeSchema.deleteOne({userId: req.params.userId})
+    res.send(response)
+    console.log("Like Deleted.")
+  }catch{
+    res.status(400).send({ message: "Like does not exist." });
+  }
+})
+
+module.exports = route;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 // statisticsRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /project_notes.
@@ -63,8 +148,9 @@ statisticsRoutes.route("/statistics/likes").post(function (req, response) {
 });
 
 // This section will help you delete a like
-statisticsRoutes.route("/statistics/:userID/likes/:postID").delete((req, response) => {
+statisticsRoutes.route("/statistics/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
+  console.log( req.params.id);
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect.collection("likes").deleteOne(myquery, function (err, obj) {
     if (err) throw err;

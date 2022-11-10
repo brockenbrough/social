@@ -1,41 +1,45 @@
-# 5.2.3
-GET http://localhost:8085/followers
-Accept: application/json 
 
-# 5.2.1
+GET http://localhost:8085/following
+Content-Type: application/json
+
+###
+GET http://localhost:8085/followers
+Content-Type: application/json
+
 ###
 POST http://localhost:8085/followers/follow
 Content-Type: application/json 
 
 {
-    "userId" : "Jack",
-    "targetUserId" : "Bryan"
+    "userId" : "John",
+    "targetUserId" : "Jerry"
 }
 
-# 5.2.2
+###
 DELETE http://localhost:8085/followers/deleteFollower
 Content-Type: application/json 
 
 {
-    "userId" : "Bob",
-    "targetUserId" : "Allan"
+    "userId" : "John",
+    "targetUserId" : "Larry"
 }
 
 ###
-GET http://localhost:8085/followers/63580abed2ebe5d28acdbe56
-Accept: application/json 
-
-###
-POST http://localhost:8080/user/signup
+DELETE http://localhost:8085/followers/unfollowUser
 Content-Type: application/json 
 
 {
-    "username" : "BobNeighbor",
-    "email" : "Idk@yahoo.com",
-    "password" : "pls123idk"
+    "userId" : "John",
+    "targetUserId" : "Jerry"
 }
+###
+
+GET http://localhost:8085/followers/Bryan
+Accept: application/json 
 
 ###
 
-GET http://localhost:8080/user/getAll
+GET http://localhost:8085/following/Jackson
 Accept: application/json 
+
+###
