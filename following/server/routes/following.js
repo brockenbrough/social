@@ -32,6 +32,7 @@ followerRoutes.get('/following', async (req, res) => {
   return res.status(200).json(following)
 })
 
+// Retrieves all the followers of a user by id.
 followerRoutes.get('/followers/:id', (req, res) => {
   followerModel.find({userId: req.params.id})
     .then(follower => res.json(follower))
