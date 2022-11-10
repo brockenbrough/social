@@ -17,6 +17,8 @@ import Login from './components/login/Login'
 import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/edituser/edituserpage";
+import PublicProfile from "./components/publicprofile/PublicProfile";
+import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
 
 //test change
 const App = () => {
@@ -28,10 +30,12 @@ const App = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/edituserpage" element={<EditUserPage />} />
+        <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path = "/publicprofile" element = {<PublicProfile/>} />
       </Routes>
     </>
   );
