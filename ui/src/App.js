@@ -18,8 +18,8 @@ import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/edituser/edituserpage";
 import PublicProfile from "./components/publicprofile/publicprofile";
-
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
+
 //test change
 const App = () => {
   return (
