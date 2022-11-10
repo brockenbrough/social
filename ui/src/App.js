@@ -17,7 +17,7 @@ import Login from './components/login/Login'
 import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/edituser/edituserpage";
-import PublicProfile from "./components/publicprofile/publicprofile";
+import PublicProfile from "./components/publicprofile/PublicProfile";
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
 
 
