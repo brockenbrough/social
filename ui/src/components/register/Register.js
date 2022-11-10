@@ -6,7 +6,7 @@ const Register = () => {
   const [data, setData] = useState({ username: "", email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const url = "http://localhost:8080/user/signup";
+  const url = "http://localhost:8081/user/signup";
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
