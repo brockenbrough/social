@@ -46,6 +46,12 @@ followerRoutes.get('/following/:id', (req, res) => {
     .catch(err => res.status(404).json({ User: 'No user found.' }));
 });
 
+
+
+// Old Code Below
+
+
+
 // Follow a user
 followerRoutes.route("/followers/follow").post(function (req, response) {
 
