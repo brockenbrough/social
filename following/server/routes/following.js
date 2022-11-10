@@ -83,6 +83,7 @@ followerRoutes.delete("/followers/delete", (req, res) => {
     ).then(e => {return e});
 });
 
+/*
 // Follow a user
 followerRoutes.route("/followers/follow").post(function (req, response) {
 
