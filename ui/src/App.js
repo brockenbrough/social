@@ -1,4 +1,5 @@
 import React from "react";
+import Comments from "./comments/Comments";
 
 // We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
@@ -26,6 +27,11 @@ const App = () => {
         <Route path="/project-notes/create" element={<CreateContributor />} />
       </Routes>
       </div>
+        <h1>Sample Comments</h1>
+      <Comments
+        commentsUrl="http://localhost:3004/comments"
+        currentUserId="1"
+      />
     </div>
   );
 };
