@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-//user schema/model
+//follower schema/model
 const followerSchema = new mongoose.Schema(
   {
     userId: {

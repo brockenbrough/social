@@ -6,6 +6,7 @@ const router = express.Router();
 //Gets posts from post service API
 async function getPosts() {
   const response = await axios.get("http://localhost:8083/posts/post");
+  console.log(response.data)
   return response.data;
 }
 
@@ -76,6 +77,7 @@ function paginate(startingPosition, pageSize, posts) {
 //Full feed service for an anonymous user
 router.route("/feed").get(async function (req, res) {
   const posts = await getPosts();
+  console.log('dwdw')
 
   var postIDs = [];
   for (i = 0; i < posts.length; i++) {
@@ -132,5 +134,5 @@ router.route("/feed/:userId").get(async function (req, res) {
 //shows the feed
 });
 
-getFollowing("63613ff65c27261c8c9e1f29")
+getViews().then((e) => console.log(e))
 module.exports = router;

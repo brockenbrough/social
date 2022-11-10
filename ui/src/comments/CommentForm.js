@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 const CommentForm = ({
   handleSubmit,
   submitLabel,
@@ -37,4 +38,3 @@ const CommentForm = ({
 };
 
 export default CommentForm;
-

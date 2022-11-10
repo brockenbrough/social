@@ -19,54 +19,30 @@ const followingModel = require('../model/followingModel')
 
 
 
+
 // Retrieves a list of all users and their followers.
-followerRoutes.route("/followers").get(function (req, res) {
-  let db_connect = dbo.getDb("following");
-  db_connect
-    .collection("followers")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-});
+followerRoutes.get('/followers', async (req, res) => {
+    const followers = await followerModel.find();
+    return res.json(followers)
+  })
 
 // Retrieves a list of all users and who they are following.
-followerRoutes.route("/following").get(function (req, res) {
-  let db_connect = dbo.getDb("following");
-  db_connect
-    .collection("following")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-});
+followerRoutes.get('/following', async (req, res) => {
+  const following = await followingModel.find();
+  return res.json(following)
+})
 
-// Retrieves all the followers of a user by id.
-followerRoutes.route("/followers/:id").get(function (req, res) {
-  let db_connect = dbo.getDb();
-  db_connect
-      .collection("followers")
-      .findOne({ userId: req.params.id }, function (err, result) {
-        if (err) throw err;
-        if (result === null) return res.status(404).json("User doesn't exist.");
-        console.log("All followers from user: "+req.params.id);
-        res.json(result);
-      });
+followerRoutes.get('/followers/:id', (req, res) => {
+  followerModel.find({userId: req.params.id})
+    .then(follower => res.json(follower))
+    .catch(err => res.status(404).json({ User: 'No user found.' }));
 });
 
 // Retrieves all the users that a certain user is following by id.
-followerRoutes.route("/following/:id").get(function (req, res) {
-  let db_connect = dbo.getDb();
-  db_connect
-      .collection("following")
-      .findOne({ userId: req.params.id }, function (err, result) {
-        if (err) throw err;
-        if (result === null) return res.status(404).json("User doesn't exist.");
-        console.log("All followers from user: "+req.params.id);
-        res.json(result);
-      });
+followerRoutes.get('/following/:id', (req, res) => {
+  followingModel.find({userId: req.params.id})
+    .then(following => res.json(following))
+    .catch(err => res.status(404).json({ User: 'No user found.' }));
 });
 
 // Follow a user

@@ -1,0 +1,36 @@
+div {
+    margin: 5px;
+  }
+  
+  label {
+    display: inline-block;;
+    width: 100px;
+  }
+  
+  input {
+    outline: none;
+  }
+
+  .error-field {
+    color : red;
+    font-size: bold ;
+  }
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: black;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+
+  /* style="padding-left: 2.5rem; padding-right: 2.5rem;" */
