@@ -16,7 +16,7 @@ import CreateContributor from "./components/project-notes/createContributor";
 import LandingPage from './components/landingpage/Landingpage'
 import Login from './components/login/Login'
 import Signup from './components/register/Register'
-
+import Feed from './components/feed/Feed';
 
 //test change
 const App = () => {
@@ -30,6 +30,7 @@ const App = () => {
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
+        <Route path="/feed" element={<Feed />} />
       </Routes>
       </>
   );
