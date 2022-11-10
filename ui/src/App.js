@@ -17,14 +17,9 @@ import Login from './components/login/Login'
 import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/edituser/edituserpage";
-<<<<<<< HEAD
-import PublicProfile from "./components/publicprofile/PublicProfile";
-=======
 import PublicProfile from "./components/publicprofile/publicprofile";
+
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
-
->>>>>>> b9beb5913ea503ca5ad6c7d8206683b156ebe7b6
-
 //test change
 const App = () => {
   return (
