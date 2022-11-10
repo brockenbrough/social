@@ -12,7 +12,7 @@ const followingSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { collection: "following" }
+  { collection: "following", versionKey: false }
 );
 
 module.exports = mongoose.model('following', followingSchema)

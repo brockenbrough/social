@@ -5,19 +5,9 @@ const express = require("express");
 // The router will be added as a middleware and will take control of requests starting with path /following.
 const followerRoutes = express.Router();
 
-// This will help us connect to the database
-const dbo = require("../db/conn");
-
-// This help convert the id from string to ObjectId for the _id.
-const ObjectId = require("mongodb").ObjectId;
-
 // Follower model
 const followerModel = require('../model/followerModel')
 const followingModel = require('../model/followingModel')
-
-
-
-
 
 // Retrieves a list of all users and their followers.
 followerRoutes.get("/followers", async (req, res) => {
@@ -48,109 +38,54 @@ followerRoutes.get("/following/:id", (req, res) => {
 });
 
 // Follow a User
-followerRoutes.post("/followers/follow", (req, res) => {
+followerRoutes.post('/followers/follow', async (req, res) => {
+  
   const { userId, targetUserId } = req.body;
 
   followingModel
-    .updateOne({ userId: userId }, { $push: { following: `${targetUserId}` } })
+    .updateOne({ userId: userId }, { $addToSet: { following: `${targetUserId}` } }, {upsert: true})
     .then(
       followerModel
         .updateOne(
           { userId: targetUserId },
-          { $push: { followers: `${userId}` } }
-        )
+          { $addToSet: { followers: `${userId}` } },
+          {upsert: true})
         .then((e) => {
           return res.status(200).json(e);
         })
     ).then(e => {return e});
-});
-
-// Deletes a Follower
-followerRoutes.delete("/followers/delete", (req, res) => {
-  const { userId, targetUserId } = req.body;
-  
-  followingModel
-    .deleteOne({ userId: userId }, { $push: { following: `${targetUserId}` } })
-    .then(
-      followerModel
-        .deleteOne(
-          { userId: targetUserId },
-          { $pop: { followers: `${userId}` } }
-        )
-        .then((e) => {
-          return res.status(200).json(e);
-        })
-    ).then(e => {return e});
-});
-
-/*
-// Follow a user
-followerRoutes.route("/followers/follow").post(function (req, response) {
-
-  if (req.body.userId == null || req.body.userId == "")
-    return response.status(400).send({ message: "Invalid parameters for userId."});
-  if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).send({ message: "Invalid parameters for targetUserId."});
-
-  const createFollowing = new followingModel({
-    userId: req.body.userId,
-    following: req.body.targetUserId,
-  });
-
-  const createFollower = new followerModel({
-    userId: req.body.targetUserId,
-    followers: req.body.userId,
-  });
-
-  let db_connect = dbo.getDb();
-
-  if(following){
-    followingModel.updateOne({userId: req.body.userId}, {$addToSet: {following: req.body.targetUserId}})
-  }else{
-    const saveFollowingUser = await followingUser.save()
-    res.send(saveFollowingUser);
-  }
-
 });
 
 // To delete a follower from the User's follower list. Similar to a block, but able to delete a User's follower.
-followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
+followerRoutes.delete('/followers/deleteFollower', async (req, res) => {
 
-  if (req.body.userId == null || req.body.userId == "")
+  const { userId, targetUserId } = req.body;
+
+  if (userId == null || userId == "")
     return res.status(400).json("Invalid parameters for userId.");
-  if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).json("Invalid parameters to DELETE targetUserId from follower list.");
+  if (targetUserId == null || targetUserId == "")
+    return res.status(400).json("Invalid parameters to DELETE targetUserId from follower list.");
 
-  let db_connect = dbo.getDb();
-  db_connect.collection("followers").updateOne({userId: req.body.userId}, {$pull: {followers: req.body.targetUserId}},function (err, obj) {
-    if (err) throw err;
-    console.log("A follower(s) has been deleted from "+req.body.userId);
-    response.json(obj);
-  });
-  db_connect.collection("following").updateOne({userId: req.body.targetUserId}, {$pull: {following: req.body.userId}},function (err, obj) {
-    if (err) throw err;
-    console.log("A following(s) has been deleted from "+req.body.targetUserId);
-  });
+
+  followerModel.updateOne({ userId: userId },{ $pull: { followers: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
+  followingModel.updateOne({ userId: targetUserId },{ $pull: { following: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
+  res.status(200).json({Success: "Successfully removed someone from follower's list."})
 });
+
 
 // Unfollow a User from the User's following list, similar to delete a follower, but now the opposite. 
-followerRoutes.route("/followers/unfollowUser").delete((req, response) => {
+followerRoutes.delete("/followers/unfollowUser", async (req, res) => {
 
-  if (req.body.userId == null || req.body.userId == "")
+  const { userId, targetUserId } = req.body;
+
+  if (userId == null || userId == "")
     return res.status(400).json("Invalid parameters for userId.");
-  if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).json("Invalid parameters to UNFOLLOW targetUserId from following list.");
+  if (targetUserId == null || targetUserId == "")
+    return result.status(400).json("Invalid parameters to UNFOLLOW targetUserId from following list.");
 
-  let db_connect = dbo.getDb();
-  db_connect.collection("followers").updateOne({userId: req.body.targetUserId}, {$pull: {followers: req.body.userId}},function (err, obj) {
-    if (err) throw err;
-    console.log("A follower(s) has been deleted from "+req.body.userId);
-  });
-  db_connect.collection("following").updateOne({userId: req.body.userId}, {$pull: {following: req.body.targetUserId}},function (err, obj) {
-    if (err) throw err;
-    response.json(obj);
-    console.log("A following(s) has been deleted from "+req.body.targetUserId);
-  });
+  followingModel.updateOne({ userId: userId },{ $pull: { following: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
+  followerModel.updateOne({ userId: targetUserId },{ $pull: { followers: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
+  res.status(200).json({Success: "Successfully removed someone from following's list."})
 });
-*/
+
 module.exports = followerRoutes;
