@@ -15,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/brockenbrough/social/issues"
   },
-  "homepage": "https://github.com/brockenbrough/social#readme",
-  "dependencies": {
-    "bootstrap": "^5.2.2",
-    "react-bootstrap": "^2.6.0"
-  }
+  "homepage": "https://github.com/brockenbrough/social#readme"
 }
