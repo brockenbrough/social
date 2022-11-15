@@ -1,35 +1,27 @@
-//This is a comment about imports
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import NavbarContributor from "./navbarContributor";
+import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
+import axios from 'axios'
 
+const userInfo = getUserInfo()
 
-// Adding new method
-// The contributor component
 const Follower = (props) => (
   <tr>
-    <td>{props.record.name}</td>
-    <td>{props.record.position}</td>
-    <td>
-      <Link className="btn btn-link" to={`/project-notes/editContributor/${props.record._id}`}>Edit</Link> |
-      <button className="btn btn-link"
-        onClick={() => {
-          props.deleteContributor(props.record._id);
-        }}
-      >
-        Delete
-      </button>
-    </td>
+    <td><a href="/publicprofile">{props.record}</a></td>
+    <td><button className="btn btn-link" onClick={() => {props.deletePerson(props.record);}}>Delete</button></td>
   </tr>
 );
 
 
-
 // The ContributorList component.  This is the main component in this file.
-export default function ContributorList() {
+export default function FollowerList() {
+
+
   const [user, setUser] = useState({})
   const [followers, setFollowers] = useState([]);
+  const params = useParams();
+  
+
   // Hook useState - we are saying: call our state 'records' and use 'setRecords' to change it's value.
   
   // This method fetches the records from the database.
@@ -38,7 +30,8 @@ export default function ContributorList() {
     // Define a function to get records. We are going to call it below.
     // We use async keyword so we can later say "await" to block on finish.
     async function getFollowers() {
-      const response = await fetch(`http://localhost:8085/followers/Doodle`);
+        
+      const response = await fetch(`http://localhost:8085/followers/${params.id.toString()}`);
       
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
@@ -47,7 +40,9 @@ export default function ContributorList() {
       }
       
       const fetchedFollowers = await response.json();
-      setFollowers(fetchedFollowers);  // update state.  when state changes, we automatically re-render.
+
+      setFollowers(fetchedFollowers[0].followers);  // update state.  when state changes, we automatically re-render.
+      
     }
     
     getFollowers();   // Now that we defined it, call the function. 
@@ -57,13 +52,20 @@ export default function ContributorList() {
   }, [followers.length]);  // If record length ever changes, this useEffect() is automatically called.
   
   // A method to delete a contributor
-  async function deleteFollower(id) {
-    await fetch(`http://localhost:8085/followers/unfollow`, {
-      method: "DELETE"
-    });
+  async function deleteFollower(userId, targetUserId) {
+    const deleteFollower = {
+        userId: userId,
+        targetUserId: targetUserId,
+      }
+    const url = "http://localhost:8085/followers/unfollow";
+
+    const res = await axios.delete(url, {
+        data: deleteFollower,
+      })
+      
     
     // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowers = followers.filter((el) => el._id !== id);
+    const newFollowers = followers.filter((el) => el !== el);
     setFollowers(newFollowers);  // This causes a re-render because we change state.
   }
   
@@ -75,7 +77,7 @@ export default function ContributorList() {
   function followerList() {
     return followers.map((record) => {
       return (
-        <Follower record={record} deleteContributor={() => deleteFollower(record._id)}key={record._id}/>);
+        <Follower record={record} deletePerson={() => deleteFollower(record, params.id.toString())}key={record}/>);
     });
   }
 
@@ -86,13 +88,12 @@ export default function ContributorList() {
   // doing a lot of work.
   return (
     <div>
-      <NavbarContributor/>
       <h3>Followers</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
             <th>Name</th>
-            <th>Position</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>{followerList()}</tbody>
