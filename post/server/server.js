@@ -1,19 +1,28 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
-require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 8083;
-app.use(cors());
-app.use(express.json());
-app.use(require("./routes/post"));
-// get driver connection
-const dbo = require("./db/conn");
- 
-app.listen(port, () => {
-  // perform a database connection when server starts
-  dbo.connectToServer(function (err) {
-    if (err) console.error(err);
- 
-  });
-  console.log(`Server is running on port: ${port}`);
-});
+const cors = require('cors')
+const createPostRoute = require('./routes/post.createPost')
+const deletePostRoute = require('./routes/post.deletePost')
+const getAllPostsRoute = require('./routes/post.getAllPosts')
+const getPostByIdRoute = require('./routes/post.getPostById')
+const updatePostRoute = require('./routes/post.updatePost')
+const getAllByUsernameRoute = require('./routes/post.getAllByUsername')
+const dbConnection = require('./config/db.config')
+
+require('dotenv').config({path: 'config.env'});
+const port =  8083;
+
+dbConnection()
+app.use(cors({origin: '*'}))
+app.use(express.json())
+app.use('/posts', createPostRoute)
+app.use('/posts', deletePostRoute)
+app.use('/posts', getAllPostsRoute)
+app.use('/posts', getPostByIdRoute)
+app.use('/posts', updatePostRoute)
+app.use('/posts', getAllByUsernameRoute)
+
+
+app.listen(port, (req, res) => {
+  console.log(`server is listening on port ${port}`);
+})
