@@ -3,27 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavbarContributor from "./navbarContributor";
 import getUserInfo from '../../utilities/decodeJwt'
-
-
-// Adding new method
-// The contributor component
-const Contributor = (props) => (
-  <tr>
-    <td>{props.record.name}</td>
-    <td>{props.record.position}</td>
-    <td>
-      <Link className="btn btn-link" to={`/project-notes/editContributor/${props.record._id}`}>Edit</Link> |
-      <button className="btn btn-link"
-        onClick={() => {
-          props.deleteContributor(props.record._id);
-        }}
-      >
-        Delete
-      </button>
-    </td>
-  </tr>
-);
-
+import Contributor from './contributor';
 
 
 // The ContributorList component.  This is the main component in this file.
@@ -91,14 +71,8 @@ export default function ContributorList() {
   return (
     <div>
       <NavbarContributor/>
-      <h3>Contributors List</h3>
+      <h2>Contributor List</h2>
       <table className="table table-striped" style={{ marginTop: 20 }}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Position</th>
-          </tr>
-        </thead>
         <tbody>{contributorList()}</tbody>
       </table>
     </div>

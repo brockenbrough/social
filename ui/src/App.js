@@ -8,7 +8,7 @@ VIKY'S COMMENT IS HERE
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
 import Home from "./components/home";
-import ContributorList from "./components/project-notes/contributorList";
+import ContributorList from "./components/project-notes/contributorListPage";
 import EditContributor from "./components/project-notes/editContributor";
 import CreateContributor from "./components/project-notes/createContributor";
 import LandingPage from './components/landingpage/Landingpage'
