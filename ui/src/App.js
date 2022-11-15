@@ -18,6 +18,7 @@ import Feed from './components/feed/Feed';
 import EditUserPage from "./components/edituser/edituserpage";
 import PublicProfile from "./components/publicprofile/PublicProfile";
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
+import Test from "./Test";
 
 //test change
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/project-notes/create" element={<CreateContributor />} />
         <Route path="/feed" element={<Feed />} />
         <Route path = "/publicprofile" element = {<PublicProfile/>} />
+        <Route path = "/test" element = {<Test/>} />
       </Routes>
     </>
   );

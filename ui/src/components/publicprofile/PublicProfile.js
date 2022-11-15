@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import './publicprofile.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Form} from 'react-bootstrap';
-import {Image} from "react-bootstrap"
 
 
 
@@ -21,23 +20,24 @@ const PublicProfile = () => {
            <Form.Group controlID = "formUsername" class = "form-control">
            <Form.Label>
             Search
-            <Form.Control type = "name" placeholder = "evilynincorportated" class = "form-control"/>
+            <Form.Control type = "name" placeholder = "username" class = "form-control"/>
            </Form.Label>
           </Form.Group>
  
     <body>
-    <Form.Label>
+      <Form.Label>
       Followers             
       </Form.Label>
-      <Form.Label>
+    <Form.Label>
       Following
       </Form.Label>
-      
-    </body>
-        
-     <small>    
+    <Form.Label>
+      Post
+      </Form.Label>
+      <small>    
       <Button variant = "primary"> Login </Button>
      </small>
+      </body>  
     </Form>
      
     </header>
@@ -47,10 +47,5 @@ const PublicProfile = () => {
      
   )
 }
-
-
-
-
-
 
 export default PublicProfile;

@@ -3,9 +3,9 @@ import './landingpage.css'
 import { Link } from "react-router-dom";
 
 const Landingpage = () => {
-    useEffect(() => {
-     localStorage.removeItem('accessToken')
-    }, [])
+    // useEffect(() => {
+    //  localStorage.removeItem('accessToken')
+    // }, [])
     
     return (
         <div>

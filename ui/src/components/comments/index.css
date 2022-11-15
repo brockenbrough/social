@@ -1,5 +1,30 @@
 .comments {
   margin-top: 20px;
+  margin: 70px;
+}
+
+.caption {
+  font-size: 22px;
+  margin: 70px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+.posterImage {
+  border: 1px solid rgb(107, 114, 12);
+  margin: 70px;
+  width: 300;
+  height: 250;
+  margin-bottom: 0px;
+}
+
+.posterImageProfile {
+  border-radius: 50%;
+  border: 1px solid rgb(107, 114, 12);
+  width: 126px;
+  height: 105px;
+  margin: 70px;
+  margin-bottom: 0px;
 }
 
 .comments-title {
@@ -16,11 +41,11 @@
 }
 
 .comment-form-textarea {
-  width: 100%;
   height: 80px;
   margin-bottom: 8px;
   margin-top: 8px;
   border: 1px solid rgb(107, 114, 12);
+  width: 800px;
 }
 
 .comment-form-button {
@@ -95,4 +120,3 @@
 .replies {
   margin-top: 20px;
 }
-
