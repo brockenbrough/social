@@ -5,7 +5,7 @@ const router = express.Router();
 
 //Gets posts from post service API
 async function getPosts() {
-  const response = await axios.get("http://localhost:8083/posts/post");
+  const response = await axios.get("http://localhost:8083/posts/getAllPosts");
   console.log(response.data)
   return response.data;
 }
@@ -121,18 +121,25 @@ router.route("/feed/:startingPosition/:pageSize").get(async function (req, res) 
 async function getFollowing(userId) {
 const response = await axios.get(`http://localhost:8085/following/${userId}`);
 
-  return response.data?.following;
+  return response.data;
 }
 
 //get posts from a specific user
-async function getUsersPosts(){
- //iterate throught the list of the users from getFollowing
- //and display their posts
+async function getUsersPosts(userName){
+
+ const response = await axios.get(`http://localhost:8083/posts/getAllByUsername/${userName}`);
+ //reruns all of the posts by provided user
+ return response.data;
 }
 //returns sorted feed for the loged in user
 router.route("/feed/:userId").get(async function (req, res) {
 //shows the feed
+const followingUsers = getFollowing();
+const followingUsersPosts = getUsersPosts();
 });
 
 getViews().then((e) => console.log(e))
+const userName = "Viky11";
+//getUsersPosts(userName).then((e) => console.log(e))
+getFollowing(userName).then((e) => console.log(e))
 module.exports = router;
