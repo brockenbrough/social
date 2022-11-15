@@ -19,6 +19,7 @@ import EditUserPage from "./components/edituser/edituserpage";
 import PublicProfile from "./components/publicprofile/PublicProfile";
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
 import Test from "./Test";
+import FollowerList from "./components/following/followerList";
 
 //test change
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/feed" element={<Feed />} />
         <Route path = "/publicprofile" element = {<PublicProfile/>} />
         <Route path = "/test" element = {<Test/>} />
+        <Route path = "/followers/:id" element = {<FollowerList/>} />
       </Routes>
     </>
   );
