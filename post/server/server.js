@@ -24,5 +24,5 @@ app.use('/posts', getAllByUsernameRoute)
 
 
 app.listen(port, (req, res) => {
-  console.log(`server is listening on port ${port}`);
+  console.log(`The post service is runnin on port ${port}`);
 })

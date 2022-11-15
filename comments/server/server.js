@@ -13,5 +13,5 @@ const connectDB = require("./db/conn");
 connectDB();
 
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+  console.log(`The comment server is running on ${port}`);
 });

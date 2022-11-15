@@ -21,5 +21,5 @@ app.use('/user', getUserByIdRoute)
 app.use('/user', editUser)
 
 app.listen(SERVER_PORT, (req, res) => {
-    console.log(`server is listening on port ${SERVER_PORT}`);
+    console.log(`The user service is running on port ${SERVER_PORT}`);
 })

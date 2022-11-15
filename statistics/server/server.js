@@ -14,5 +14,5 @@ app.use('/statistics', statisticsRoute);
 
  
 app.listen(SERVER_PORT, (req,res) => {
-  console.log(`Server is running on port: ${SERVER_PORT}`);
+  console.log(`The post service is running on port ${SERVER_PORT}`);
 });

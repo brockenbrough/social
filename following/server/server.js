@@ -17,7 +17,7 @@ app.use(express.json())
 app.use('/', following)
 
 app.listen(SERVER_PORT, (req, res) => {
-    console.log(`server is listening on port ${SERVER_PORT}`);
+    console.log(`The following server is running on port ${SERVER_PORT}`);
 })
 
 
