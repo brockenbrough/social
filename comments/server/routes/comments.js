@@ -1,6 +1,6 @@
- 
+
 const express = require("express");
-var currentDate = new Date();
+const { MongoRuntimeError } = require("mongodb");
 
 // CommentRoutes is an instance of the express router.
 // We use it to define our routes.
@@ -9,101 +9,51 @@ const CommentRoutes = express.Router();
 //==============================================
 
 // This will help us connect to the database
-const dbo = require("../db/conn");
-
-// This help convert the id from string to ObjectId for the _id.
-const ObjectId = require("mongodb").ObjectId;
+const Comment = require('../models/commentsModel');
 
 // This section will help you get a list of all the comments.
-CommentRoutes.route("/comments/comment").get(function (req, res) {
-  let db_connect = dbo.getDb("comments");
-  db_connect
-    .collection("comments")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
+CommentRoutes.get('/comments/comment', (req, res) => {
+  Comment.find()
+  .then (comments => res.json(comments))
+  .catch(err => res.status(404).json({ commentsfound: 'No comments found'}));
 });
 
 // This section will help you get a single contributor by id
-CommentRoutes.route("/comments/comment/:id").get(function (req, res) {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId(req.params.id) };
-  db_connect.collection("comments").findOne(myquery, function (err, result) {
-    if (err) throw err;
-    res.json(result);
-  });
+CommentRoutes.get('/comments/comment/:id', (req, res) => {
+  Comment.findById(req.params.id)
+  .then (comment => res.json(comment))
+  .catch(err => res.status(404).json({ commentnotfound: 'No comment found' }));
 });
 
 // This section will help you create a new comment.
-CommentRoutes.route("/comments/comment/add").post(function (req, response) {
-  let db_connect = dbo.getDb();
-
-  let myobj = {
-    postId: req.body.postId,
-    commentContent: req.body.commentContent,
-    userId: req.body.userId,
-    Date: currentDate,
-  };
-  db_connect.collection("comments").insertOne(myobj, function (err, res) {
-    if (err) throw err;
-    response.json(res);
-  });
+CommentRoutes.post('/comments/comment/add', (req, res) => {
+  Comment.create(req.body)
+  .then(comment => res.json({msg: 'Comment added'}))
+  .catch(err => res.status(400).json({ error: 'Unable to add this comment'})); 
 });
 
-// Reply to a comment.
-CommentRoutes.route("/comments/reply/add/:id").post(function (
-  req,
-  response
-) {
-  let db_connect = dbo.getDb();
-
-  let myobj = {
-    postId: req.body.postId,
-    commentContent: req.body.commentContent,
-    replyComment: req.body.replyComment,
-    userId: req.body.userId,
-    Date: currentDate,
-  };
-  db_connect.collection("comments").insertOne(myobj, function (err, res) {
-    if (err) throw err;
-    response.json(res);
-  });
+// help you find a comment to reply to by id.
+CommentRoutes.put('/comments/comment/reply/:id', (req, res) => {
+  Comment.findById(req.params.id, req.body)
+  .then(comment => res.json({msg: 'Comment found'}))
+  .catch(err => res.status(400).json({error: ' Comment not found'}));
+  
 });
-
+  
 // This section will help you update a comment by id.
-CommentRoutes.route("/comments/comment/update/:id").put(function (
-  req,
-  response
-) {
-  let db_connect = dbo.getDb();
-
-  let myquery = { _id: ObjectId(req.params.id) };
-  let newvalues = {
-    $set: {
-      commentContent: req.body.commentContent,
-      Date: currentDate,
-    },
-  };
-  db_connect
-    .collection("comments")
-    .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-      console.log("1 document updated");
-      response.json(res);
-    });
+CommentRoutes.put('/comments/comment/update/:id', (req, res) => {
+  Comment.findByIdAndUpdate(req.params.id, req.body)
+  .then(comment => res.json({msg: 'Updated successfully'}))
+  .catch(err =>
+    res.status(400).json({ error: 'Unable to update the Database' })
+  );
 });
 
 // This section will help you delete a contributor
-CommentRoutes.route("/comments/comment/:id").delete((req, response) => {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId(req.params.id) };
-  db_connect.collection("comments").deleteOne(myquery, function (err, obj) {
-    if (err) throw err;
-    console.log("1 document deleted");
-    response.json(obj);
-  });
+CommentRoutes.delete('/comments/comment/:id', (req, res) => {
+  Comment.findByIdAndRemove(req.params.id, req.body)
+  .then(comment => res.json({msg: 'comment deleted successfully'}))
+  .catch(err => res.status(404).json({ error:'No comment'}));
 });
 
 module.exports = CommentRoutes;
