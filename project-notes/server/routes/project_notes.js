@@ -22,7 +22,7 @@ projectNotesRoutes.get('/project_notes/contributor/:id', (req, res) => {
 
 projectNotesRoutes.post('/project_notes/contributor/add', (req, res) => {
   Developer.create(req.body)
-    .then(book => res.json({ msg: 'Developer added successfully' }))
+    .then(developer => res.json({ msg: 'Developer added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this developer' }));
 });
 
