@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 // We import bootstrap to make our application look better.
-import "bootstrap/dist/css/bootstrap.css";
 import getUserInfo from '../utilities/decodeJwt'
 
 
