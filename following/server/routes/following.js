@@ -56,9 +56,9 @@ followerRoutes.post('/followers/follow', async (req, res) => {
           { $addToSet: { followers: `${userId}` } },
           {upsert: true})
         .then((e) => {
-          return res.status(200).json(e).catch((err) => res.status(404).json({ Error: "Error occurred trying to follow a user." }));
+          return res.status(200).json(e);
         })
-    ).then(e => {return e});
+    ).then(e => {return e}).catch((err) => res.status(404).json({ Error: "Error occurred trying to follow a user." }));;
 });
 
 // // To delete a follower from the User's follower list. Similar to a block, but able to delete a User's follower. MIGHT NEED THIS IN THE FUTURE.
