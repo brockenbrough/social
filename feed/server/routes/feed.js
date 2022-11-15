@@ -6,7 +6,7 @@ const router = express.Router();
 //Gets posts from post service API
 async function getPosts() {
   const response = await axios.get("http://localhost:8083/posts/getAllPosts");
-  console.log(response.data)
+  console.log(response.data);
   return response.data;
 }
 
@@ -31,10 +31,10 @@ async function sortPosts(posts) {
   var weights = [];
   for (i = 0; i < posts.length; i++) {
     let postObj = {
-      "postID" : posts[i],
-      "likes" : 0,
-      "views" : 0,
-      "weight" : 0
+      postID: posts[i],
+      likes: 0,
+      views: 0,
+      weight: 0,
     };
     weights.push(postObj);
   }
@@ -56,7 +56,7 @@ async function sortPosts(posts) {
     weights[i].weight = weights[i].likes + weights[i].views;
   }
 
-  weights.sort(function(a, b){
+  weights.sort(function (a, b) {
     return b.weight - a.weight;
   });
 
@@ -64,7 +64,7 @@ async function sortPosts(posts) {
   for (i = 0; i < posts.length; i++) {
     sortedIDs[i] = weights[i].postID;
   }
-  
+
   return sortedIDs;
 }
 
@@ -77,7 +77,6 @@ function paginate(startingPosition, pageSize, posts) {
 //Full feed service for an anonymous user
 router.route("/feed").get(async function (req, res) {
   const posts = await getPosts();
-  console.log('dwdw')
 
   var postIDs = [];
   for (i = 0; i < posts.length; i++) {
@@ -87,7 +86,7 @@ router.route("/feed").get(async function (req, res) {
   const sortedPosts = await sortPosts(postIDs);
 
   let obj = {
-    "feed" : sortedPosts
+    feed: sortedPosts,
   };
 
   res.json(obj);
@@ -95,51 +94,94 @@ router.route("/feed").get(async function (req, res) {
 
 //Paginated feed service for an anonymous user
 //Takes URI inputs of starting position and page size
-router.route("/feed/:startingPosition/:pageSize").get(async function (req, res) {
-  const posts = await getPosts();
+router
+  .route("/feed/:startingPosition/:pageSize")
+  .get(async function (req, res) {
+    const posts = await getPosts();
 
-  const startingPosition = parseInt(req.params.startingPosition);
-  const pageSize = parseInt(req.params.pageSize);
-  if (isNaN(startingPosition) || isNaN(pageSize)) return res.status(400).send("Error: invalid starting position and/or page size, starting position and page size must be a number.");
-  
-  var postIDs = [];
-  for (i = 0; i < posts.length; i++) {
-    postIDs[i] = posts[i]._id;
-  }
+    const startingPosition = parseInt(req.params.startingPosition);
+    const pageSize = parseInt(req.params.pageSize);
+    if (isNaN(startingPosition) || isNaN(pageSize))
+      return res
+        .status(400)
+        .send(
+          "Error: invalid starting position and/or page size, starting position and page size must be a number."
+        );
 
-  const sortedPosts = await sortPosts(postIDs);
-  const page = paginate(startingPosition, pageSize, sortedPosts);
+    var postIDs = [];
+    for (i = 0; i < posts.length; i++) {
+      postIDs[i] = posts[i]._id;
+    }
 
-  let obj = {
-    "feed" : page
-  };
+    const sortedPosts = await sortPosts(postIDs);
+    const page = paginate(startingPosition, pageSize, sortedPosts);
 
-  res.json(obj);
-});
+    let obj = {
+      feed: page,
+    };
+
+    res.json(obj);
+  });
 
 //gets a list of the users that are followed from the logged in user
 async function getFollowing(userId) {
-const response = await axios.get(`http://localhost:8085/following/${userId}`);
+  const response = await axios.get(`http://localhost:8085/following/${userId}`);
 
   return response.data;
 }
 
 //get posts from a specific user
-async function getUsersPosts(userName){
+async function getUsersPosts(userName) {
+  const response = await getFollowing(userName);
+  const followingList = response[0].following;
+  let finalArr = [];
 
- const response = await axios.get(`http://localhost:8083/posts/getAllByUsername/${userName}`);
- //reruns all of the posts by provided user
- return response.data;
+
+  for (i = 0; i < followingList.length; i++) {
+    await axios
+      .get(`http://localhost:8083/posts/getAllByUsername/${followingList[i]}`)
+      .then((e) => finalArr.push(e.data))
+      .catch((e) =>
+        console.log(`something went wrong with this user - ${followingList[i]}`)
+      );
+  }
+
+  return finalArr;
+
+  //  var userIds = [];
+  //  var postIds = [];
+  //  if(followingUsers!=null){
+
+  //   userIds = followingUsers.following;
+
+  //   for(i=0;i<userIds.length;i++){
+  //     response = await axios.get(`http://localhost:8083/posts/getAllByUsername/${userIds[i]}`);
+  //     for(j=postIds.length;j<postIds.length+response.length;j++){
+  //       postIds[j] = response;
+  //     }
+  //   }
+  //  }
+  //  //reruns all of the posts by provided user
+  //  return postIds.data;
 }
 //returns sorted feed for the loged in user
 router.route("/feed/:userId").get(async function (req, res) {
-//shows the feed
-const followingUsers = getFollowing();
-const followingUsersPosts = getUsersPosts();
+  //shows the feed
+  const followingUsersPosts = getUsersPosts(userId);
+  if (followingUsers != null) {
+    var postIDs = [];
+    for (i = 0; i < followingUsersPosts.length; i++) {
+      postIDs[i] = followingUsersPosts[i]._id;
+    }
+    const sortedPosts = await sortPosts(postIDs);
+    let obj = {
+      feed: sortedPosts,
+    };
+  }
 });
 
-getViews().then((e) => console.log(e))
+//getViews().then((e) => console.log(e))
 const userName = "Viky11";
-//getUsersPosts(userName).then((e) => console.log(e))
-getFollowing(userName).then((e) => console.log(e))
+getUsersPosts(userName).then((e) => console.log(e));
+// getFollowing(userName).then((e) => console.log(e))
 module.exports = router;
