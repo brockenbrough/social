@@ -41,12 +41,12 @@ async function sortPosts(posts) {
 
   for (i = 0; i < posts.length; i++) {
     for (j = 0; j < likes.length; j++) {
-      if (likes[j].postID == posts[i]) {
+      if (likes[j].postId == posts[i]) {
         weights[i].likes += 1;
       }
     }
     for (j = 0; j < views.length; j++) {
-      if (views[j].postID == posts[i]) {
+      if (views[j].postId == posts[i]) {
         weights[i].views += 1;
       }
     }

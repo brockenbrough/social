@@ -13,15 +13,6 @@ const Feed = () => {
       setUser(getUserInfo())
     }, [])
 
-    if (!user) return <h1>You are not authorized</h1>
-    
-
-    // const [user, setUser] = useState({})
-
-    useEffect(() => {
-        setUser(getUserInfo())
-    }, [])
-
     if (!user) return (
         <div>
             <h3>

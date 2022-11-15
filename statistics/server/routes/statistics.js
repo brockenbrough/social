@@ -90,7 +90,11 @@ route.get('/count/likes-for-post/:postId', async(req,res) => {
     res.sendStatus(404).send({message: "Post does not exist"})
   }
 });
+route.get('/views',async(req,res)=>{
+  const response = await viewSchema.find({postId : req.body.postId}).count();
+  res.status(200).json(response);
 
+})
 module.exports = route;
 
 
