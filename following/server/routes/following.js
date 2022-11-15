@@ -42,6 +42,11 @@ followerRoutes.post('/followers/follow', async (req, res) => {
   
   const { userId, targetUserId } = req.body;
 
+  if (userId == null || userId == "")
+    return res.status(400).json("Invalid parameters for userId.");
+  if (targetUserId == null || targetUserId == "")
+    return res.status(400).json("Invalid parameters for targetUserID");
+
   followingModel
     .updateOne({ userId: userId }, { $addToSet: { following: `${targetUserId}` } }, {upsert: true})
     .then(
@@ -64,7 +69,7 @@ followerRoutes.delete('/followers/unfollow', async (req, res) => {
   if (userId == null || userId == "")
     return res.status(400).json("Invalid parameters for userId.");
   if (targetUserId == null || targetUserId == "")
-    return res.status(400).json("Invalid parameters to DELETE targetUserId from follower list.");
+    return res.status(400).json("Invalid parameters for targetUserId");
 
 
   followerModel.updateOne({ userId: userId },{ $pull: { followers: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
