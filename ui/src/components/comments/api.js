@@ -2,35 +2,35 @@ export const getComments = async () => {
   return [
     {
       id: "1",
-      body: "First comment",
-      username: "Jack",
+      body: "Nice View! Wow 🤩🥰",
+      username: "Cherry Gertiz",
       userId: "1",
       parentId: null,
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: "2022-08-16T23:00:33.010+02:00",
     },
     {
       id: "2",
-      body: "Second comment",
-      username: "John",
+      body: "Bro, that's beautiful man..❤🕺",
+      username: "Martin Van Dirk",
       userId: "2",
       parentId: null,
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: "2022-08-16T23:00:33.010+02:00",
     },
     {
       id: "3",
-      body: "First comment first child",
-      username: "John",
+      body: "I know it was amazing🏝🏞",
+      username: "John Bisque",
       userId: "2",
       parentId: "1",
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: "2022-08-16T23:00:33.010+02:00",
     },
     {
       id: "4",
-      body: "Second comment second child",
-      username: "John",
+      body: "The weather was perfect!!!🌍🏞",
+      username: "John Bisque",
       userId: "2",
       parentId: "2",
-      createdAt: "2021-08-16T23:00:33.010+02:00",
+      createdAt: "2022-08-16T23:00:33.010+02:00",
     },
   ];
 };
@@ -41,7 +41,7 @@ export const createComment = async (text, parentId = null) => {
     body: text,
     parentId,
     userId: "1",
-    username: "John",
+    username: "John Bisque",
     createdAt: new Date().toISOString(),
   };
 };

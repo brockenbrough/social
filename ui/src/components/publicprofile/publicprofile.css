@@ -2,3 +2,24 @@
     color : red;
     font-size: bold ;
   }
+.bootstrap-logo {
+  width: 72px;
+  height: 72px;
+}
+.PublicProfile
+{
+  width: 72px;
+  height: 72px;
+  color:burlywood;
+  font-size: medium;
+}
+.Button{
+  color: cadetblue;
+  font-size: small;
+}
+.body {
+  font-family: 'Oswald', sans-serif !important;
+}
+.PublicProfile{
+height: d-flex align-items-center justify-content-center text-center
+}
