@@ -4,12 +4,14 @@ import axios from "axios";
 import "./login.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import getUserInfo from "../../utilities/decodeJwt";
 
 const PRIMARY_COLOR = "#cc5c99";
 const SECONDARY_COLOR = '#0c0c1f'
 const url = "http://localhost:8081/user/login";
 
 const Login = () => {
+  const [user, setUser] = useState(null)
   const [data, setData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [light, setLight] = useState(false);
@@ -34,7 +36,10 @@ const Login = () => {
   };
 
   useEffect(() => {
- 
+
+    const obj = getUserInfo(user)
+    setUser(obj)
+
     if (light) {
       setBgColor("white");
       setBgText('Dark mode')
@@ -62,6 +67,13 @@ const Login = () => {
       }
     }
   };
+
+  console.log(user)
+
+  if(user) {
+    navigate('/feed')
+    return
+  }
 
   return (
     <>
@@ -115,13 +127,13 @@ const Login = () => {
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
-                    onChange={() => {setLight(!light)}}
+                    onChange={() => { setLight(!light) }}
                   />
                   <label class="form-check-label" for="flexSwitchCheckDefault" className='text-muted'>
                     {bgText}
                   </label>
                 </div>
-                {error && <div style={labelStyling} className = 'pt-3'>{error}</div>}
+                {error && <div style={labelStyling} className='pt-3'>{error}</div>}
                 <Button
                   variant="primary"
                   type="submit"
