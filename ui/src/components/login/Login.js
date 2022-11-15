@@ -1,23 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios"
-import './login.css'
+import axios from "axios";
+import "./login.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
+const PRIMARY_COLOR = "#cc5c99";
+const SECONDARY_COLOR = '#0c0c1f'
+const url = "http://localhost:8081/user/login";
 
 const Login = () => {
   const [data, setData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const [light, setLight] = useState(false);
+  const [bgColor, setBgColor] = useState(SECONDARY_COLOR);
+  const [bgText, setBgText] = useState('Light Mode')
   const navigate = useNavigate();
-  const url = "http://localhost:8081/user/login";
+
+  let labelStyling = {
+    color: PRIMARY_COLOR,
+    fontWeight: "bold",
+    textDecoration: "none",
+  };
+  let backgroundStyling = { background: bgColor };
+  let buttonStyling = {
+    background: PRIMARY_COLOR,
+    borderStyle: "none",
+    color: bgColor,
+  };
+
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
+
+  useEffect(() => {
+ 
+    if (light) {
+      setBgColor("white");
+      setBgText('Dark mode')
+    } else {
+      setBgColor(SECONDARY_COLOR);
+      setBgText('Light mode')
+    }
+  }, [light]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data: res } = await axios.post(url, data);
-      const { accessToken } = res
-      //store token in localStorage 
+      const { accessToken } = res;
+      //store token in localStorage
       localStorage.setItem("accessToken", accessToken);
       navigate("/feed");
     } catch (error) {
@@ -34,49 +66,78 @@ const Login = () => {
   return (
     <>
       <section className="vh-100">
-        <div className="container-fluid h-custom">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="container-fluid h-custom vh-100">
+          <div
+            className="row d-flex justify-content-center align-items-center h-100 "
+            style={backgroundStyling}>
             <div className="col-md-9 col-lg-6 col-xl-5">
-              <img src="https://cdn.freebiesupply.com/images/large/1x/social-media-ui-kit-demo-o77.jpg"
-                className="img-fluid" alt="test image" />
+              <img
+                src="https://cdn.dribbble.com/users/1080850/screenshots/11585265/media/01aaa0e9a2325d1032112e98d5c78474.png?compress=1&resize=700x600"
+                className="img-fluid"
+                alt="test image"
+              />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form>
-                <div className="form-outline mb-4">
-                  <label className="form-label" htmlFor="username">Username</label>
-                  <input type="username" name='username' id="username" className="form-control form-control-lg"
-                    placeholder="Enter username" onChange={handleChange} />
+              <Form>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label style={labelStyling}>Username</Form.Label>
+                  <Form.Control
+                    type="username"
+                    name="username"
+                    onChange={handleChange}
+                    placeholder="Enter username"
+                  />
+                  <Form.Text className="text-muted">
+                    We just might sell your data
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label style={labelStyling}>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                  <Form.Text className="text-muted pt-1">
+                    Dont have an account?
+                    <span>
+                      <Link to="/signup" style={labelStyling}> Sign up
+                      </Link>
+                    </span>
+                  </Form.Text>
+                </Form.Group>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                    onChange={() => {setLight(!light)}}
+                  />
+                  <label class="form-check-label" for="flexSwitchCheckDefault" className='text-muted'>
+                    {bgText}
+                  </label>
                 </div>
-                <div className="form-outline mb-3">
-                  <label className="form-label" for="form3Example4">Password</label>
-                  <input type="password" id="password" name='password' className="form-control form-control-lg"
-                    placeholder="Enter password" onChange={handleChange} />
-                </div>
-                <div classNameName="error-field">
-                  {error && <div>{error}</div>}
-                </div>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="form-check">
-                    <input className="form-check-input me-2" type="checkbox" value="" id="checkbox" />
-                    <label className="form-check-label pr-10" for="checkbox">
-                      stay signed in
-                    </label>
-                  </div>
-                  <a href="#!" className="text-body">Forgot password?</a>
-                </div>
-                <div className="text-center text-lg-start mt-4 pt-1">
-                  <button type="button" className="btn btn-primary btn-lg" onClick={(e) => handleSubmit(e)}
-                  >Login</button>
-                  <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <Link to='/signup' href="#!"
-                    className="link-danger">Register</Link></p>
-                </div>
-              </form>
+                {error && <div style={labelStyling} className = 'pt-3'>{error}</div>}
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={handleSubmit}
+                  style={buttonStyling}
+                  className='mt-2'
+                >
+                  Submit
+                </Button>
+              </Form>
             </div>
           </div>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -2,13 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
-import "bootstrap/dist/css/bootstrap.css";
+
 import { useNavigate, Link } from 'react-router-dom';
 import getUserInfo from '../../utilities/decodeJwt';
 import './feed.css';
 const Feed = () => {
-
     const [user, setUser] = useState({})
+
+    useEffect(() => {
+      setUser(getUserInfo())
+    }, [])
+
+    if (!user) return <h1>You are not authorized</h1>
+    
+
+    // const [user, setUser] = useState({})
 
     useEffect(() => {
         setUser(getUserInfo())
