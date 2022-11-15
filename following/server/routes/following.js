@@ -56,8 +56,8 @@ followerRoutes.post('/followers/follow', async (req, res) => {
     ).then(e => {return e});
 });
 
-// To delete a follower from the User's follower list. Similar to a block, but able to delete a User's follower.
-followerRoutes.delete('/followers/deleteFollower', async (req, res) => {
+// Unfollow a User
+followerRoutes.delete('/followers/unfollow', async (req, res) => {
 
   const { userId, targetUserId } = req.body;
 
@@ -69,23 +69,7 @@ followerRoutes.delete('/followers/deleteFollower', async (req, res) => {
 
   followerModel.updateOne({ userId: userId },{ $pull: { followers: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
   followingModel.updateOne({ userId: targetUserId },{ $pull: { following: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
-  res.status(200).json({Success: "Successfully removed someone from follower's list."})
-});
-
-
-// Unfollow a User from the User's following list, similar to delete a follower, but now the opposite. 
-followerRoutes.delete("/followers/unfollowUser", async (req, res) => {
-
-  const { userId, targetUserId } = req.body;
-
-  if (userId == null || userId == "")
-    return res.status(400).json("Invalid parameters for userId.");
-  if (targetUserId == null || targetUserId == "")
-    return result.status(400).json("Invalid parameters to UNFOLLOW targetUserId from following list.");
-
-  followingModel.updateOne({ userId: userId },{ $pull: { following: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
-  followerModel.updateOne({ userId: targetUserId },{ $pull: { followers: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
-  res.status(200).json({Success: "Successfully removed someone from following's list."})
+  res.status(200).json({Success: "Successfully removed follower."})
 });
 
 module.exports = followerRoutes;
