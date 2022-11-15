@@ -73,7 +73,7 @@ followerRoutes.delete("/followers/unfollow", async (req, res) => {
 
   followingModel.updateOne({ userId: userId },{ $pull: { following: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
   followerModel.updateOne({ userId: targetUserId },{ $pull: { followers: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
-  res.status(200).json({Success: "Successfully removed someone from following's list."})
+  res.status(200).json({Success: "Unfollowed User."})
 });
 
 module.exports = followerRoutes;
