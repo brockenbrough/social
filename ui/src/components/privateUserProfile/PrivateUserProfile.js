@@ -9,7 +9,6 @@ import Badge from 'react-bootstrap/Badge';
 //link to service 
 //http://localhost:8096/privateUserProfile
 
-
 const PrivateUserProfile = () =>{
 //   const [user, setUser] = useState({})
 //   useEffect(() => {
