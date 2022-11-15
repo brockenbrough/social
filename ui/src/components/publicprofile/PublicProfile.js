@@ -28,24 +28,16 @@ const PublicProfile = () => {
       <Form.Label>
       Followers             
       </Form.Label>
-    </body>
-    <body>
     <Form.Label>
       Following
       </Form.Label>
-    </body>
-    <body>
     <Form.Label>
       Post
       </Form.Label>
-    </body>
-    
-      
-    
-        
-     <small>    
+      <small>    
       <Button variant = "primary"> Login </Button>
      </small>
+      </body>  
     </Form>
      
     </header>
