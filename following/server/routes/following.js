@@ -61,20 +61,35 @@ followerRoutes.post('/followers/follow', async (req, res) => {
     ).then(e => {return e});
 });
 
-// Unfollow a User
-followerRoutes.delete('/followers/unfollow', async (req, res) => {
+// // To delete a follower from the User's follower list. Similar to a block, but able to delete a User's follower. MIGHT NEED THIS IN THE FUTURE.
+// followerRoutes.delete('/followers/deleteFollower', async (req, res) => {
+
+//   const { userId, targetUserId } = req.body;
+
+//   if (userId == null || userId == "")
+//     return res.status(400).json("Invalid parameters for userId.");
+//   if (targetUserId == null || targetUserId == "")
+//     return res.status(400).json("Invalid parameters for targetUserId");
+
+
+//   followerModel.updateOne({ userId: userId },{ $pull: { followers: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
+//   followingModel.updateOne({ userId: targetUserId },{ $pull: { following: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
+//   res.status(200).json({Success: "Successfully removed follower."})
+// });
+
+// To unfollow a user.
+followerRoutes.delete("/followers/unfollowUser", async (req, res) => {
 
   const { userId, targetUserId } = req.body;
 
   if (userId == null || userId == "")
     return res.status(400).json("Invalid parameters for userId.");
   if (targetUserId == null || targetUserId == "")
-    return res.status(400).json("Invalid parameters for targetUserId");
+    return result.status(400).json("Invalid parameters for targetUserId");
 
-
-  followerModel.updateOne({ userId: userId },{ $pull: { followers: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
-  followingModel.updateOne({ userId: targetUserId },{ $pull: { following: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
-  res.status(200).json({Success: "Successfully removed follower."})
+  followingModel.updateOne({ userId: userId },{ $pull: { following: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
+  followerModel.updateOne({ userId: targetUserId },{ $pull: { followers: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
+  res.status(200).json({Success: "Successfully removed someone from following's list."})
 });
 
 module.exports = followerRoutes;
