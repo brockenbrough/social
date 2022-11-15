@@ -56,7 +56,7 @@ followerRoutes.post('/followers/follow', async (req, res) => {
           { $addToSet: { followers: `${userId}` } },
           {upsert: true})
         .then((e) => {
-          return res.status(200).json(e);
+          return res.status(200).json(e).catch((err) => res.status(404).json({ Error: "Error occurred trying to follow a user." }));
         })
     ).then(e => {return e});
 });
