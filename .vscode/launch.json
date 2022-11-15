@@ -46,6 +46,13 @@
             "request": "launch",
             "type": "node-terminal"
         },
+        {
+            "cwd": "${workspaceFolder}/following/server",
+            "command": "npm start",
+            "name": "following: npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
 
     ]
 }

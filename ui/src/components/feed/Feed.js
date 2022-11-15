@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import getUserInfo from '../../utilities/decodeJwt'
-import Navbar from '../navbar.js';
-import './feed.css'
+import React, { useState, useEffect } from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import "bootstrap/dist/css/bootstrap.css";
+import { useNavigate, Link } from 'react-router-dom';
+import getUserInfo from '../../utilities/decodeJwt';
+import './feed.css';
 const Feed = () => {
     const [user, setUser] = useState({})
 
@@ -13,13 +16,50 @@ const Feed = () => {
     if (!user) return <h1>You are not authorized</h1>
     
 
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        setUser(getUserInfo())
+    }, [])
+
+    if (!user) return (
+        <div>
+            <h3>
+                You are not authorized to view this page, Please Login in <Link to={'/login'}> <a href='#'> here </a> </Link>
+            </h3>
+        </div>
+    )
+
     return (
         <>
-            <Navbar />
             <div>
-                <h1>
-                    This is the feed
-                </h1>
+                <Card>
+                    <Card.Header>CheeseB0y</Card.Header>
+                    <Card.Body>I love this cool new social media web application!</Card.Body>
+                    <div>
+                        <ToggleButton href='#'>235 ❤︎</ToggleButton>
+                        <Button>Comments</Button>
+                    </div>
+                    <Card.Footer>11/10/2022</Card.Footer>
+                </Card>
+                <Card>
+                    <Card.Header>NewUser23</Card.Header>
+                    <Card.Body>Hello, I am new here :)</Card.Body>
+                    <div>
+                        <ToggleButton href='#'>3 ❤︎</ToggleButton>
+                        <Button>Comments</Button>
+                    </div>
+                    <Card.Footer>11/14/2022</Card.Footer>
+                </Card>
+                <Card>
+                    <Card.Header>JWood</Card.Header>
+                    <Card.Body>This is a test UI and does not actually work yet</Card.Body>
+                    <div>
+                        <ToggleButton href='#'>2.3M ❤︎</ToggleButton>
+                        <Button>Comments</Button>
+                    </div>
+                    <Card.Footer>12/31/2999</Card.Footer>
+                </Card>
             </div>
         </>
     )

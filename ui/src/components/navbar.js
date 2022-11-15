@@ -23,7 +23,7 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">
+              <NavLink className="nav-link" to="/feed">
                 Home
               </NavLink>
             </li>
@@ -35,6 +35,16 @@ export default function Navbar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/project-notes/contributors">
                 About
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/">
+                Profile
               </NavLink>
             </li>
           </ul>

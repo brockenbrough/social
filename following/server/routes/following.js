@@ -5,156 +5,87 @@ const express = require("express");
 // The router will be added as a middleware and will take control of requests starting with path /following.
 const followerRoutes = express.Router();
 
-
-// This will help us connect to the database
-const dbo = require("../db/conn");
-
-// This help convert the id from string to ObjectId for the _id.
-const ObjectId = require("mongodb").ObjectId;
-
 // Follower model
 const followerModel = require('../model/followerModel')
 const followingModel = require('../model/followingModel')
 
-
-
-
-
 // Retrieves a list of all users and their followers.
-followerRoutes.get('/followers', async (req, res) => {
-    const followers = await followerModel.find();
-    return res.json(followers)
-  })
+followerRoutes.get("/followers", async (req, res) => {
+  const followers = await followerModel.find();
+  return res.status(200).json(followers);
+});
 
 // Retrieves a list of all users and who they are following.
-followerRoutes.get('/following', async (req, res) => {
+followerRoutes.get("/following", async (req, res) => {
   const following = await followingModel.find();
-  return res.json(following)
-})
+  return res.status(200).json(following);
+});
 
-followerRoutes.get('/followers/:id', (req, res) => {
-  followerModel.find({userId: req.params.id})
-    .then(follower => res.json(follower))
-    .catch(err => res.status(404).json({ User: 'No user found.' }));
+// Retrieves all the followers of a user by id.
+followerRoutes.get("/followers/:id", (req, res) => {
+  followerModel
+    .find({ userId: req.params.id })
+    .then((follower) => res.json(follower))
+    .catch((err) => res.status(404).json({ User: "No user found." }));
 });
 
 // Retrieves all the users that a certain user is following by id.
-followerRoutes.get('/following/:id', (req, res) => {
-  followingModel.find({userId: req.params.id})
-    .then(following => res.json(following))
-    .catch(err => res.status(404).json({ User: 'No user found.' }));
+followerRoutes.get("/following/:id", (req, res) => {
+  followingModel
+    .find({ userId: req.params.id })
+    .then((following) => res.json(following))
+    .catch((err) => res.status(404).json({ User: "No user found." }));
 });
 
-// Follow a user
-followerRoutes.route("/followers/follow").post(function (req, response) {
+// Follow a User
+followerRoutes.post('/followers/follow', async (req, res) => {
+  
+  const { userId, targetUserId } = req.body;
 
-  if (req.body.userId == null || req.body.userId == "")
-    return response.status(400).send({ message: "Invalid parameters for userId."});
-  if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).send({ message: "Invalid parameters for targetUserId."});
-
-  const createFollowing = new followingModel({
-    userId: req.body.userId,
-    following: req.body.targetUserId,
-  });
-
-  const createFollower = new followerModel({
-    userId: req.body.targetUserId,
-    followers: req.body.userId,
-  });
-
-  let db_connect = dbo.getDb();
-
-  db_connect
-    .collection("following")
-    .findOne({ userId: req.body.userId }, function (err, res) {
-      if (err) throw err;
-      if (res) {
-        db_connect
-          .collection("following")
-          .findOneAndUpdate(
-            { userId: req.body.userId },
-            { $addToSet: { following: req.body.targetUserId } },
-            function (err, result) {
-              if (err) throw err;
-              console.log("Following " + req.body.userId);
-              response.json(result);
-            }
-          );
-      } else {
-        db_connect
-          .collection("following")
-          .insertOne(createFollowing, function (err, res) {
-            if (err) throw err;
-            console.log("Created new User " + req.body.userId + ",and added to following.");
-            response.json(res);
-          });
-      }
-    });
-    db_connect
-    .collection("followers")
-    .findOne({ userId: req.body.targetUserId }, function (err, res) {
-      if (err) throw err;
-      if (res) {
-        db_connect
-          .collection("followers")
-          .findOneAndUpdate(
-            { userId: req.body.targetUserId },
-            { $addToSet: { followers: req.body.userId } },
-            function (err, result) {
-              if (err) throw err;
-              console.log("Followers " + req.body.targetUserId);
-            }
-          );
-      } else {
-        db_connect
-          .collection("followers")
-          .insertOne(createFollower, function (err, res) {
-            if (err) throw err;
-            console.log("Created new User " + req.body.targetUserId + ",and added to followers.");
-          });
-      }
-    });
+  followingModel
+    .updateOne({ userId: userId }, { $addToSet: { following: `${targetUserId}` } }, {upsert: true})
+    .then(
+      followerModel
+        .updateOne(
+          { userId: targetUserId },
+          { $addToSet: { followers: `${userId}` } },
+          {upsert: true})
+        .then((e) => {
+          return res.status(200).json(e);
+        })
+    ).then(e => {return e});
 });
 
 // To delete a follower from the User's follower list. Similar to a block, but able to delete a User's follower.
-followerRoutes.route("/followers/deleteFollower").delete((req, response) => {
+followerRoutes.delete('/followers/deleteFollower', async (req, res) => {
 
-  if (req.body.userId == null || req.body.userId == "")
-    return response.status(400).json("Invalid parameters for userId.");
-  if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).json("Invalid parameters to DELETE targetUserId from follower list.");
+  const { userId, targetUserId } = req.body;
 
-  let db_connect = dbo.getDb();
-  db_connect.collection("followers").updateOne({userId: req.body.userId}, {$pull: {followers: req.body.targetUserId}},function (err, obj) {
-    if (err) throw err;
-    console.log("A follower(s) has been deleted from "+req.body.userId);
-    response.json(obj);
-  });
-  db_connect.collection("following").updateOne({userId: req.body.targetUserId}, {$pull: {following: req.body.userId}},function (err, obj) {
-    if (err) throw err;
-    console.log("A following(s) has been deleted from "+req.body.targetUserId);
-  });
+  if (userId == null || userId == "")
+    return res.status(400).json("Invalid parameters for userId.");
+  if (targetUserId == null || targetUserId == "")
+    return res.status(400).json("Invalid parameters to DELETE targetUserId from follower list.");
+
+
+  followerModel.updateOne({ userId: userId },{ $pull: { followers: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
+  followingModel.updateOne({ userId: targetUserId },{ $pull: { following: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
+  res.status(200).json({Success: "Successfully removed someone from follower's list."})
 });
 
+
 // Unfollow a User from the User's following list, similar to delete a follower, but now the opposite. 
-followerRoutes.route("/followers/unfollowUser").delete((req, response) => {
+followerRoutes.delete("/followers/unfollowUser", async (req, res) => {
 
-  if (req.body.userId == null || req.body.userId == "")
-    return response.status(400).json("Invalid parameters for userId.");
-  if (req.body.targetUserId == null || req.body.targetUserId == "")
-    return response.status(400).json("Invalid parameters to UNFOLLOW targetUserId from following list.");
+  const { userId, targetUserId } = req.body;
 
-  let db_connect = dbo.getDb();
-  db_connect.collection("followers").updateOne({userId: req.body.targetUserId}, {$pull: {followers: req.body.userId}},function (err, obj) {
-    if (err) throw err;
-    console.log("A follower(s) has been deleted from "+req.body.userId);
-  });
-  db_connect.collection("following").updateOne({userId: req.body.userId}, {$pull: {following: req.body.targetUserId}},function (err, obj) {
-    if (err) throw err;
-    response.json(obj);
-    console.log("A following(s) has been deleted from "+req.body.targetUserId);
-  });
+  if (userId == null || userId == "")
+    return res.status(400).json("Invalid parameters for userId.");
+  if (targetUserId == null || targetUserId == "")
+    return result.status(400).json("Invalid parameters to UNFOLLOW targetUserId from following list.");
+
+  followingModel.updateOne({ userId: userId },{ $pull: { following: `${targetUserId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a following." }));
+  followerModel.updateOne({ userId: targetUserId },{ $pull: { followers: `${userId}` } }).catch((err) => res.status(404).json({ Error: "Error occurred trying to remove a follower." }));
+  res.status(200).json({Success: "Successfully removed someone from following's list."})
 });
 
 module.exports = followerRoutes;

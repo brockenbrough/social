@@ -5,80 +5,39 @@ const express = require("express");
 // The router will be added as a middleware and will take control of requests starting with path /project_notes.
 const projectNotesRoutes = express.Router();
 
-// This will help us connect to the database
-const dbo = require("../db/conn");
+// Load Developer model
+const Developer = require('../models/contributorModel');
 
-// This help convert the id from string to ObjectId for the _id.
-const ObjectId = require("mongodb").ObjectId;
-
-
-// This section will help you get a list of all the contributors.
-projectNotesRoutes.route("/project_notes/contributor").get(function (req, res) {
-  let db_connect = dbo.getDb("project_notes");
-  db_connect
-    .collection("contributors")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
+projectNotesRoutes.get('/project_notes/contributor', (req, res) => {
+  Developer.find()
+    .then(developers => res.json(developers))
+    .catch(err => res.status(404).json({ nobooksfound: 'No developers found' }));
 });
 
-// This section will help you get a single contributor by id
-projectNotesRoutes.route("/project_notes/contributor/:id").get(function (req, res) {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
-  db_connect
-      .collection("contributors")
-      .findOne(myquery, function (err, result) {
-        if (err) throw err;
-        res.json(result);
-      });
+projectNotesRoutes.get('/project_notes/contributor/:id', (req, res) => {
+  Developer.findById(req.params.id)
+    .then(developer => res.json(developer))
+    .catch(err => res.status(404).json({ developernotfound: 'No developer found' }));
 });
 
-// This section will help you create a new contributor.
-projectNotesRoutes.route("/project_notes/contributor/add").post(function (req, response) {
-  let db_connect = dbo.getDb();
-  let myobj = {
-    name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
-  };
-  db_connect.collection("contributors").insertOne(myobj, function (err, res) {
-    if (err) throw err;
-    response.json(res);
-  });
+projectNotesRoutes.post('/project_notes/contributor/add', (req, res) => {
+  Developer.create(req.body)
+    .then(book => res.json({ msg: 'Developer added successfully' }))
+    .catch(err => res.status(400).json({ error: 'Unable to add this developer' }));
 });
 
-// This section will help you update a contributor by id.
-projectNotesRoutes.route("/project_notes/contributor/update/:id").post(function (req, response) {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
-  let newvalues = {
-    $set: {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
-    },
-  };
-  db_connect
-    .collection("contributors")
-    .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-      console.log("1 document updated");
-      response.json(res);
-    });
+projectNotesRoutes.put('/project_notes/contributor/update/:id', (req, res) => {
+  Developer.findByIdAndUpdate(req.params.id, req.body)
+    .then(developer => res.json({ msg: 'Updated successfully' }))
+    .catch(err =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
 });
 
-// This section will help you delete a contributor
-projectNotesRoutes.route("/project_notes/contributor/:id").delete((req, response) => {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
-  db_connect.collection("contributors").deleteOne(myquery, function (err, obj) {
-    if (err) throw err;
-    console.log("1 document deleted");
-    response.json(obj);
-  });
+projectNotesRoutes.delete('/project_notes/contributor/:id', (req, res) => {
+  Developer.findByIdAndRemove(req.params.id, req.body)
+    .then(developer => res.json({ mgs: ' entry deleted successfully' }))
+    .catch(err => res.status(404).json({ error: 'No such developer' }));
 });
 
 module.exports = projectNotesRoutes;

@@ -1,19 +1,24 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
+const cors = require('cors')
 require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 8085;
+
+const following = require('./routes/following.js')
+
+const dbConnection = require('./db/conn.js')
+
+require('dotenv').config();
+const SERVER_PORT = 8085
+
+dbConnection()
 app.use(cors());
-app.use(express.json());
-app.use(require("./routes/following"));
-// get driver connection
-const dbo = require("./db/conn");
- 
-app.listen(port, () => {
-  // perform a database connection when server starts
-  dbo.connectToServer(function (err) {
-    if (err) console.error(err);
- 
-  });
-  console.log(`Server is running on port: ${port}`);
-});
+app.use(express.json())
+
+app.use('/', following)
+
+app.listen(SERVER_PORT, (req, res) => {
+    console.log(`server is listening on port ${SERVER_PORT}`);
+})
+
+
+
