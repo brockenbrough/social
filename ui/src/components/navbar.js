@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-// We import bootstrap to make our application look better.
 import getUserInfo from '../utilities/decodeJwt'
-
 
 // We import NavLink to utilize the react router.
 import { NavLink } from "react-router-dom";
