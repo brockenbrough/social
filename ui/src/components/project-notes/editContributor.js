@@ -11,6 +11,7 @@ export default function EditContributor() {
   const [form, setForm] = useState({
     name: "",
     position: "",
+    level: "",
   });
   const params = useParams();
   const navigate = useNavigate();
@@ -93,6 +94,16 @@ export default function EditContributor() {
                          id="position"
                          value={form.position}
                          onChange={(e) => updateForm({ position: e.target.value })}
+             />
+          </Form.Group>
+
+          
+          <Form.Group className="mb-3" controlId="formLevel">
+             <Form.Label>Level</Form.Label>
+             <Form.Control type="text" placeholder="Enter level" 
+                         id="level"
+                         value={form.level}
+                         onChange={(e) => updateForm({ level: e.target.value })}
              />
           </Form.Group>
       

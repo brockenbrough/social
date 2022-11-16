@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import NavbarContributor from "./contributorNavbar";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 export default function CreateContributor() {
   // We define the state for the form.
@@ -39,7 +42,7 @@ export default function CreateContributor() {
     });
 
     setForm({ name: "", position: "" });
-    navigate("/");
+    navigate("/project-notes/contributors");
   }
 
   // This following section will display the form that takes the input from the user.
@@ -47,36 +50,44 @@ export default function CreateContributor() {
   return (
     <div>
       <NavbarContributor/>
-      <h3>Create Contributor</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            value={form.name}
-            onChange={(e) => updateForm({ name: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="position">Position</label>
-          <input
-            type="text"
-            className="form-control"
-            id="position"
-            value={form.position}
-            onChange={(e) => updateForm({ position: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="submit"
-            value="Create person"
-            className="btn btn-primary"
-          />
-        </div>
-      </form>
-    </div>
+      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
+        <Card.Title>Add Developer</Card.Title>
+        <Card.Body> 
+        <Form>
+          <Form.Group className="mb-3" controlId="formName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter name" 
+                        id="name"
+                        value={form.name}
+                        onChange={(e) => updateForm({ name: e.target.value })}
+             />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formPosition">
+             <Form.Label>Position</Form.Label>
+             <Form.Control type="text" placeholder="Enter position" 
+                         id="position"
+                         value={form.position}
+                         onChange={(e) => updateForm({ position: e.target.value })}
+             />
+          </Form.Group>
+
+          
+          <Form.Group className="mb-3" controlId="formLevel">
+             <Form.Label>Level</Form.Label>
+             <Form.Control type="text" placeholder="Enter level" 
+                         id="level"
+                         value={form.level}
+                         onChange={(e) => updateForm({ level: e.target.value })}
+             />
+          </Form.Group>
+      
+          <Button variant="primary" type="submit" onClick={onSubmit}>
+            Submit
+          </Button>
+        </Form>
+        </Card.Body>
+      </Card>
+      </div>
   );
 }
