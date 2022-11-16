@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react'
 import './landingpage.css'
 import { Link } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 const Landingpage = () => {
     // useEffect(() => {
@@ -8,22 +12,16 @@ const Landingpage = () => {
     // }, [])
     
     return (
-        <div>
-            <h1>
-                Welcome to the CSC 351 SM APP</h1>
-            <Link to={'/signup'}>
-                <button className='signup-btn'>
-                    Signup
-                </button>
-            </Link>
-
-            <Link to={'/login'}><button className='login-btn'>
-                Login
-            </button>
-            </Link>
-            <br />
-        
-        </div>
+        <Card style={{ width: '30rem' }} className="mx-2 my-2">
+        <Card.Body>
+          <Card.Title>Welcome to the CSC 351 Social Media App</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">Social media as you've never seen it before.</Card.Subtitle>
+          <Card.Text>
+          </Card.Text>
+          <Card.Link href="/signup">Sign Up</Card.Link>
+          <Card.Link href="/login">Login</Card.Link>
+        </Card.Body>
+      </Card>
     )
 }
 
