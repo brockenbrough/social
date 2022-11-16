@@ -1,5 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import getUserInfo from './utilities/decodeJwt'
+import React, {useState, useEffect} from 'react';
+import getUserInfo from './utilities/decodeJwt';
+import Alert from 'react-bootstrap/Alert';
+import Stack from 'react-bootstrap/Stack';
 
 const Test = () => {
     const [user, setUser] = useState(null)
@@ -12,9 +14,14 @@ const Test = () => {
     }, [])
     
   return (
-    <div>
-        <h1>{JSON.stringify(user)}</h1>
-    </div>
+    <Stack direction="verticle" gap={2}>
+      <div className="mx-2">
+        <h4>Authenticated User</h4>
+      </div>
+      <Alert variant='primary' className="mx-2">
+        {JSON.stringify(user, null, 2)}
+      </Alert>
+    </Stack>
   )
 }
 
