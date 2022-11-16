@@ -12,7 +12,9 @@ export default function Navbar() {
   setUser(getUserInfo())
   }, [])
   
-  if (!user) return null
+  // if (!user) return null   - for now, let's show the bar even not logged in.
+  // we have an issue with getUserInfo() returning null after a few minutes
+  // it seems.
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
