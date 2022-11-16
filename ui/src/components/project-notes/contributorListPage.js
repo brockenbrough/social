@@ -1,7 +1,7 @@
 //This is a comment about imports
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavbarContributor from "./navbarContributor";
+import ContributorNavbar from "./contributorNavbar";
 import getUserInfo from '../../utilities/decodeJwt'
 import Contributor from './contributor';
 
@@ -70,8 +70,7 @@ export default function ContributorList() {
   // doing a lot of work.
   return (
     <div>
-      <NavbarContributor/>
-      <h2>Contributor List</h2>
+      <ContributorNavbar/>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <tbody>{contributorList()}</tbody>
       </table>

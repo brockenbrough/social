@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import NavbarContributor from "./navbarContributor";
+import NavbarContributor from "./contributorNavbar";
 
 export default function CreateContributor() {
   // We define the state for the form.

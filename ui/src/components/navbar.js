@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import getUserInfo from '../utilities/decodeJwt'
+import getUserInfo from '../utilities/decodeJwt';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import ReactNavbar from 'react-bootstrap/Navbar';
 
 // We import NavLink to utilize the react router.
 import { NavLink } from "react-router-dom";
@@ -16,38 +19,15 @@ export default function Navbar() {
   // we have an issue with getUserInfo() returning null after a few minutes
   // it seems.
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/feed">
-                Home
-              </NavLink>
-            </li>
-          </ul>
-        </div>
+    <ReactNavbar bg="dark" variant="dark">
+    <Container>
+      <Nav className="me-auto">
+        <Nav.Link href="/feed">Home</Nav.Link>
+        <Nav.Link href="/project-notes/contributors">About</Nav.Link>
+        <Nav.Link href="/privateUserProfile">Profile</Nav.Link>
+      </Nav>
+    </Container>
+  </ReactNavbar>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/project-notes/contributors">
-                About
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/">
-                Profile
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
   );
 }

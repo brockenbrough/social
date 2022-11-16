@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import NavbarContributor from "./navbarContributor";
+import NavbarContributor from "./contributorNavbar";
 
 // Edit Component
 export default function EditContributor() {
