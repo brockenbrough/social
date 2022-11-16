@@ -75,38 +75,34 @@ export default function EditContributor() {
     <div>
       <NavbarContributor/>
 
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name: </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            value={form.name}
-            onChange={(e) => updateForm({ name: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="position">Position: </label>
-          <input
-            type="text"
-            className="form-control"
-            id="position"
-            value={form.position}
-            onChange={(e) => updateForm({ position: e.target.value })}
-          />
-        </div>
+      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
+        <Card.Body> 
+        <Form>
+          <Form.Group className="mb-3" controlId="formName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter name" 
+                        id="name"
+                        value={form.name}
+                        onChange={(e) => updateForm({ name: e.target.value })}
+             />
+          </Form.Group>
 
-        <br />
+          <Form.Group className="mb-3" controlId="formPosition">
+             <Form.Label>Position</Form.Label>
+             <Form.Control type="text" placeholder="Enter position" 
+                         id="position"
+                         value={form.position}
+                         onChange={(e) => updateForm({ position: e.target.value })}
+             />
+          </Form.Group>
+      
+          <Button variant="primary" type="submit" onClick={onSubmit}>
+            Submit
+          </Button>
+        </Form>
+        </Card.Body>
+      </Card>
 
-        <div className="form-group">
-          <input
-            type="submit"
-            value="Update Record"
-            className="btn btn-primary"
-          />
-        </div>
-      </form>
     </div>
   );
 }
