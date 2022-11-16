@@ -70,7 +70,6 @@ export default function EditContributor() {
   return (
     <div>
       <NavbarContributor/>
-      <h4>Update YO MOMMA'S Records</h4>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name: </label>
