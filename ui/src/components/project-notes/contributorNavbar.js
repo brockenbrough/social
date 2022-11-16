@@ -8,11 +8,11 @@ import Navbar from 'react-bootstrap/Navbar';
 // Here, we display our Navbar
 export default function NavbarContributor() {
   return (
-    <Navbar bg="primary" variant="light">
+    <Navbar bg="light" variant="light">
     <Container>
       <Nav className="me-auto">
-        <Nav.Link href="/project-notes/contributors">Contributors</Nav.Link>
-        <Nav.Link href="/project-notes/create">Create</Nav.Link>
+        <Nav.Link href="/project-notes/contributors">Developers</Nav.Link>
+        <Nav.Link href="/project-notes/create">Add Developer</Nav.Link>
       </Nav>
     </Container>
   </Navbar>

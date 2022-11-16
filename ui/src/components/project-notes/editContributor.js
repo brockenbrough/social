@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import NavbarContributor from "./contributorNavbar";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+
 
 // Edit Component
 export default function EditContributor() {
@@ -70,6 +74,32 @@ export default function EditContributor() {
   return (
     <div>
       <NavbarContributor/>
+
+      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
+        <Card.Body> 
+      <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="string" placeholder="Enter email" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+        </Card.Body>
+      </Card>
+
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name: </label>
