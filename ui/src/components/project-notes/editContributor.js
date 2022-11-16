@@ -59,46 +59,21 @@ export default function EditContributor() {
     };
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:8095/project_notes/contributor/update/${params.id}`, {
-      method: "POST",
+    await fetch(`http://localhost:8095/project_notes/contributor/update/${params.id.toString()}`, {
+      method: "PUT",
       body: JSON.stringify(editedPerson),
       headers: {
         'Content-Type': 'application/json'
       },
     });
 
-    navigate("/");
+    navigate("/project-notes/contributors");
   }
 
   // This following section will display the form that takes input from the user to update the data.
   return (
     <div>
       <NavbarContributor/>
-
-      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
-        <Card.Body> 
-      <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="string" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
-        </Card.Body>
-      </Card>
 
       <form onSubmit={onSubmit}>
         <div className="form-group">
