@@ -3,7 +3,7 @@ var currentDate = new Date();
 
 // CommentRoutes is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path 
+// The router will be added as a middleware and will take control of requests starting with path /project_notes.
 const CommentRoutes = express.Router();
 //==============================================
 
@@ -52,10 +52,7 @@ CommentRoutes.route("/comments/comment/add").post(function (req, response) {
 });
 
 // Reply to a comment.
-CommentRoutes.route("/comments/reply/add/:id").post(function (
-  req,
-  response
-) {
+CommentRoutes.route("/comments/reply/add/:id").post(function (req, response) {
   let db_connect = dbo.getDb();
 
   let myobj = {
