@@ -10,7 +10,7 @@ const viewSchema = require("../models/view");
  */
 
 //Allows a post to gain a view of a post
-route.post('/views',async(req,res)=>{
+route.post('/views/view',async(req,res)=>{
   const userView={
     userId: req.body.userId,
     postId: req.body.postId,
@@ -25,13 +25,11 @@ route.post('/views',async(req,res)=>{
 });
 
 //Alows a user to like a post
-route.post('/likes', async(req,res) => {
+route.post('/likes/like', async(req,res) => {
   //Creating a timestamp object to pass to 
-  const now = new Date()
   const userLike = {
     userId: req.body.userId,
     postId: req.body.postId,
-    date: now,
   };
 
   const likes = await likeSchema.findOne({userId: userLike.userId, postId: userLike.postId})
@@ -52,13 +50,13 @@ route.post('/likes', async(req,res) => {
  */
 
 //returns a list of all likes
-route.get('/likes', async(req,res) => {
+route.get('/like-list', async(req,res) => {
   const likes = await likeSchema.find()
   return res.json(likes)
 });
 
 //returns a list of posts that an individual user liked
-route.get('/likes/:userId', async(req,res) => {
+route.get('/user-likes/:userId', async(req,res) => {
   const likes = await likeSchema.find({userId: req.params.userId}) 
   return res.json(likes)
 });
