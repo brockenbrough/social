@@ -20,6 +20,7 @@ import PublicProfile from "./components/publicprofile/PublicProfile";
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerList";
+import FeedPage from "./components/post/feedPage";
 
 //test change
 const App = () => {
@@ -35,7 +36,8 @@ const App = () => {
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
-        <Route path="/feed" element={<Feed />} />
+        <Route path="/oldfeed" element={<Feed />} />
+        <Route path="/feed" element={<FeedPage />} />
         <Route path = "/publicprofile" element = {<PublicProfile/>} />
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
