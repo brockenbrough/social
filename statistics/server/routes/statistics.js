@@ -5,7 +5,11 @@ const likeSchema = require("../models/like");
 const viewSchema = require("../models/view");
 
 
+/**
+ * Functions to add views and likes to posts
+ */
 
+//Allows a post to gain a view of a post
 route.post('/views',async(req,res)=>{
   const userView={
     userId: req.body.userId,
@@ -43,6 +47,10 @@ route.post('/likes', async(req,res) => {
   }
 });
 
+/**
+ * Utility functions for likes.
+ */
+
 //returns a list of all likes
 route.get('/likes', async(req,res) => {
   const likes = await likeSchema.find()
@@ -68,7 +76,7 @@ route.delete('/likes/unLike', async(req,res) =>{
 
 
 /**
- * Get functions for counting likes for users and posts
+ * Get functions for counting likes and views for users and posts
  */
 
 //Count the amount of posts a user liked
@@ -90,11 +98,13 @@ route.get('/count/likes-for-post/:postId', async(req,res) => {
     res.sendStatus(404).send({message: "Post does not exist"})
   }
 });
+
 route.get('/views',async(req,res)=>{
   const response = await viewSchema.find({postId : req.body.postId}).count();
   res.status(200).json(response);
 
 })
+
 module.exports = route;
 
 
