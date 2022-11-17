@@ -62,10 +62,10 @@ const comments = ({ commentsUrl, currentUserId }) => {
     <div className="comments">
       <h3 className="comments-title">Comments</h3>
       <div className="comment-form-title">Write comment</div>
-      <CommentForm submitLabel="Write" handleSubmit={addComment} />
+      <commentForm submitLabel="Write" handleSubmit={addComment} />
       <div className="comments-container">
         {rootComments.map((rootComment) => (
-          <Comment
+          <comment
             key={rootComment.id}
             comment={rootComment}
             replies={getReplies(rootComment.id)}
