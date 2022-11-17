@@ -1,7 +1,7 @@
-
+import React from "react";
 import { useState, useEffect } from "react";
-import CommentForm from "./CommentForm";
-import Comment from "./Comment";
+import commentForm from "./commentForm";
+import comment from "./comment";
 import {
   getComments as getCommentsApi,
   createComment as createCommentApi,
@@ -9,7 +9,7 @@ import {
   deleteComment as deleteCommentApi,
 } from "./api";
 
-const Comments = ({ commentsUrl, currentUserId }) => {
+const comments = ({ commentsUrl, currentUserId }) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
   const rootComments = backendComments.filter(
@@ -82,4 +82,4 @@ const Comments = ({ commentsUrl, currentUserId }) => {
   );
 };
 
-export default Comments;
+export default comments;

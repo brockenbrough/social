@@ -1,6 +1,7 @@
+import React from "react";
 import { useState } from "react";
 
-const CommentForm = ({
+const commentForm = ({
   handleSubmit,
   submitLabel,
   hasCancelButton = false,
@@ -38,4 +39,4 @@ const CommentForm = ({
   );
 };
 
-export default CommentForm;
+export default commentForm;

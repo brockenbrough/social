@@ -1,6 +1,7 @@
-import CommentForm from "./CommentForm";
+import React from "react";
+import commentForm from "./commentForm";
 
-const Comment = ({
+const comment = ({
   comment,
   replies,
   setActiveComment,
@@ -39,7 +40,7 @@ const Comment = ({
         </div>
         {!isEditing && <div className="comment-text">{comment.body}</div>}
         {isEditing && (
-          <CommentForm
+          <commentForm
             submitLabel="Update"
             hasCancelButton
             initialText={comment.body}
@@ -80,7 +81,7 @@ const Comment = ({
           )}
         </div>
         {isReplying && (
-          <CommentForm
+          <commentForm
             submitLabel="Reply"
             handleSubmit={(text) => addComment(text, replyId)}
           />
@@ -88,7 +89,7 @@ const Comment = ({
         {replies.length > 0 && (
           <div className="replies">
             {replies.map((reply) => (
-              <Comment
+              <comment
                 comment={reply}
                 key={reply.id}
                 setActiveComment={setActiveComment}
@@ -108,4 +109,4 @@ const Comment = ({
   );
 };
 
-export default Comment;
+export default comment;
