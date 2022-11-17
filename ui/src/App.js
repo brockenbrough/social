@@ -20,6 +20,7 @@ import PublicProfile from "./components/publicprofile/PublicProfile";
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
+import FollowingList from "./components/following/followingListPage";
 import FeedPage from "./components/post/feedPage";
 import commentsHome from "./components/comments/commentsHome";
 
