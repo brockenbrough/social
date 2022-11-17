@@ -1,4 +1,5 @@
-import CommentForm from "./CommentForm";
+import React from 'react';
+import commentForm from "./commentForm";
 
 const Comment = ({
   comment,
@@ -108,4 +109,4 @@ const Comment = ({
   );
 };
 
-export default Comment;
+export default comment;
