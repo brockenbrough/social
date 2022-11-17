@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+/*
 import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
@@ -101,3 +102,4 @@ export default function FollowingList() {
     </div>
   );
 }
+*/
