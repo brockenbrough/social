@@ -12,7 +12,7 @@ async function getPosts() {
 
 //Gets likes from statistics service API
 async function getLikes() {
-  const response = await axios.get("http://localhost:8087/statistics/likes");
+  const response = await axios.get("http://localhost:8087/statistics/like-list");
   return response.data;
 }
 
