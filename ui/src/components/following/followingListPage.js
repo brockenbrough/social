@@ -1,4 +1,4 @@
-/*
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
@@ -61,7 +61,7 @@ export default function FollowingList() {
     const url = "http://localhost:8085/followers/unfollow";
 
     const res = await axios.delete(url, {
-        data: deleteFollower,
+        data: deleteFollowing,
       })
       
     
