@@ -45,6 +45,7 @@ const App = () => {
         <Route path = "/publicprofile" element = {<PublicProfile/>} />
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
+        <Route path = "/following/:id" element = {<FollowingList/>} />
       </Routes>
     </>
   );
