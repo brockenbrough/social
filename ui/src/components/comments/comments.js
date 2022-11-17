@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
-import CommentForm from "./CommentForm";
-import Comment from "./Comment";
+import commentForm from "./commentForm";
+import comment from "./comment";
 import {
   getComments as getCommentsApi,
   createComment as createCommentApi,
@@ -82,4 +82,4 @@ const Comments = ({ commentsUrl, currentUserId }) => {
   );
 };
 
-export default Comments;
+export default comments;
