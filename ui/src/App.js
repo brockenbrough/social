@@ -19,7 +19,7 @@ import EditUserPage from "./components/edituser/edituserpage";
 import PublicProfile from "./components/publicprofile/PublicProfile";
 import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
 import Test from "./Test";
-import FollowerList from "./components/following/followerList";
+import FollowerList from "./components/following/followerListPage";
 import FeedPage from "./components/post/feedPage";
 import commentsHome from "./components/comments/commentsHome";
 
