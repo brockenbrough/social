@@ -1,3 +1,4 @@
+import React from 'react';
 import commentForm from "./commentForm";
 
 const Comment = ({
