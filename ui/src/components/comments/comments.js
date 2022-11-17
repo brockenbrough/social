@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { useState, useEffect } from "react";
 import commentForm from "./commentForm";
 import comment from "./comment";
