@@ -10,11 +10,18 @@ const commentsSchema = new mongoose.Schema({
     type: String,
     default: '',
    },
+   
+
+   replies: {
+      type: [String],
+      required: false,
+    },
 
    date: {
     type: Date,
     default: () => Date.now(),
    },
+   
    
   },
 
