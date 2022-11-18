@@ -2,7 +2,7 @@ const express = require("express");
 
 // CommentRoutes is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /project_notes.
+// The router will be added as a middleware and will take control of requests starting with path 
 const CommentRoutes = express.Router();
 //==============================================
 
@@ -57,12 +57,25 @@ CommentRoutes.post("/comments/comment/add", (req, res) => {
     );
 });
 
-// help you find a comment to reply to by id.
-// CommentRoutes.put("/comments/comment/reply/:id", (req, res) => {
-//   Comment.findById(req.params.id, req.body)
-//     .then((comment) => res.json({ msg: "Comment found" }))
-//     .catch((err) => res.status(400).json({ error: " Comment not found" }));
-// });
+// Reply to a comment.
+CommentRoutes.route("/comments/reply/add/:id").post(function (
+  req,
+  response
+) {
+  let db_connect = dbo.getDb();
+
+  let myobj = {
+    postId: req.body.postId,
+    commentContent: req.body.commentContent,
+    replyComment: req.body.replyComment,
+    userId: req.body.userId,
+    Date: currentDate,
+  };
+  db_connect.collection("comments").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
 
 // This section will help you update a comment by id.
 CommentRoutes.put("/comments/comment/update/:id", (req, res) => {
