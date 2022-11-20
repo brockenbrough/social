@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { useState } from "react";
 
-const CommentForm = ({
+const commentForm = ({
   handleSubmit,
   submitLabel,
   hasCancelButton = false,

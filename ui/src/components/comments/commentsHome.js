@@ -1,9 +1,9 @@
-import React from 'react';
-import { useState } from "react";
- import Comments from "./Comments";
+import React from "react";
+ import { useState } from "react";
+ import comments from "./comments";
 
  
- const CommentForm = ({
+ const commentForm = ({
   handleSubmit,
   submitLabel,
   hasCancelButton = false,
@@ -35,7 +35,7 @@ import { useState } from "react";
         alt="alternatetext"
       ></img>
 
-      <Comments
+      <comments
         commentsUrl="http://localhost:3004/comments"
         currentUserId="1"
       />
@@ -44,4 +44,4 @@ import { useState } from "react";
     );
  };
 
-export default Comments;
+export default comments;

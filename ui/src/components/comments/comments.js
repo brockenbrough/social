@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 import commentForm from "./commentForm";
 import comment from "./comment";
@@ -9,7 +9,7 @@ import {
   deleteComment as deleteCommentApi,
 } from "./api";
 
-const Comments = ({ commentsUrl, currentUserId }) => {
+const comments = ({ commentsUrl, currentUserId }) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
   const rootComments = backendComments.filter(
@@ -62,10 +62,10 @@ const Comments = ({ commentsUrl, currentUserId }) => {
     <div className="comments">
       <h3 className="comments-title">Comments</h3>
       <div className="comment-form-title">Write comment</div>
-      <CommentForm submitLabel="Write" handleSubmit={addComment} />
+      <commentForm submitLabel="Write" handleSubmit={addComment} />
       <div className="comments-container">
         {rootComments.map((rootComment) => (
-          <Comment
+          <comment
             key={rootComment.id}
             comment={rootComment}
             replies={getReplies(rootComment.id)}

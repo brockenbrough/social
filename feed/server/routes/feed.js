@@ -12,7 +12,7 @@ async function getPosts() {
 
 //Gets likes from statistics service API
 async function getLikes() {
-  const response = await axios.get("http://localhost:8087/statistics/likes");
+  const response = await axios.get("http://localhost:8087/statistics/like-list");
   return response.data;
 }
 
@@ -20,6 +20,39 @@ async function getLikes() {
 async function getViews() {
   const response = await axios.get("http://localhost:8087/statistics/views");
   return response.data;
+}
+
+//gets a list of the users that are followed from the logged in user
+async function getFollowing(userId) {
+  const response = await axios.get(`http://localhost:8085/following/${userId}`);
+  return response.data;
+}
+
+async function getAllUserIds() {
+  const response = await axios.get(`http://localhost:8081/user/getAll`);
+  ids = [];
+  for (i=0;i<response.data.length;i++) {
+    ids[i] = response.data[i].username
+  }
+  return ids
+}
+
+//get posts from a specific user
+async function getUsersPosts(userName) {
+  const response = await getFollowing(userName);
+  const followingList = response[0].following;
+  let finalArr = [];
+
+  for (i = 0; i < followingList.length; i++) {
+    await axios
+      .get(`http://localhost:8083/posts/getAllByUsername/${followingList[i]}`)
+      .then((e) => finalArr.push(e.data))
+      .catch((e) =>
+        console.log(`something went wrong with this user - ${followingList[i]}`)
+      );
+  }
+
+  return finalArr;
 }
 
 //Feed sorting algorithm
@@ -101,13 +134,13 @@ router
 
     const startingPosition = parseInt(req.params.startingPosition);
     const pageSize = parseInt(req.params.pageSize);
-    if (isNaN(startingPosition) || isNaN(pageSize))
+    if (isNaN(startingPosition) || isNaN(pageSize)) {
       return res
         .status(400)
         .send(
           "Error: invalid starting position and/or page size, starting position and page size must be a number."
         );
-
+    }
     var postIDs = [];
     for (i = 0; i < posts.length; i++) {
       postIDs[i] = posts[i]._id;
@@ -123,52 +156,21 @@ router
     res.json(obj);
   });
 
-//gets a list of the users that are followed from the logged in user
-async function getFollowing(userId) {
-  const response = await axios.get(`http://localhost:8085/following/${userId}`);
-
-  return response.data;
-}
-
-//get posts from a specific user
-async function getUsersPosts(userName) {
-  const response = await getFollowing(userName);
-  const followingList = response[0].following;
-  let finalArr = [];
-
-
-  for (i = 0; i < followingList.length; i++) {
-    await axios
-      .get(`http://localhost:8083/posts/getAllByUsername/${followingList[i]}`)
-      .then((e) => finalArr.push(e.data))
-      .catch((e) =>
-        console.log(`something went wrong with this user - ${followingList[i]}`)
-      );
-  }
-
-  return finalArr;
-
-  //  var userIds = [];
-  //  var postIds = [];
-  //  if(followingUsers!=null){
-
-  //   userIds = followingUsers.following;
-
-  //   for(i=0;i<userIds.length;i++){
-  //     response = await axios.get(`http://localhost:8083/posts/getAllByUsername/${userIds[i]}`);
-  //     for(j=postIds.length;j<postIds.length+response.length;j++){
-  //       postIds[j] = response;
-  //     }
-  //   }
-  //  }
-  //  //reruns all of the posts by provided user
-  //  return postIds.data;
-}
 //returns sorted feed for the loged in user
 router.route("/feed/:userId").get(async function (req, res) {
   //shows the feed
-  const followingUsersPosts = getUsersPosts(userId);
-  if (followingUsers != null) {
+  const userId = req.params.userId
+  const allUserId = await getAllUserIds();
+  if (!allUserId.includes(userId)) {
+    return res
+      .status(400)
+      .send(
+        "Error: invalid user ID"
+      );
+  }
+
+  const followingUsersPosts = await getUsersPosts(userId);
+  if (followingUsersPosts != null) {
     var postIDs = [];
     for (i = 0; i < followingUsersPosts.length; i++) {
       postIDs[i] = followingUsersPosts[i]._id;
@@ -177,11 +179,16 @@ router.route("/feed/:userId").get(async function (req, res) {
     let obj = {
       feed: sortedPosts,
     };
+    res.json(obj);
   }
 });
 
+//TEST CODE DELETE LATER
 //getViews().then((e) => console.log(e))
 const userName = "Viky11";
 getUsersPosts(userName).then((e) => console.log(e));
+getAllUserIds().then((e) => console.log(e))
 // getFollowing(userName).then((e) => console.log(e))
+
+//(DO NOT delete this one)
 module.exports = router;
