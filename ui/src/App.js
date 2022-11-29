@@ -23,6 +23,7 @@ import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
 import FeedPage from "./components/post/feedPage";
 import commentsHome from "./components/comments/commentsHome";
+import PrivateUserLikeList from "./components/privateUserLikeList/PrivateUserLikeListPage";
 
 //test change
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/edituserpage" element={<EditUserPage />} />
         <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
+        <Route path="/privateUserLikeList" element={<PrivateUserLikeList />}/>
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
@@ -44,6 +46,7 @@ const App = () => {
         <Route path = "/publicprofile" element = {<PublicProfile/>} />
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
+        <Route path = "/following/:id" element = {<FollowingList/>} />
       </Routes>
     </>
   );

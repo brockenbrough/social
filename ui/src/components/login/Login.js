@@ -68,8 +68,6 @@ const Login = () => {
     }
   };
 
-  console.log(user)
-
   if(user) {
     navigate('/feed')
     return

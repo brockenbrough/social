@@ -1,4 +1,4 @@
-/*
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
@@ -9,7 +9,7 @@ const userInfo = getUserInfo()
 const Following = (props) => (
   <tr>
     <td><a href="/publicprofile">{props.record}</a></td>
-    <td><button className="btn btn-link" onClick={() => {props.deletePerson(props.record);}}>Delete</button></td>
+    <td><button className="btn btn-link" onClick={() => {props.deletePerson(props.record);}}>Unfollow</button></td>
   </tr>
 );
 
@@ -19,7 +19,7 @@ export default function FollowingList() {
 
 
   const [user, setUser] = useState({})
-  const [followers, setFollowing] = useState([]);
+  const [followings, setFollowing] = useState([]);
   const params = useParams();
   
 
@@ -50,7 +50,7 @@ export default function FollowingList() {
     setUser(getUserInfo())
     
     return; 
-  }, [following.length]);  // If record length ever changes, this useEffect() is automatically called.
+  }, [followings.length]);  // If record length ever changes, this useEffect() is automatically called.
   
   // A method to delete a contributor
   async function deleteFollowing(userId, targetUserId) {
@@ -61,12 +61,12 @@ export default function FollowingList() {
     const url = "http://localhost:8085/followers/unfollow";
 
     const res = await axios.delete(url, {
-        data: deleteFollower,
+        data: deleteFollowing,
       })
       
     
     // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowing = following.filter((el) => el !== el);
+    const newFollowing = followings.filter((el) => el !== el);
     setFollowing(newFollowing);  // This causes a re-render because we change state.
   }
   
@@ -76,9 +76,9 @@ export default function FollowingList() {
   // We are returning component tags for records. See use in rendering below.
   // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
   function followingList() {
-    return following.map((record) => {
+    return followings.map((record) => {
       return (
-        <Following record={record} deletePerson={() => deleteFollowing(record, params.id.toString())}key={record}/>);
+        <Following record={record} deletePerson={() => deleteFollowing(params.id.toString(), record)}key={record}/>);
     });
   }
 
@@ -94,7 +94,7 @@ export default function FollowingList() {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Delete</th>
+            <th>Unfollow</th>
           </tr>
         </thead>
         <tbody>{followingList()}</tbody>
@@ -102,4 +102,3 @@ export default function FollowingList() {
     </div>
   );
 }
-*/
