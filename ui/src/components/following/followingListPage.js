@@ -4,8 +4,6 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 
-const userInfo = getUserInfo()
-
 const Following = (props) => (
   <tr>
     <td><a href="/publicprofile">{props.record}</a></td>
@@ -60,10 +58,9 @@ export default function FollowingList() {
       }
     const url = "http://localhost:8085/followers/unfollow";
 
-    const res = await axios.delete(url, {
+    await axios.delete(url, {
         data: deleteFollowing,
       })
-      
     
     // We're going to patch up our state by removing the records corresponding to id in our current state.
     const newFollowing = followings.filter((el) => el !== el);
