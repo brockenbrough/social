@@ -12,20 +12,11 @@ Content-Type: application/json
 
 {
     "userId" : "Doodle",
-    "targetUserId" : "John"
+    "targetUserId" : "Bryan"
 }
 
 ###
-DELETE http://localhost:8085/followers/deleteFollower
-Content-Type: application/json 
-
-{
-    "userId" : "John",
-    "targetUserId" : "Larry"
-}
-
-###
-DELETE http://localhost:8085/followers/unfollowUser
+DELETE http://localhost:8085/followers/unfollow
 Content-Type: application/json 
 
 {
