@@ -13,10 +13,18 @@ import EditContributor from "./components/project-notes/editContributor";
 import CreateContributor from "./components/project-notes/createContributor";
 import LandingPage from './components/users/Landingpage'
 import Login from './components/users/Login'
-import Signup from './components/register/Register'
+import Signup from './components/users/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/users/editUserPage";
+<<<<<<< HEAD
 //import PublicProfile from "./components/users/PublicProfilePage";
+=======
+<<<<<<< HEAD
+import PublicProfilePage from "./components/users/PublicProfilePage";
+=======
+//import PublicProfile from "./components/users/PublicProfilePage";
+>>>>>>> b0fe764b22db40fd543f9f16400405924669c79e
+>>>>>>> 0d5874a98e1e07281fe8fdd37c1074a0d5022cdc
 import PrivateUserProfile from "./components/users/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
@@ -36,6 +44,7 @@ const App = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/editUserPage" element={<EditUserPage />} />
         <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
+        <Route path="/publicProfilePage" element={<PublicProfilePage />} />
         <Route path="/privateUserLikeList" element={<PrivateUserLikeList />}/>
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />

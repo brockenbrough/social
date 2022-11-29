@@ -7,8 +7,6 @@ const getAllPostsRoute = require('./routes/post.getAllPosts')
 const getPostByIdRoute = require('./routes/post.getPostById')
 const updatePostRoute = require('./routes/post.updatePost')
 const getAllByUsernameRoute = require('./routes/post.getAllByUsername')
-const uploadImagesRoute = require('./routes/post.uploadImages')
-
 const dbConnection = require('./config/db.config')
 
 require('dotenv').config({path: 'config.env'});
@@ -23,7 +21,6 @@ app.use('/posts', getAllPostsRoute)
 app.use('/posts', getPostByIdRoute)
 app.use('/posts', updatePostRoute)
 app.use('/posts', getAllByUsernameRoute)
-app.use('/posts', uploadImagesRoute)
 
 
 app.listen(port, (req, res) => {
