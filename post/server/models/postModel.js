@@ -15,6 +15,8 @@ const newPostSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
+  
+    postImage: { type: String}
   },
     {collection: "posts"}
 );
