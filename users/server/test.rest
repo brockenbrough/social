@@ -27,9 +27,10 @@ POST http://localhost:8081/user/editUser
 Content-Type: application/json 
 
 {
-    "userId" : "635ab8dfc407faf9f73deaf2",
-    "username" : "Tochi Edit",
-    "password" : "dwwrwr"
+    "userId" : "636d28c3a9b5c57aa6bacb56",
+    "username" : "rkanoff",
+    "password" : "password",
+    "email" : "rkanoff@email.com"
 }
 
 ###
