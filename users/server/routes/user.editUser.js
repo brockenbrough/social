@@ -2,37 +2,46 @@ const express = require("express");
 const router = express.Router();
 const z = require('zod')
 const bcrypt = require("bcrypt");
-
 const newUserModel = require('../models/userModel')
+const { newUserValidation } = require('../models/userValidator');
+const { generateAccessToken } = require('../utilities/generateToken');
 
+router.post('/editUser', async (req, res) =>
+{
+    // validate new user information
+    const { error } = newUserValidation(req.body);
+    if (error) return res.status(400).send({ message: error.errors[0].message });
 
-router.post('/editUser', async (req, res) => {
-    const { userId, username, email, password } = req.body
-    const obj = {}
+    // store new user information
+    const {userId, username, email, password} = req.body
 
-    if (!userId) return res.status(403).json("Please provide a userId")
-    if (!username && !email && !password) return res.status(403).json("Please provide the fields for the user youd like to edit")
+    // check if username is available
+    const user = await newUserModel.findOne({ username: username })
+    if (user) userIdReg = JSON.stringify(user._id).replace(/["]+/g, '')
+    if (user && userIdReg !== userId) 
+        return res.status(409).send({ message: "Username is taken, pick another" })
 
-    if (username) obj["username"] = username
-    if (email) obj["email"] = email
-    if (password) {
-        const generateHash = await bcrypt.genSalt(Number(10))
-        const hashPassword = await bcrypt.hash(password, generateHash)
-        obj["password"] = hashPassword
+    // generates the hash
+    const generateHash = await bcrypt.genSalt(Number(10))
+
+    // parse the generated hash into the password
+    const hashPassword = await bcrypt.hash(password, generateHash)
+
+    // find and update user using stored information
+    newUserModel.findByIdAndUpdate(userId, {
+        username : username, 
+        email : email, 
+        password : hashPassword
+    } ,function (err, user) {
+    if (err){
+        console.log(err);
+    } else {
+        // create and send new access token to local storage
+        const accessToken = generateAccessToken(user._id, email, username, hashPassword)  
+        res.header('Authorization', accessToken).send({ accessToken: accessToken })
     }
+    });
 
-
-
-    const data = await newUserModel.findByIdAndUpdate(userId, obj)
-
-    if (!data) {
-        return res.status(404).json('Something went wrong, CHeck userId')
-    }
-
-
-    return res.status(200).json("Success")
-
-    // newUserModel.findByIdAndUpdate({})
 })
 
 module.exports = router;
