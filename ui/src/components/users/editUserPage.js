@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import getUserInfo from '../utilities/decodeJwt';
+import getUserInfo from '../../utilities/decodeJwt';
 
 const EditUserPage = () =>{
 
