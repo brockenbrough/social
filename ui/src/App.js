@@ -36,6 +36,7 @@ const App = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/editUserPage" element={<EditUserPage />} />
         <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
+        <Route path="/publicProfilePage" element={<PrivateUserProfile />} />
         <Route path="/privateUserLikeList" element={<PrivateUserLikeList />}/>
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
