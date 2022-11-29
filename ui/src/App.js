@@ -12,12 +12,12 @@ import ContributorList from "./components/project-notes/contributorListPage";
 import EditContributor from "./components/project-notes/editContributor";
 import CreateContributor from "./components/project-notes/createContributor";
 import LandingPage from './components/landingpage/Landingpage'
-import Login from './components/login/Login'
+import Login from './users/Login'
 import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
-import EditUserPage from "./components/edituser/edituserpage";
-import PublicProfile from "./components/publicprofile/PublicProfile";
-import PrivateUserProfile from "./components/privateUserProfile/PrivateUserProfile";
+import EditUserPage from "./users/editUserPage";
+//import PublicProfile from "./components/publicprofile/publicProfile";
+import PrivateUserProfile from "./users/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
@@ -34,7 +34,7 @@ const App = () => {
         <Route exact path="/" element={<LandingPage />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/edituserpage" element={<EditUserPage />} />
+        <Route exact path="/editUserPage" element={<EditUserPage />} />
         <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         <Route path="/privateUserLikeList" element={<PrivateUserLikeList />}/>
         <Route path="/project-notes/contributors" element={<ContributorList />} />
@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/oldfeed" element={<Feed />} />
         <Route path="/feed" element={<FeedPage />} />
         <Route path="/comments" element={<commentsHome />} />
-        <Route path = "/publicprofile" element = {<PublicProfile/>} />
+        
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
         <Route path = "/following/:id" element = {<FollowingList/>} />
