@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import getUserInfo from '../../utilities/decodeJwt';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import api, { postURL } from './api/api'
+import api, { postURL, deleteUrl } from './api/api'
+import Post from '../post/post';
 
+const user = getUserInfo()
 
 const PrivateUserLikeListPage = () => {
 
@@ -13,7 +15,6 @@ const PrivateUserLikeListPage = () => {
     useEffect(() => {
         const fetchLikes = async () => {
             try {
-                const user = getUserInfo()
                 console.log(user)
                 await api.get(`/${user.id}`).then(e => {
                     /**
@@ -22,8 +23,8 @@ const PrivateUserLikeListPage = () => {
                      */
                     e.data.map(async (e) => {
                         const res = await postURL.get(`/getPostById/${e.postId}`)
-                        //"...post" appeneds res.data to our post array to prevent overriting 
-                        setPost(e => [...e,res.data])
+                        //"...e" appeneds res.data to our post array to prevent overriting 
+                        setPost(e => [...e, res.data])
                         //setPost(res.data)
                     })
                 })
@@ -37,21 +38,16 @@ const PrivateUserLikeListPage = () => {
         fetchLikes()
     }, [])
 
+    /*
+    removeLike(userId, postId){
+        deleteUrl.delete('/')
+    }
+    */
 
     return (
         <div>
             {post.map(e => {
-                console.log(e)
-                return(<Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>{e.username}</Card.Title>
-                        <Card.Text>
-                            {e.content}
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>)
+                return <Post username={e.username} content={e.content} date={e.date}/>
             })}
         </div>
     )
