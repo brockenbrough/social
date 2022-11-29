@@ -6,68 +6,70 @@ import Card from 'react-bootstrap/Card';
 
 
 // display of public user - EA
-export default function ShowPublicUser() {
-  const [form, setForm] = useState({
-    name: "",
-    position: "",
-    level: "",
-  });
-  const params = useParams();
-  const navigate = useNavigate();
-// with useEffect we will fetch the id of all the public users - EA
+// The ShowPublicUser component.  This is the main component in this file.
+/////////////////////////////////////////
+export default function ShowPublicUser() 
+{
+  const [user, setUser] = useState({})
+  const [contributors, setContributors] = useState([]);
+  name = "",
+ 
   useEffect(() => {
-    async function fetchData() {
-      const id = params.id.toString();
-      const response = await fetch(`http://localhost:8095/ui/PublicUser/${params.id.toString()}`);
-
+    // Define a function to get records. We are going to call it below.
+    // We use async keyword so we can later say "await" to block on finish.
+    async function getRecords() {
+      const response = await fetch(`http://localhost:8081/publicprofilepage/`);
+      
       if (!response.ok) {
-        const message = `An error has occured: ${response.statusText}`;
+        const message = `An error occured: ${response.statusText}`;
         window.alert(message);
         return;
       }
-
-      const record = await response.json();
-      if (!record) {
-        window.alert(`Record with id ${id} not found`);
-        navigate("/");
-        return;
-      }
-
-      setForm(record);
-    }
-
-    fetchData();
-
-    return;
-  }, [params.id, navigate]);
-// methods
-  // These methods will update the state properties.
-  // The value is an object like {name: "Jose"} identifying field and new value.
-
-  // This following section will display the form that takes input from the user to update the data.
-  return (
-    <div>
-      <NavbarContributor/>
-
-      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
-        <Card.Body> 
-        <Form>
-          <Form.Group className="mb-3" controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter name" 
-                        id="name"
-                        value={form.name}
-                        onChange={(e) => updateForm({ name: e.target.value })}
-             />
-          </Form.Group>
       
-          <Button variant="primary" type="submit" onClick={onSubmit}>
-            Submit
-          </Button>
-        </Form>
-        </Card.Body>
-      </Card>
+      const fetchedRecords = await response.json();
+      setContributors(fetchedRecords);
+    }
+    
+    getRecords();  
+    setUser(getUserInfo())
+    
+    return; 
+  }, [contributors.length]);  
+  ///////////////////////////////////////////////////////////////////
+  
+  // A method to delete a user
+  async function deleteUser(id) 
+  {
+    await fetch(`http://localhost:8081/publicuser/${id}`, {
+      method: "DELETE"
+    });
+    const newRecords = contributors.filter((el) => el._id !== id);
+    setContributors(newRecords); 
+  }
+  
+  function publicUserList() 
+  {
+    return contributors.map((record) => {
+      return (
+        <Contributor
+          record={record}
+          deleteContributor={() => deleteUser(record._id)}
+          key={record._id}
+        />
+      );
+    });
+  }
+  if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
+  // This following section will display the table with the records of individuals.
+  /////////////////////////////////////////////////
+  return 
+  (
+    <div>
+      <ContributorNavbar/>
+      <table className="table table-striped" style={{ marginTop: 20 }}>
+        <tbody>{publicUserList()}</tbody>
+      </table>
     </div>
   );
 }
