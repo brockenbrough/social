@@ -3,71 +3,60 @@ import { useParams, useNavigate } from "react-router";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-
+import {Link} from 'react-router-dom';
+import getUserInfo from '../../utilities/decodeJwt';
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 // display of public user - EA
-export default function ShowPublicUser() {
-  const [form, setForm] = useState({
-    name: "",
-    position: "",
-    level: "",
-  });
-  const params = useParams();
-  const navigate = useNavigate();
-// with useEffect we will fetch the id of all the public users - EA
+const ShowPublicUser = () => 
+{
+  const [user, setUser] = useState({})
+  const navigate = useNavigate()
   useEffect(() => {
-    async function fetchData() {
-      const id = params.id.toString();
-      const response = await fetch(`http://localhost:8095/ui/PublicUser/${params.id.toString()}`);
-
-      if (!response.ok) {
-        const message = `An error has occured: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const record = await response.json();
-      if (!record) {
-        window.alert(`Record with id ${id} not found`);
-        navigate("/");
-        return;
-      }
-
-      setForm(record);
-    }
-
-    fetchData();
-
-    return;
-  }, [params.id, navigate]);
-// methods
-  // These methods will update the state properties.
-  // The value is an object like {name: "Jose"} identifying field and new value.
-
-  // This following section will display the form that takes input from the user to update the data.
-  return (
+    setUser(getUserInfo())
+  }, [])
+  if (!user) return (
     <div>
-      <NavbarContributor/>
-
-      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
-        <Card.Body> 
-        <Form>
-          <Form.Group className="mb-3" controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter name" 
-                        id="name"
-                        value={form.name}
-                        onChange={(e) => updateForm({ name: e.target.value })}
-             />
-          </Form.Group>
-      
-          <Button variant="primary" type="submit" onClick={onSubmit}>
-            Submit
-          </Button>
-        </Form>
-        </Card.Body>
-      </Card>
-
+        <h3>
+            You are not authorized to view this page, Please Login in <Link to={'/login'}> <a href='#'> here </a> </Link>
+        </h3>
     </div>
-  );
+)
+
+return (
+  <>
+      <div>
+          <Card>
+              <Card.Header>CheeseB0y</Card.Header>
+              <Card.Body>I love this cool new social media web application!</Card.Body>
+              <div>
+                  <ToggleButton href='#'>235 ❤︎</ToggleButton>
+                  <Button>Comments</Button>
+              </div>
+              <Card.Footer>11/10/2022</Card.Footer>
+          </Card>
+          <Card>
+              <Card.Header>NewUser23</Card.Header>
+              <Card.Body>Hello, I am new here :)</Card.Body>
+              <div>
+                  <ToggleButton href='#'>3 ❤︎</ToggleButton>
+                  <Button>Comments</Button>
+              </div>
+              <Card.Footer>11/14/2022</Card.Footer>
+          </Card>
+          <Card>
+              <Card.Header>JWood</Card.Header>
+              <Card.Body>This is a test UI and does not actually work yet</Card.Body>
+              <div>
+                  <ToggleButton href='#'>2.3M ❤︎</ToggleButton>
+                  <Button>Comments</Button>
+              </div>
+              <Card.Footer>12/31/2999</Card.Footer>
+          </Card>
+      </div>
+  </>
+  )
 }
+
+export default ShowPublicUser
+
