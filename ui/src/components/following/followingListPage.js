@@ -4,16 +4,6 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 
-const userInfo = getUserInfo()
-
-const Following = (props) => (
-  <tr>
-    <td><a href="/publicprofile">{props.record}</a></td>
-    <td><button className="btn btn-link" onClick={() => {props.deletePerson(props.record);}}>Unfollow</button></td>
-  </tr>
-);
-
-
 // The ContributorList component.  This is the main component in this file.
 export default function FollowingList() {
 
@@ -35,7 +25,7 @@ export default function FollowingList() {
       const response = await fetch(`http://localhost:8085/following/${params.id.toString()}`);
 
       if (!response.ok) {
-        const message = `An error occured: ${response.statusText}`;
+        const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
         return;
       }
@@ -60,9 +50,9 @@ export default function FollowingList() {
     }
     const url = "http://localhost:8085/followers/unfollow";
 
-    const res = await axios.delete(url, {
-        data: deleteFollowing,
-      })
+  await axios.delete(url, {
+    data: deleteFollowing,
+  });
       
     
     // We're going to patch up our state by removing the records corresponding to id in our current state.
@@ -74,8 +64,7 @@ export default function FollowingList() {
   const Following = ({ record, user, deletePerson }) => (
     <tr>
       <td><a href="/publicprofile">{record}</a></td>
-      {user.username == params.id.toString() ? <td><button className="btn btn-link" onClick={() => { deletePerson(record); }}>Unfollow</button></td> : <p></p>}
-  
+      {user.username == params.id.toString() ? <td><button className="btn btn-link" onClick={() => { deletePerson(record); }}>Unfollow</button></td> : <p></p>}  
     </tr>
   );
 

@@ -25,7 +25,7 @@ export default function FollowerList() {
       const response = await fetch(`http://localhost:8085/followers/${params.id.toString()}`);
       
       if (!response.ok) {
-        const message = `An error occured: ${response.statusText}`;
+        const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
         return;
       }
