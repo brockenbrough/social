@@ -4,22 +4,26 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
-const Post = (props) => {
-    const  post  = props.record;
+const Post = ({username, content, date}) => {
+
 
     return(
-      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
-        <div>Author: {post.author} Date: {post.date} </div>
-        <Card.Body> 
-            <Stack>
-              <div>This where the post text goes.{post.text}</div>
-              <div>
-                  <Button variant="primary" className="mx-1 my-1" href={`/project-notes/editContributor/${post._id}`} >Comments</Button>
-                  <Button variant="primary" className="mx-1 my-1" href={`/project-notes/editContributor/${post._id}`} >Like</Button>
-              </div>
-            </Stack>
-        </Card.Body>
-      </Card>
+      <div>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card.Body>
+                        <Card.Title>{username}</Card.Title>
+                        <Card.Text>
+                            {content}
+                        </Card.Text>
+                        <div class = "text-center">
+                            <Button variant="outline-danger">Unlike</Button> 
+                        </div>
+
+                    </Card.Body>
+                </Card>
+           
+        </div>
     )
 };
 
