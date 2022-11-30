@@ -50,7 +50,7 @@ export default function FollowerList() {
       }
     const url = "http://localhost:8085/followers/unfollow";
 
-    const res = await axios.delete(url, {
+    await axios.delete(url, {
         data: deleteFollower,
       })
       

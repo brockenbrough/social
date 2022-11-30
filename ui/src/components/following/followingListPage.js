@@ -4,6 +4,15 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 
+const userInfo = getUserInfo()
+
+const Following = (props) => (
+  <tr>
+    <td><a href="/publicprofile">{props.record}</a></td>
+    <td><button className="btn btn-link" onClick={() => {props.deletePerson(props.record);}}>Unfollow</button></td>
+  </tr>
+);
+
 
 // The ContributorList component.  This is the main component in this file.
 export default function FollowingList() {
@@ -52,10 +61,10 @@ export default function FollowingList() {
     const url = "http://localhost:8085/followers/unfollow";
 
     const res = await axios.delete(url, {
-      data: deleteFollowing,
-    })
-
-
+        data: deleteFollowing,
+      })
+      
+    
     // We're going to patch up our state by removing the records corresponding to id in our current state.
     const newFollowing = followings.filter((el) => el !== el);
     setFollowing(newFollowing);  // This causes a re-render because we change state.
