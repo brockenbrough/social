@@ -16,11 +16,12 @@ import Login from './components/users/Login'
 import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/users/editUserPage";
-import PublicProfile from "./components/users/PublicProfilePage";
+//import PublicProfile from "./components/users/PublicProfilePage";
 import PrivateUserProfile from "./components/users/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
+import FollowButtonTest from "./components/following/followButtonTest";
 import FeedPage from "./components/post/feedPage";
 import commentsHome from "./components/comments/commentsHome";
 import PrivateUserLikeList from "./components/privateUserLikeList/PrivateUserLikeListPage";
@@ -47,6 +48,7 @@ const App = () => {
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
         <Route path = "/following/:id" element = {<FollowingList/>} />
+        <Route path = "/followButton/:id" element = {<FollowButtonTest/>} />
       </Routes>
     </>
   );

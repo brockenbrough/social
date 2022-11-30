@@ -9,7 +9,7 @@ export default function FollowButton() {
 
 
   const [user, setUser] = useState()
-  const [followings, setFollowing] = useState([]);
+  const [followers, setFollowing] = useState([]);
   const params = useParams();
 
 
@@ -32,7 +32,7 @@ useEffect(() => {setUser(getUserInfo())}, [])
 
 
     // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowing = followings.filter((el) => el !== el);
+    const newFollowing = followers.filter((el) => el !== el);
     setFollowing(newFollowing);  // This causes a re-render because we change state.
   }
 
@@ -51,9 +51,39 @@ useEffect(() => {setUser(getUserInfo())}, [])
 
 
     // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowing = followings.filter((el) => el !== el);
+    const newFollowing = followers.filter((el) => el !== el);
     setFollowing(newFollowing);  // This causes a re-render because we change state.
   }
+
+  async function isFollowing() {
+    const response = await fetch(
+      `http://localhost:8085/followers/${params.id.toString()}`
+    );
+
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+
+    const fetchedFollowers = await response.json();
+
+    setFollowing(fetchedFollowers[0].followers); // update state.  when state changes, we automatically re-render.
+    if (followers.includes(user.username)) {
+      console.log(true);
+      return true;
+    } else {
+      console.log(false);
+      return false;
+    }
+  }
+
+  let isBroken = async () => {
+    let result = await isFollowing();
+    console.log(result)
+    return result
+  }
+  
 
   // This method will map out the records on the table.
   // Records.map means for each item in 'records' do something.
@@ -70,8 +100,10 @@ useEffect(() => {setUser(getUserInfo())}, [])
 
   return (
     <div>
-      <button onClick={(e) => followUser()}>Follow</button>
-      <button onClick={(e) => unfollowUser()}>UnFollow</button>
+    <button onClick={(e) => unfollowUser()}>Unfollow</button>
+    <button onClick={(e) => followUser()}>Follow</button>
+    <button onClick={(e) => isFollowing()}>Is following?</button>
+    { isBroken ? <button onClick={(e) => unfollowUser()}>Unfollow</button> : <button onClick={(e) => followUser()}>Follow</button> }
     </div>
   );
 }
