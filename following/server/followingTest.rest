@@ -20,8 +20,8 @@ DELETE http://localhost:8085/followers/unfollow
 Content-Type: application/json 
 
 {
-    "userId" : "John",
-    "targetUserId" : "Jerry"
+    "userId" : "Doodle",
+    "targetUserId" : "Bryan"
 }
 ###
 
