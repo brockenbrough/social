@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 export default function EditComment() {
   const currentDate = new Date();
   const [form, setForm] = useState({
-    name: "",
+    commentContent: "",
     date: currentDate,
   });
   const params = useParams();
@@ -57,13 +57,13 @@ export default function EditComment() {
     const currentDate = new Date();
 
     const editedComment = {
-      comment: form.comment,
+      commentContent: form.comment,
       date: currentDate,
     };
 
     // This will send a post request to update the data in the database.
     await fetch(
-      `http://localhost:8444/comments/comment/update/${params.id.toString()}`,
+      `http://localhost:8089/comments/comment/update/${params.id.toString()}`,
       {
         method: "PUT",
         body: JSON.stringify(editedComment),
@@ -73,7 +73,7 @@ export default function EditComment() {
       }
     );
 
-    navigate("/comments/comments");
+    navigate("/comments/comment");
   }
 
   // This following section will display the form that takes input from the user to update the data.
