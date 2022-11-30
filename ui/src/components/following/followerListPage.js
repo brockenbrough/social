@@ -3,15 +3,6 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 
-const userInfo = getUserInfo()
-
-const Follower = (props) => (
-  <tr>
-    <td><a href="/publicprofile">{props.record}</a></td>
-    <td><button className="btn btn-link" onClick={() => {props.deletePerson(props.record);}}>Delete</button></td>
-  </tr>
-);
-
 
 // The ContributorList component.  This is the main component in this file.
 export default function FollowerList() {
@@ -68,6 +59,13 @@ export default function FollowerList() {
     const newFollowers = followers.filter((el) => el !== el);
     setFollowers(newFollowers);  // This causes a re-render because we change state.
   }
+
+  const Follower = ({record, user, deletePerson}) => (
+    <tr>
+      <td><a href="/publicprofile">{record}</a></td>
+      {user.username == params.id.toString() ? <td><button className="btn btn-link" onClick={() => {deletePerson(record);}}>Delete</button></td> : <p></p>}
+    </tr>
+  );
   
   // This method will map out the records on the table.
   // Records.map means for each item in 'records' do something.
@@ -75,9 +73,11 @@ export default function FollowerList() {
   // We are returning component tags for records. See use in rendering below.
   // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
   function followerList() {
+    console.log(user)
+    console.log(params.id.toString())
     return followers.map((record) => {
       return (
-        <Follower record={record} deletePerson={() => deleteFollower(record, params.id.toString())}key={record}/>);
+        <Follower record={record} deletePerson={() => deleteFollower(record, params.id.toString())}key={record} user={user}/>);
     });
   }
 
@@ -93,7 +93,6 @@ export default function FollowerList() {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Delete</th>
           </tr>
         </thead>
         <tbody>{followerList()}</tbody>
