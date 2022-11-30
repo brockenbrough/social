@@ -4,16 +4,6 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 
-const userInfo = getUserInfo()
-
-const Following = (props) => (
-  <tr>
-    <td><a href="/publicprofile">{props.record}</a></td>
-    <td><button className="btn btn-link" onClick={() => {props.deletePerson(props.record);}}>Unfollow</button></td>
-  </tr>
-);
-
-
 // The ContributorList component.  This is the main component in this file.
 export default function FollowingList() {
 
@@ -75,7 +65,6 @@ export default function FollowingList() {
     <tr>
       <td><a href="/publicprofile">{record}</a></td>
       {user.username == params.id.toString() ? <td><button className="btn btn-link" onClick={() => { deletePerson(record); }}>Unfollow</button></td> : <p></p>}
-  
     </tr>
   );
 
