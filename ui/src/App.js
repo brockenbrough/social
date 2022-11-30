@@ -44,13 +44,13 @@ const App = () => {
         <Route exact path="/editUserPage" element={<EditUserPage />} />
         <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         <Route path="/privateUserLikeList" element={<PrivateUserLikeList />} />
-        <Route path="/project-notes/contributors"  element={<ContributorList />}/>
-        <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
+        <Route path="/project-notes/contributors" element={<ContributorList />}/>
+        <Route path="/project-notes/editContributor/:id"element={<EditContributor />}/>
         <Route path="/project-notes/create" element={<CreateContributor />} />
 
         <Route path="/comments/create" element={<CreateComments />} />
         <Route path="/comments/comment" element={<CommentList />} />
-        <Route path="/comments/comment/:id" element={<EditComment />}/>
+        <Route path="/comments/editComments/:id" element={<EditComment />} />
 
         <Route path="/oldfeed" element={<Feed />} />
         <Route path="/feed" element={<FeedPage />} />
