@@ -3,9 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import getUserInfo from '../../utilities/decodeJwt';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import api, { postURL } from './api/api'
+import api, { postURL } from './api/api';
+import Post from '../post/post'
 
-
+const user = getUserInfo()
 const PrivateUserLikeListPage = () => {
 
     const [post, setPost] = useState([])
@@ -13,7 +14,7 @@ const PrivateUserLikeListPage = () => {
     useEffect(() => {
         const fetchLikes = async () => {
             try {
-                const user = getUserInfo()
+                
                 console.log(user)
                 await api.get(`/${user.id}`).then(e => {
                     /**
@@ -42,17 +43,7 @@ const PrivateUserLikeListPage = () => {
         <div>
             <h2>{user.username}'s liked posts:</h2>
             {post.map(e => {
-                console.log(e)
-                return(<Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>{e.username}</Card.Title>
-                        <Card.Text>
-                            {e.content}
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>)
+                <Post username ={e.username} content={e.content} date={e.date}/>
             })}
         </div>
     )
