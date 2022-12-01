@@ -34,7 +34,7 @@ const ShowPublicUser = (currentUserId) => {
           <Card>
               <h3>SSU Social</h3>
              
-                  <Card.Header className = "col-50 text-center" color = "danger">Ms.LaStarr</Card.Header>
+                  <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10" >Ms.LaStarr</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./patrickwig.webp")}/>
@@ -64,7 +64,7 @@ const ShowPublicUser = (currentUserId) => {
 
 </Card>
 <Card>
-<Card.Header className = "col-50 text-center">HandsomeSponge</Card.Header>
+<Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">HandsomeSponge</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./handsomespongebob.jpg")}/>
@@ -93,7 +93,7 @@ const ShowPublicUser = (currentUserId) => {
 <div>11/11/2011</div>
 </Card>            
 <Card>
-                  <Card.Header className = "col-50 text-center">CheeseB0y</Card.Header>
+                  <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">CheeseB0y</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./elmo.jpeg")}/>
@@ -121,7 +121,7 @@ const ShowPublicUser = (currentUserId) => {
   <Card style={{ width: '5rem' }}></Card>
 <div>11/02/2022</div>
 
-                  <Card.Header className = "col-50 text-center">NewUser23</Card.Header>
+                  <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">NewUser23</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./smallcatscreaming.jpg")}/>
@@ -149,7 +149,7 @@ const ShowPublicUser = (currentUserId) => {
  <div>10/10/2022</div>
 </Card>
               <Card>
-                  <Card.Header className = "col-50 text-center">JWood03</Card.Header>
+                  <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">JWood03</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./cryingcat.jpg")}/>
