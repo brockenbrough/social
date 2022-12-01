@@ -12,7 +12,9 @@ async function getPosts() {
 
 //Gets likes from statistics service API
 async function getLikes() {
-  const response = await axios.get("http://localhost:8087/statistics/like-list");
+  const response = await axios.get(
+    "http://localhost:8087/statistics/like-list"
+  );
   // console.log(response.data);
   return response.data;
 }
@@ -38,9 +40,11 @@ async function getAllUserIds() {
 }
 
 async function getAllPostsByUserId(userId) {
-  const response = await axios.get(`http://localhost:8083/posts/getAllByUsername/${userId}`)
+  const response = await axios.get(
+    `http://localhost:8083/posts/getAllByUsername/${userId}`
+  );
   // console.log(response.data);
-  return response.data
+  return response.data;
 }
 
 //Feed sorting algorithm
@@ -150,42 +154,39 @@ router.route("/feed/:userId").get(async function (req, res) {
   const userId = req.params.userId;
   const allUserId = await getAllUserIds();
   const following = await getFollowing(userId);
-  
 
   let postIDs = [];
   let userIdList = [];
   let followingUsersPosts = [];
 
-  for (i=0;i<allUserId.length;i++) {
+  for (i = 0; i < allUserId.length; i++) {
     userIdList[i] = allUserId[i].username;
   }
 
   if (!userIdList.includes(userId)) {
-    return res
-      .status(400)
-      .send(
-        "Error: invalid user ID"
-      );
+    return res.status(400).send("Error: invalid user ID");
   }
 
-  if (following[0]==null) {
+  if (following[0] == null) {
     return res
-    .status(400)
-    .send(
-      "Error: User ID was found but does not exist in following API"
-    );
+      .status(400)
+      .send("Error: User ID was found but does not exist in following API");
   }
 
   const followingList = following[0].following;
+  
   for (i = 0; i < followingList.length; i++) {
-    userPosts = await getAllPostsByUserId(followingList[i])
-    followingUsersPosts.push(userPosts)
+    userPosts = await getAllPostsByUserId(followingList[i]);
+    followingUsersPosts.push(userPosts);
   }
 
-  if (followingUsersPosts[0] !== null) {
-    for (i = 0; i < followingUsersPosts[0].length; i++) {
-      postIDs.push(followingUsersPosts[0][i]._id)
-    }
+
+    followingUsersPosts.map(e => {
+      e.map(e => {
+        postIDs.push(e._id);
+      })
+    })
+  
     const sortedPosts = await sortPosts(postIDs);
 
     let obj = {
@@ -194,7 +195,7 @@ router.route("/feed/:userId").get(async function (req, res) {
 
     res.json(obj);
   }
-});
+);
 
 //(DO NOT delete this one)
 module.exports = router;
