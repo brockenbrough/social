@@ -41,7 +41,7 @@ const ShowPublicUser = (currentUserId) => {
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
-                  <Card.Body>Where's my man? Bring him hereeeee</Card.Body>
+                  <Card.Body>I want to cry like all the time.</Card.Body>
                   <div>
                   <Button href='/components/privateUserLikeList'  className = "me-2 " aria-label = "Second group">300k ❤︎</Button>
                       <div className="vr" />
