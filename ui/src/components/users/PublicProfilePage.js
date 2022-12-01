@@ -9,7 +9,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col'
-
+import Image from 'react-bootstrap/Image'
 
 
 // display of public user - EA //
@@ -26,10 +26,10 @@ const ShowPublicUser = (currentUserId) => {
           <Card>
               <h3>SSU Social</h3>
              
-                  <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10" >Ms.LaStarr</Card.Header>
+                  <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-lightblue bg-opacity-10" >Ms.LaStarr</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
-                  <div class = 'profile-image'>
-                   <img src ={require("./patrickwig.webp")}/>
+                  <div className = "d-flex flex-wrap justify-content-md-center">
+                   <Image  width = "150"roundedCircle src ={require("./patrickwig.webp")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
@@ -58,8 +58,8 @@ const ShowPublicUser = (currentUserId) => {
 <Card>
 <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">HandsomeSponge</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
-                  <div class = 'profile-image'>
-                   <img src ={require("./handsomespongebob.jpg")}/>
+                  <div className = "d-flex flex-wrap justify-content-md-center">
+                   <Image width = "150" roundedCircle src ={require("./handsomespongebob.jpg")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
@@ -87,8 +87,8 @@ const ShowPublicUser = (currentUserId) => {
 <Card>
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">CheeseB0iiiiiYarde</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
-                  <div class = 'profile-image'>
-                   <img src ={require("./elmo.jpeg")}/>
+                  <div className = "d-flex flex-wrap justify-content-md-center">
+                   <Image width = "150" roundedCircle src ={require("./elmo.jpeg")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
@@ -115,8 +115,8 @@ const ShowPublicUser = (currentUserId) => {
 
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">NewUser23</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
-                  <div class = 'profile-image'>
-                   <img src ={require("./smallcatscreaming.jpg")}/>
+                  <div className = "d-flex flex-wrap justify-content-md-center">
+                   <Image width = "150" roundedCircle src ={require("./smallcatscreaming.jpg")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '3rem' }}></Card>
@@ -143,8 +143,8 @@ const ShowPublicUser = (currentUserId) => {
               <Card>
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">JWood03</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
-                  <div class = 'profile-image'>
-                   <img src ={require("./cryingcat.jpg")}/>
+                  <div className = "d-flex flex-wrap justify-content-md-center">
+                   <Image width = "150" roundedCircle src ={require("./cryingcat.jpg")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                   <Card style={{ width: '3rem' }}></Card>
