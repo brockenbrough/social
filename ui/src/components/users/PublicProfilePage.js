@@ -57,7 +57,33 @@ const ShowPublicUser = (currentUserId) => {
   </div>
   <Card style={{ width: '5rem' }}></Card>
 <div>11/02/2022</div>
+
 </Card>
+          <Card.Header>pantsSquare</Card.Header>
+                  <div class = 'profile-image'>
+                   <img src ={require("./handsomespongebob.jpg")}/>
+                   </div>
+                   <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
+                   <Card style={{ width: '3rem' }}></Card>
+                  <Card.Body>my place at 6pm, stuffs about to get wild, bring your own seat cushion</Card.Body>
+                  <div>
+                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
+                      <div className="vr" />
+                      <Button>Comments</Button>
+                      <div className="vr" />
+                      <FloatingLabel controlId="me-auto" label="Comments">
+                      <Form.Control
+                      as="textarea"
+                     placeholder="Leave a comment here"
+                     style={{ height: '80px' }}
+        />
+      </FloatingLabel>
+     <>
+    </>
+  </div>
+  <Card style={{ width: '5rem' }}></Card>
+<div>11/02/2022</div>
+              
               <Card>
                   <Card.Header>CheeseB0y</Card.Header>
                   <div class = 'profile-image'>
@@ -83,8 +109,7 @@ const ShowPublicUser = (currentUserId) => {
   </div>
   <Card style={{ width: '5rem' }}></Card>
 <div>11/02/2022</div>
-</Card>
-              <Card>
+
                   <Card.Header>NewUser23</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./smallcatscreaming.jpg")}/>
