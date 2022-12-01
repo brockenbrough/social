@@ -1,51 +1,78 @@
 const express = require("express");
 
-// projectNotesRoutes is an instance of the express router.
+// CommentRoutes is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /project_notes.
-const commentRoutes = express.Router();
+// The router will be added as a middleware and will take control of requests starting with path 
+const CommentRoutes = express.Router();
+//==============================================
 
-// Load Developer model
+// This will help us connect to the database
 const Comment = require("../models/commentsModel");
 
-commentRoutes.get("/comments/comment", (req, res) => {
+CommentRoutes.post("/comments/comment/reply/:id", async (req, res) => {
+  const { commentContent } = req.body;
+  const { id } = req.params;
+
+  if (!id && !commentContent) return res.status(403).json("Please provide the required fields");
+  const data = await Comment.findById(id).then(e => e)
+  
+    if(!data) return res.status(404).json('User does not exist')
+
+  Comment.findByIdAndUpdate(
+    id,
+    { $addToSet: { replies: `${commentContent}` } },
+    { upsert: true }
+  ).then(e => {
+
+      return res.status(200).json(e)
+  }).then(e => {
+    return e
+  })
+
+});
+// This section will help you get a list of all the comments.
+CommentRoutes.get("/comments/comment", (req, res) => {
   Comment.find()
-    .then((comment) => res.json(comment))
+  .then((comments) => res.json(comments))
     .catch((err) =>
-      res.status(404).json({ nobooksfound: "No comment found" })
+      res.status(404).json({ commentsfound: "No comments found" })
     );
 });
 
-commentRoutes.get("/comments/comment/:id", (req, res) => {
+// This section will help you get a single contributor by id
+CommentRoutes.get("/comments/comment/:id", (req, res) => {
   Comment.findById(req.params.id)
     .then((comment) => res.json(comment))
     .catch((err) =>
-      res.status(404).json({ developernotfound: "No comment found" })
+      res.status(404).json({ commentnotfound: "No comment found" })
     );
 });
 
-commentRoutes.post("/comments/comment/add", (req, res) => {
+// This section will help you create a new comment.
+CommentRoutes.post("/comments/comment/add", (req, res) => {
   Comment.create(req.body)
-    .then((comment) => res.json({ msg: "Comment added successfully" }))
+    .then((comment) => res.json({ msg: "Comment added" }))
     .catch((err) =>
       res.status(400).json({ error: "Unable to add this comment" })
     );
 });
 
-commentRoutes.put("/comments/comment/update/:id", (req, res) => {
+// This section will help you update a comment by id.
+CommentRoutes.put("/comments/comment/update/:id", (req, res) => {
   Comment.findByIdAndUpdate(req.params.id, req.body)
     .then((comment) => res.json({ msg: "Updated successfully" }))
     .catch((err) =>
-      res
-        .status(400)
-        .json({ error: "Unable to update comment to the Database" })
+      res.status(400).json({ error: "Unable to update the Database" })
     );
 });
 
-commentRoutes.delete("/comments/comment/:id", (req, res) => {
+// This section will help you delete a contributor
+CommentRoutes.delete("/comments/comment/:id", (req, res) => {
   Comment.findByIdAndRemove(req.params.id, req.body)
-    .then((comment) => res.json({ mgs: " entry deleted successfully" }))
-    .catch((err) => res.status(404).json({ error: "No such comment" }));
+    .then((comment) => res.json({ msg: "comment deleted successfully" }))
+    .catch((err) => res.status(404).json({ error: "No comment" }));
 });
 
-module.exports = commentRoutes;
+// help you find a comment to reply to by id.
+
+module.exports = CommentRoutes;

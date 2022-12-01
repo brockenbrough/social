@@ -1,43 +1,33 @@
-Get http://localhost:8089/comments/comment/ 
+Get http://localhost:8089/comments/comment/
 Content-Type: application/json
 ###
-GET http://localhost:8089/comments/comment/
+GET http://localhost:8089/comments/comment/:id
 Content-Type: application/json
 ###
 POST http://localhost:8089/comments/comment/add 
 Content-Type: application/json
 
 {
-     "postId": "632cb06a269b6e44010436b9",
-      "commentContent": "Midterm Tommorow !",
-      "userId":"2282h26a269b6e426et36262"
+      "username": "",
+      "commentContent": ""
 }
 ###
-DELETE http://localhost:8089/comments/comment/635810dc0e7cddefa94c097c
- Content-Type: application/json
+DELETE http://localhost:8089/comments/comment/:id
+Content-Type: application/json
+
 ###
-Put http://localhost:8089/comments/comment/update/63580f5c62352dd8496d2d31 
+Put http://localhost:8089/comments/comment/update/:id 
 Content-Type: application/json
 
 {
-  "commentContent": "Editing Comment"
+  "commentContent": ""
 }
 ###
-Post http://localhost:8089/comments/comment/reply/63580f5c62352dd8496d2d31 
-Accept: application/json
+Post http://localhost:8089/comments/comment/reply/:id 
+Content-Type: application/json
 
 {
-     "postId": "632cb06a269b6e44010436b9",
       "commentContent": "Hello World!",
-      "userId":"2282h26a269b6e426et36262"
 }
 ###
-Post http://localhost:8089/comments/comment/add
-Accept: application/json
-
-{
-     "postId": "632cb06a269b6e44010436b9",
-      "commentContent": "Hello World!",
-      "userId":"2282h26a269b6e426et36262"
-}
 

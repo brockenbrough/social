@@ -2,27 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Stack from 'react-bootstrap/Stack';
 
-const Post = ({username, content, date}) => {
-
-
+  const Post = ({username, content,date}) => {
     return(
-      <div>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>{username}</Card.Title>
-                        <Card.Text>
-                            {content}
-                        </Card.Text>
-                        <div class = "text-center">
-                            <Button variant="outline-danger">Unlike</Button> 
-                        </div>
-
-                    </Card.Body>
-                </Card>
-           
+       <div className='d-inline-flex p-2'>
+            <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                    <Card.Title>{username}</Card.Title>
+                    <Card.Text>
+                        {content}
+                    </Card.Text>
+                    <div class = "text-center">
+                        <Button variant="outline-danger">Like</Button> 
+                    </div>
+                </Card.Body>
+            </Card>
         </div>
     )
 };

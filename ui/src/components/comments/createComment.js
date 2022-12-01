@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import navbarComment from "./commentNavbar";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
@@ -9,7 +8,7 @@ export default function CreateComments() {
      const currentDate = new Date();
   // We define the state for the form.
   const [form, setForm] = useState({
-    comment: "",
+    commentContent: "",
     date: currentDate,
   });
   const navigate = useNavigate();
@@ -28,20 +27,20 @@ export default function CreateComments() {
     e.preventDefault();
 
     // When a post request is sent to the create url, we'll add a new record to the database.
-    const newPerson = { ...form };
+    const newComment = { ...form };
 
-    await fetch("http://localhost:8095/project_notes/contributor/add", {
+    await fetch("http://localhost:8089/comments/comment/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newPerson),
+      body: JSON.stringify(newComment),
     }).catch((error) => {
       window.alert(error);
       return;
     });
 
-    setForm({ comment: "", });
+    setForm({ commentContent: "" });
     navigate("/comments/comment");
   }
 
@@ -66,11 +65,10 @@ export default function CreateComments() {
                 type="text"
                 placeholder="Enter name"
                 id="name"
-                value={form.name}
-                onChange={(e) => updateForm({ name: e.target.value })}
+                value={form.commentContent}
+                onChange={(e) => updateForm({ commentContent: e.target.value })}
               />
             </Form.Group>
-
 
             <Button variant="primary" type="submit" onClick={onSubmit}>
               submit comment

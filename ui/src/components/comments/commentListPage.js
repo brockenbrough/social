@@ -1,7 +1,7 @@
 //This is a comment about imports
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import commentNavbar from "./commentNavbar";
+
 import getUserInfo from "../../utilities/decodeJwt";
 import Comment from "./comment";
 

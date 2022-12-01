@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
-
 import { useNavigate, Link } from 'react-router-dom';
 import getUserInfo from '../../utilities/decodeJwt';
 import './feed.css';
 const Feed = () => {
     const [user, setUser] = useState({})
+    
 
     useEffect(() => {
       setUser(getUserInfo())

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import navbarComment from "./commentNavbar";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 export default function EditComment() {
   const currentDate = new Date();
   const [form, setForm] = useState({
-    name: "",
+    commentContent: "",
     date: currentDate,
   });
   const params = useParams();
@@ -57,7 +57,7 @@ export default function EditComment() {
     const currentDate = new Date();
 
     const editedComment = {
-      comment: form.comment,
+      commentContent: form.commentContent,
       date: currentDate,
     };
 
@@ -73,7 +73,7 @@ export default function EditComment() {
       }
     );
 
-    navigate("/comments/comments");
+    navigate("/comments/comment");
   }
 
   // This following section will display the form that takes input from the user to update the data.

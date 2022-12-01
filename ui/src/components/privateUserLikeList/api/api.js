@@ -7,7 +7,3 @@ export default axios.create({
 export const postURL = axios.create({
     baseURL: 'http://localhost:8083/posts'
 })
-
-export const deleteUrl = axios.create({
-    baseURL: 'http://localhost:8083/statistcs/likes/unLike'
-})

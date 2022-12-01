@@ -12,7 +12,16 @@ Content-Type: application/json
 
 {
     "userId" : "Doodle",
-    "targetUserId" : "Bryan"
+    "targetUserId" : "John"
+}
+
+###
+DELETE http://localhost:8085/followers/deleteFollower
+Content-Type: application/json 
+
+{
+    "userId" : "John",
+    "targetUserId" : "Larry"
 }
 
 ###
@@ -20,8 +29,8 @@ POST http://localhost:8085/followers/unfollow
 Content-Type: application/json 
 
 {
-    "userId" : "Doodle",
-    "targetUserId" : "Bryan"
+    "userId" : "John",
+    "targetUserId" : "Jerry"
 }
 ###
 

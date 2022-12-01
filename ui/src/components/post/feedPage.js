@@ -1,10 +1,9 @@
 //This is a comment about imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import getUserInfo from '../../utilities/decodeJwt'
 import Post from './post';
 import Button from 'react-bootstrap/Button';
-
 
 export default function PostList() {
   const [user, setUser] = useState({})
@@ -63,7 +62,6 @@ export default function PostList() {
     });
   }
   if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
-
   // This following section will display the table with the records of individuals.
   // This is what RecordList returns: a rendering.  Notice that recordList() is
   // doing a lot of work.
