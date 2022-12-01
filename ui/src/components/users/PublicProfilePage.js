@@ -6,8 +6,10 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import getUserInfo from '../../utilities/decodeJwt'
 import ToggleButton from 'react-bootstrap/ToggleButton';
-// display of public user - EA
-const ShowPublicUser = () => {
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+
+// display of public user - EA //
+const ShowPublicUser = (currentUserId) => {
   const [user, setUser] = useState({})
 
   useEffect(() => {
@@ -27,34 +29,79 @@ const ShowPublicUser = () => {
           <div>
               <Card>
                   <Card.Header>CheeseB0y</Card.Header>
-                  <Card.Body>I love this cool new social media web application!</Card.Body>
+                  <div class = 'profile-image'>
+                   <img src ={require("./elmo.jpeg")}/>
+                   </div>
+                  <Card.Body>I love this! Bruh Lets get groovy</Card.Body>
                   <div>
-                      <ToggleButton href='#'>235 ❤︎</ToggleButton>
+                      <ToggleButton href='#'>2.3k ❤︎</ToggleButton>
+                      <div className="vr" />
                       <Button>Comments</Button>
+                      <div className="vr" />
+                      <FloatingLabel controlId="me-auto" label="Comments">
+                      <Form.Control
+                      as="textarea"
+                     placeholder="Leave a comment here"
+                     style={{ height: '80px' }}
+        />
+      </FloatingLabel>
+                      <>
+    </>
                   </div>
-                  <Card.Footer>11/10/2022</Card.Footer>
+                  <div>11/02/2022</div>
               </Card>
               <Card>
                   <Card.Header>NewUser23</Card.Header>
-                  <Card.Body>Hello, I am new here :)</Card.Body>
+                  <div class = 'profile-image'>
+                   <img src ={require("./smallcatscreaming.jpg")}/>
+                   </div>
+                  <Card.Body>Hello, I am new here, be my friend please</Card.Body>
                   <div>
                       <ToggleButton href='#'>3 ❤︎</ToggleButton>
+                      <div className="vr" />
                       <Button>Comments</Button>
+                      <div className="vr" />
+                      <FloatingLabel controlId="me-auto" label="Comments">
+                      <Form.Control
+                      as="textarea"
+                     placeholder="Leave a comment here"
+                     style={{ height: '80px' }}
+        />
+      </FloatingLabel>
+                      <>
+    </>
                   </div>
-                  <Card.Footer>11/14/2022</Card.Footer>
+                  <div>11/02/2022</div>
               </Card>
               <Card>
-                  <Card.Header>JWood</Card.Header>
-                  <Card.Body>This is a test UI and does not actually work yet</Card.Body>
+                  <Card.Header>JWood03</Card.Header>
+                  <div class = 'profile-image'>
+                   <img src ={require("./cryingcat.jpg")}/>
+                   </div>
+                  <Card.Body>This is a test UI and it does not actually work yet. Yikes</Card.Body>
                   <div>
-                      <ToggleButton href='#'>2.3M ❤︎</ToggleButton>
-                      <Button>Comments</Button>
+                  <ToggleButton href='#'>3.5k ❤︎</ToggleButton>
+                  <div className="vr" />
+                  <Button href='#'>Comments</Button>
+                  <div className="vr" />
+                      <FloatingLabel controlId="me-auto" label="Comments">
+                      <Form.Control
+                      as="textarea"
+                     placeholder="Leave a comment here"
+                     style={{ height: '80px' }}
+        />
+      </FloatingLabel>
+                      <>
+    </>
                   </div>
-                  <Card.Footer>12/31/2999</Card.Footer>
+                  <div>11/02/2022</div>
               </Card>
           </div>
       </>
   )
 }
 
+
+
 export default ShowPublicUser
+
