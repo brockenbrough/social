@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8085/followers/unfollow
+POST http://localhost:8085/followers/unfollow
 Content-Type: application/json 
 
 {
