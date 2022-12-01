@@ -163,13 +163,8 @@ const ShowPublicUser = (currentUserId) => {
               <Card>
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">JWood03</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
-<<<<<<< HEAD
                   <div className = "d-flex flex-wrap justify-content-md-center">
                    <Image width = "150" roundedCircle src ={require("./cryingcat.jpg")}/>
-=======
-                  <div class = 'profile-image'>
-                   <img src ={require("./pictures/cryingcat.jpg")}/>
->>>>>>> 12203a34a81d3918fc30937cafa378b7d6d4d6fe
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                   <Card style={{ width: '3rem' }}></Card>
