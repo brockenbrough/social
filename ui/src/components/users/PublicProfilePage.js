@@ -8,6 +8,7 @@ import getUserInfo from '../../utilities/decodeJwt'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Badge from 'react-bootstrap/Badge';
+import Col from 'react-bootstrap/Col'
 
 
 
@@ -49,8 +50,11 @@ const ShowPublicUser = (currentUserId) => {
                       <Form.Control
                       as="textarea"
                      placeholder="Leave a comment here"
-                     style={{ height: '80px' }}
+                     style={{ height: '80px' }}          
         />
+        <div className = "col-  10 text-end"> <Button>Submit</Button>
+        </div>
+        
       </FloatingLabel>
      <>
     </>
@@ -78,6 +82,8 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
+      <div className = "col-  10 text-end"> <Button>Submit</Button>
+        </div>
      <>
     </>
   </div>
@@ -104,6 +110,8 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
+      <div className = "col-  10 text-end"> <Button>Submit</Button>
+        </div>
      <>
     </>
   </div>
@@ -129,6 +137,8 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
+      <div className = "col-  10 text-end"> <Button>Submit</Button>
+        </div>
    <>
   </>
 </div>
@@ -154,6 +164,8 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
+      <div className = "col-  10 text-end"> <Button>Submit</Button>
+        </div>
      <>
     </>
  </div>
