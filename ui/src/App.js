@@ -23,7 +23,11 @@ import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
 import FollowButtonTest from "./components/following/followButtonTest";
 import FeedPage from "./components/post/feedPage";
-import commentsHome from "./components/comments/commentsHome";
+
+import CommentList from "./components/comments/commentListPage";
+import EditComment from "./components/comments/editComment";
+import CreateComments from "./components/comments/createComment";
+
 import PrivateUserLikeList from "./components/privateUserLikeList/PrivateUserLikeListPage";
 
 //test change
@@ -44,7 +48,14 @@ const App = () => {
         <Route path="/project-notes/create" element={<CreateContributor />} />
         <Route path="/oldfeed" element={<Feed />} />
         <Route path="/feed" element={<FeedPage />} />
+<<<<<<< HEAD
         <Route path="/comments" element={<commentsHome />} />
+=======
+         <Route path="/comments/create" element={<CreateComments />} />
+        <Route path="/comments/comment" element={<CommentList />} />
+        <Route path="/comments/editComment/:id" element={<EditComment />} />
+        
+>>>>>>> 3557be6ac6433bdf03c9782db9e64956171c5678
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
         <Route path = "/following/:id" element = {<FollowingList/>} />
