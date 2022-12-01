@@ -20,14 +20,6 @@ const ShowPublicUser = (currentUserId) => {
     setUser(getUserInfo())
   }, [])
 
-  if (!user) return (
-      <div>
-          <h3>
-              You are not authorized to view this page, Please Login in <Link to={'/login'}> <a href='#'> here </a> </Link>
-          </h3>
-      </div>
-  )
-
   return (
       <>
           <div>
@@ -35,7 +27,7 @@ const ShowPublicUser = (currentUserId) => {
               <h3>SSU Social</h3>
              
                   <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10" >Ms.LaStarr</Card.Header>
-                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./patrickwig.webp")}/>
                    </div>
@@ -53,7 +45,7 @@ const ShowPublicUser = (currentUserId) => {
                      placeholder="Leave a comment here"
                      style={{ height: '80px' }}          
         />
-        <div className = "col-  10 text-end"> <Button>Submit</Button>
+        <div className = "col-  10 text-end"> <Button href='/components/comments/commentListPage'>Submit</Button>
         </div>
       </FloatingLabel>
      <>
@@ -65,7 +57,7 @@ const ShowPublicUser = (currentUserId) => {
 </Card>
 <Card>
 <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">HandsomeSponge</Card.Header>
-                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./handsomespongebob.jpg")}/>
                    </div>
@@ -83,7 +75,7 @@ const ShowPublicUser = (currentUserId) => {
                      placeholder="Leave a comment here"
                      style={{ height: '80px' }}          
         />
-        <div className = "col-  10 text-end"> <Button>Submit</Button>
+        <div className = "col-  10 text-end"> <Button href='/components/comments/commentListPage'>Submit</Button>
         </div>
       </FloatingLabel>
      <>
@@ -94,7 +86,7 @@ const ShowPublicUser = (currentUserId) => {
 </Card>            
 <Card>
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">CheeseB0iiiiiYarde</Card.Header>
-                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./elmo.jpeg")}/>
                    </div>
@@ -113,7 +105,7 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
-      <div className = "col-  10 text-end"> <Button>Submit</Button>
+      <div className = "col-  10 text-end"> <Button href='/components/comments/commentListPage'>Submit</Button>
         </div>
      <>
     </>
@@ -122,7 +114,7 @@ const ShowPublicUser = (currentUserId) => {
 <div>11/02/2022</div>
 
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">NewUser23</Card.Header>
-                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./smallcatscreaming.jpg")}/>
                    </div>
@@ -141,7 +133,7 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
-      <div className = "col-  10 text-end"> <Button>Submit</Button>
+      <div className = "col-  10 text-end"><Button href='/components/comments/commentListPage'>Submit</Button>
         </div>
    <>
   </>
@@ -150,7 +142,7 @@ const ShowPublicUser = (currentUserId) => {
 </Card>
               <Card>
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">JWood03</Card.Header>
-                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./cryingcat.jpg")}/>
                    </div>
@@ -169,7 +161,7 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
-      <div className = "col-  10 text-end"> <Button>Submit</Button>
+      <div className = "col-  10 text-end"><Button href='/components/comments/commentListPage'>Submit</Button>
         </div>
      <>
     </>
