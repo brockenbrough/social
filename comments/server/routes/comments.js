@@ -57,26 +57,6 @@ CommentRoutes.post("/comments/comment/add", (req, res) => {
     );
 });
 
-// Reply to a comment.
-CommentRoutes.route("/comments/reply/add/:id").post(function (
-  req,
-  response
-) {
-  let db_connect = dbo.getDb();
-
-  let myobj = {
-    postId: req.body.postId,
-    commentContent: req.body.commentContent,
-    replyComment: req.body.replyComment,
-    userId: req.body.userId,
-    Date: currentDate,
-  };
-  db_connect.collection("comments").insertOne(myobj, function (err, res) {
-    if (err) throw err;
-    response.json(res);
-  });
-});
-
 // This section will help you update a comment by id.
 CommentRoutes.put("/comments/comment/update/:id", (req, res) => {
   Comment.findByIdAndUpdate(req.params.id, req.body)
