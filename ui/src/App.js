@@ -48,14 +48,7 @@ const App = () => {
         <Route path="/project-notes/create" element={<CreateContributor />} />
         <Route path="/oldfeed" element={<Feed />} />
         <Route path="/feed" element={<FeedPage />} />
-<<<<<<< HEAD
         <Route path="/comments" element={<commentsHome />} />
-=======
-         <Route path="/comments/create" element={<CreateComments />} />
-        <Route path="/comments/comment" element={<CommentList />} />
-        <Route path="/comments/editComment/:id" element={<EditComment />} />
-        
->>>>>>> 3557be6ac6433bdf03c9782db9e64956171c5678
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
         <Route path = "/following/:id" element = {<FollowingList/>} />
