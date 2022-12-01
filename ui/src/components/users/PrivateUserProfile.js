@@ -6,7 +6,6 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-//import "./components/comments/index.css";
 
 //link to service 
 //http://localhost:8096/privateUserProfile
