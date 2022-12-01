@@ -39,7 +39,7 @@ return(
         <div class="d-flex flex-wrap justify-content-md-center">
 			<Row>
    			 <Col xs={12} sm={4} md={4}>
-			 	<Image width="150" roundedCircle src={require("./elmo.jpeg")} />
+			 	<Image width="150" roundedCircle src={require("./pictures/elmo.jpeg")} />
     		 </Col>
 			</Row>
         </div>
@@ -57,7 +57,7 @@ return(
                   <div>
 				  <Row>
    			 <Col xs={12} sm={4} md={4}>
-			 	<Image width="150" roundedCircle src={require("./elmo.jpeg")} />
+			 	<Image width="150" roundedCircle src={require("./pictures/elmo.jpeg")} />
     		 </Col>
 			</Row>
 			<Card style={{ width: '5rem' }}></Card>
