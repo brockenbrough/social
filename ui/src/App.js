@@ -23,7 +23,6 @@ import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
 import FollowButtonTest from "./components/following/followButtonTest";
 import FeedPage from "./components/post/feedPage";
-
 import CommentList from "./components/comments/commentListPage";
 import EditComment from "./components/comments/editComment";
 import CreateComments from "./components/comments/createComment";
@@ -49,6 +48,7 @@ const App = () => {
         <Route path="/oldfeed" element={<Feed />} />
         <Route path="/feed" element={<FeedPage />} />
         <Route path="/comments" element={<commentsHome />} />
+        <Route path="/editComment" element={<EditComment />} />
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
         <Route path = "/following/:id" element = {<FollowingList/>} />
