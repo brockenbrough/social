@@ -34,7 +34,7 @@ const ShowPublicUser = (currentUserId) => {
           <Card>
               <h3>SSU Social</h3>
              
-                  <Card.Header className = "col-50 text-center">Ms.LaStarr</Card.Header>
+                  <Card.Header className = "col-50 text-center" color = "danger">Ms.LaStarr</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./patrickwig.webp")}/>
@@ -43,9 +43,9 @@ const ShowPublicUser = (currentUserId) => {
                    <Card style={{ width: '10rem' }}></Card>
                   <Card.Body>Where's my man? Bring him hereeeee</Card.Body>
                   <div>
-                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
+                  <Button href='/components/privateUserLikeList'  className = "me-2 " aria-label = "Second group">300k ❤︎</Button>
                       <div className="vr" />
-                      <Button>Comments</Button>
+                      <Button className = "col-50 text-end" variant = "primary" id = "follow" type = "Button "  href = "/components/comments" >Comments </Button>
                       <div className="vr" />
                       <FloatingLabel controlId="me-auto" label="Comments">
                       <Form.Control
@@ -73,9 +73,9 @@ const ShowPublicUser = (currentUserId) => {
                    <Card style={{ width: '10rem' }}></Card>
                   <Card.Body>You know what it is HandsomeSponge out here</Card.Body>
                   <div>
-                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">300k ❤︎</ToggleButton>
+                  <Button href='/components/privateUserLikeList'  className = "me-2 " aria-label = "Second group">561k ❤︎</Button>
                       <div className="vr" />
-                      <Button>Comments</Button>
+                      <Button className = "col-50 text-end" variant = "primary" id = "follow" type = "Button "  href = "/components/comments">Comments </Button>
                       <div className="vr" />
                       <FloatingLabel controlId="me-auto" label="Comments">
                       <Form.Control
@@ -102,9 +102,9 @@ const ShowPublicUser = (currentUserId) => {
                    <Card style={{ width: '10rem' }}></Card>
                   <Card.Body>I love this! Bruh Lets get groovy</Card.Body>
                   <div>
-                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2 ❤︎</ToggleButton>
+                  <Button href='/components/privateUserLikeList'  className = "me-2 " aria-label = "Second group">9k ❤︎</Button>
                       <div className="vr" />
-                      <Button>Comments</Button>
+                      <Button className = "col-50 text-end" variant = "primary" id = "follow" type = "Button "  href = "/components/comments">Comments </Button>
                       <div className="vr" />
                       <FloatingLabel controlId="me-auto" label="Comments">
                       <Form.Control
@@ -130,9 +130,9 @@ const ShowPublicUser = (currentUserId) => {
                    <Card style={{ width: '3rem' }}></Card>
                   <Card.Body>Hello, I am new here, be my friend please</Card.Body>
                   <div>
-                  <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
+                  <Button href='/components/privateUserLikeList'  className = "me-2 " aria-label = "Second group">3 ❤︎</Button>
                       <div className="vr" />
-                      <Button>Comments</Button>
+                      <Button className = "col-50 text-end" variant = "primary" id = "follow" type = "Button "  href = "/components/comments">Comments </Button>
                       <div className="vr" />
                       <FloatingLabel controlId="me-auto" label="Comments">
                       <Form.Control
@@ -158,9 +158,9 @@ const ShowPublicUser = (currentUserId) => {
                   <Card style={{ width: '3rem' }}></Card>
                   <Card.Body >This is a test UI and it does not actually work yet. Yikes</Card.Body>
                   <div>
-                  <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">3k ❤︎</ToggleButton>
+                  <Button href='/components/privateUserLikeList'  className = "me-2 " aria-label = "Second group">1.2M ❤︎</Button>
                   <div className="vr" />
-                  <Button href='#'>Comments</Button>
+                  <Button className = "col-50 text-end" variant = "primary" id = "follow" type = "Button "  href = "/components/comments">Comments </Button>
                   <div className="vr" />
                       <FloatingLabel controlId="me-auto" label="Comments">
                       <Form.Control
