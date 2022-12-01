@@ -9,7 +9,7 @@ import Post from '../post/post'
 const user = getUserInfo()
 const PrivateUserLikeListPage = () => {
 
-//     const [post, setPost] = useState([])
+    const [post, setPost] = useState([])
 
     useEffect(() => {
         const fetchLikes = async () => {
@@ -43,7 +43,7 @@ const PrivateUserLikeListPage = () => {
         <div>
             <h2>{user.username}'s liked posts:</h2>
             {post.map(e => {
-                <Post username ={e.username} content={e.content} date={e.date}/>
+               return <Post username ={e.username} content={e.content} date={e.date}/>
             })}
         </div>
     )
