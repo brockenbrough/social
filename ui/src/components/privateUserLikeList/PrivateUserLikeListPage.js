@@ -9,7 +9,7 @@ import Post from '../post/post'
 const user = getUserInfo()
 const PrivateUserLikeListPage = () => {
 
-    const [post, setPost] = useState([])
+//     const [post, setPost] = useState([])
 
     useEffect(() => {
         const fetchLikes = async () => {
