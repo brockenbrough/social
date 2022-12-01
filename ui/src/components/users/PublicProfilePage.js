@@ -93,7 +93,7 @@ const ShowPublicUser = (currentUserId) => {
 <div>11/11/2011</div>
 </Card>            
 <Card>
-                  <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">CheeseB0y</Card.Header>
+                  <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">CheeseB0iiiiiYarde</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./elmo.jpeg")}/>
