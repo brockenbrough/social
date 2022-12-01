@@ -34,13 +34,13 @@ const ShowPublicUser = (currentUserId) => {
           <Card>
               <h3>SSU Social</h3>
              
-                  <Card.Header>Ms.LaStarr</Card.Header>
+                  <Card.Header className = "col-50 text-center">Ms.LaStarr</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./patrickwig.webp")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
-                   <Card style={{ width: '3rem' }}></Card>
-                  <Card.Body>Where's my man?</Card.Body>
+                   <Card style={{ width: '10rem' }}></Card>
+                  <Card.Body>Where's my man? Bring him hereeeee</Card.Body>
                   <div>
                       <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
                       <div className="vr" />
@@ -63,15 +63,15 @@ const ShowPublicUser = (currentUserId) => {
 <div>11/02/2022</div>
 
 </Card>
-          <Card.Header>pantsSquare</Card.Header>
+          <Card.Header className = "col-50 text-center">pantsSquare</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./handsomespongebob.jpg")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
-                   <Card style={{ width: '3rem' }}></Card>
+                   <Card style={{ width: '10rem' }}></Card>
                   <Card.Body>my place at 6pm, stuffs about to get wild, bring your own seat cushion</Card.Body>
                   <div>
-                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
+                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">300k ❤︎</ToggleButton>
                       <div className="vr" />
                       <Button>Comments</Button>
                       <div className="vr" />
@@ -91,15 +91,15 @@ const ShowPublicUser = (currentUserId) => {
 <div>11/02/2022</div>
               
               <Card>
-                  <Card.Header>CheeseB0y</Card.Header>
+                  <Card.Header className = "col-50 text-center">CheeseB0y</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./elmo.jpeg")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
-                   <Card style={{ width: '3rem' }}></Card>
+                   <Card style={{ width: '10rem' }}></Card>
                   <Card.Body>I love this! Bruh Lets get groovy</Card.Body>
                   <div>
-                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
+                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2 ❤︎</ToggleButton>
                       <div className="vr" />
                       <Button>Comments</Button>
                       <div className="vr" />
@@ -118,7 +118,7 @@ const ShowPublicUser = (currentUserId) => {
   <Card style={{ width: '5rem' }}></Card>
 <div>11/02/2022</div>
 
-                  <Card.Header>NewUser23</Card.Header>
+                  <Card.Header className = "col-50 text-center">NewUser23</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./smallcatscreaming.jpg")}/>
                    </div>
@@ -142,10 +142,10 @@ const ShowPublicUser = (currentUserId) => {
    <>
   </>
 </div>
- <div>11/02/2022</div>
+ <div>10/10/2022</div>
 </Card>
               <Card>
-                  <Card.Header>JWood03</Card.Header>
+                  <Card.Header className = "col-50 text-center">JWood03</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./cryingcat.jpg")}/>
                    </div>
@@ -153,7 +153,7 @@ const ShowPublicUser = (currentUserId) => {
                   <Card style={{ width: '3rem' }}></Card>
                   <Card.Body >This is a test UI and it does not actually work yet. Yikes</Card.Body>
                   <div>
-                  <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
+                  <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">3k ❤︎</ToggleButton>
                   <div className="vr" />
                   <Button href='#'>Comments</Button>
                   <div className="vr" />
