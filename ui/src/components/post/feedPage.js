@@ -1,9 +1,10 @@
 //This is a comment about imports
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import getUserInfo from '../../utilities/decodeJwt'
 import Post from './post';
 import Button from 'react-bootstrap/Button';
+
 
 export default function PostList() {
   const [user, setUser] = useState({})
@@ -13,10 +14,8 @@ export default function PostList() {
   // This method fetches the records from the database.
   // Hook useEffect - this hook is used to invoke something after rendering.
   useEffect(() => {
-    // Define a function to get records. We are going to call it below.
-    // We use async keyword so we can later say "await" to block on finish.
-    async function getRecords() {
-      const response = await fetch(`http://localhost:8095/project_notes/contributor/`);
+    async function getFeed(id) {
+      const response = await fetch(`http://localhost:8093/feed${id}`);
       
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
@@ -24,12 +23,12 @@ export default function PostList() {
         return;
       }
       
-      const fetchedRecords = await response.json();
-      setPosts(fetchedRecords);  // update state.  when state changes, we automatically re-render.
+      const feed = await response.json();
+      setPosts(feed);  // update state.  when state changes, we automatically re-render.
     }
-    
-    getRecords();   // Now that we defined it, call the function. 
+
     setUser(getUserInfo())
+    getFeed(user);
     
     return; 
   }, [posts.length]);  // If record length ever changes, this useEffect() is automatically called.
@@ -62,6 +61,9 @@ export default function PostList() {
     });
   }
   if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
+
+  
+
   // This following section will display the table with the records of individuals.
   // This is what RecordList returns: a rendering.  Notice that recordList() is
   // doing a lot of work.
