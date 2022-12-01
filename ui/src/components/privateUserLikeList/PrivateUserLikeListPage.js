@@ -46,6 +46,7 @@ const PrivateUserLikeListPage = () => {
 
     return (
         <div>
+            <h2>{user.username}'s liked posts:</h2>
             {post.map(e => {
                 return <Post username={e.username} content={e.content} date={e.date}/>
             })}
