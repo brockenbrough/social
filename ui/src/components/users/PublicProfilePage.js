@@ -35,6 +35,7 @@ const ShowPublicUser = (currentUserId) => {
               <h3>SSU Social</h3>
              
                   <Card.Header className = "col-50 text-center">Ms.LaStarr</Card.Header>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./patrickwig.webp")}/>
                    </div>
@@ -54,7 +55,6 @@ const ShowPublicUser = (currentUserId) => {
         />
         <div className = "col-  10 text-end"> <Button>Submit</Button>
         </div>
-        
       </FloatingLabel>
      <>
     </>
@@ -63,13 +63,15 @@ const ShowPublicUser = (currentUserId) => {
 <div>11/02/2022</div>
 
 </Card>
-          <Card.Header className = "col-50 text-center">pantsSquare</Card.Header>
+<Card>
+<Card.Header className = "col-50 text-center">HandsomeSponge</Card.Header>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./handsomespongebob.jpg")}/>
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
-                  <Card.Body>my place at 6pm, stuffs about to get wild, bring your own seat cushion</Card.Body>
+                  <Card.Body>You know what it is HandsomeSponge out here</Card.Body>
                   <div>
                       <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">300k ❤︎</ToggleButton>
                       <div className="vr" />
@@ -79,19 +81,20 @@ const ShowPublicUser = (currentUserId) => {
                       <Form.Control
                       as="textarea"
                      placeholder="Leave a comment here"
-                     style={{ height: '80px' }}
+                     style={{ height: '80px' }}          
         />
-      </FloatingLabel>
-      <div className = "col-  10 text-end"> <Button>Submit</Button>
+        <div className = "col-  10 text-end"> <Button>Submit</Button>
         </div>
+      </FloatingLabel>
      <>
     </>
   </div>
   <Card style={{ width: '5rem' }}></Card>
-<div>11/02/2022</div>
-              
-              <Card>
+<div>11/11/2011</div>
+</Card>            
+<Card>
                   <Card.Header className = "col-50 text-center">CheeseB0y</Card.Header>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./elmo.jpeg")}/>
                    </div>
@@ -119,6 +122,7 @@ const ShowPublicUser = (currentUserId) => {
 <div>11/02/2022</div>
 
                   <Card.Header className = "col-50 text-center">NewUser23</Card.Header>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./smallcatscreaming.jpg")}/>
                    </div>
@@ -146,6 +150,7 @@ const ShowPublicUser = (currentUserId) => {
 </Card>
               <Card>
                   <Card.Header className = "col-50 text-center">JWood03</Card.Header>
+                  <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/following">Follow </Button>
                   <div class = 'profile-image'>
                    <img src ={require("./cryingcat.jpg")}/>
                    </div>
