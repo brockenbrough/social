@@ -23,7 +23,7 @@ const EditUserPage = () =>{
     else if (username.length < 6) newErrors.name = 'Username must be at least 6 characters'
     // email validation checks
     if (!email || email === '') newErrors.email = 'Input a valid email address'
-    if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Input a valid email address'
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Input a valid email address'
     // password validation checks
     if (!password || password === '') newErrors.password = 'Input a valid password'
     else if (password.length < 8) newErrors.password = 'Password must be at least 8 characters'
