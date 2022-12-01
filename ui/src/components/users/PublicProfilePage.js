@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 import getUserInfo from '../../utilities/decodeJwt'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Badge from 'react-bootstrap/Badge';
+
+
 
 // display of public user - EA //
 const ShowPublicUser = (currentUserId) => {
@@ -27,14 +30,44 @@ const ShowPublicUser = (currentUserId) => {
   return (
       <>
           <div>
+          <Card>
+              <h3>SSU Social</h3>
+             
+                  <Card.Header>Ms.LaStarr</Card.Header>
+                  <div class = 'profile-image'>
+                   <img src ={require("./patrickwig.webp")}/>
+                   </div>
+                   <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
+                   <Card style={{ width: '3rem' }}></Card>
+                  <Card.Body>Where's my man?</Card.Body>
+                  <div>
+                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
+                      <div className="vr" />
+                      <Button>Comments</Button>
+                      <div className="vr" />
+                      <FloatingLabel controlId="me-auto" label="Comments">
+                      <Form.Control
+                      as="textarea"
+                     placeholder="Leave a comment here"
+                     style={{ height: '80px' }}
+        />
+      </FloatingLabel>
+     <>
+    </>
+  </div>
+  <Card style={{ width: '5rem' }}></Card>
+<div>11/02/2022</div>
+</Card>
               <Card>
                   <Card.Header>CheeseB0y</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./elmo.jpeg")}/>
                    </div>
+                   <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
+                   <Card style={{ width: '3rem' }}></Card>
                   <Card.Body>I love this! Bruh Lets get groovy</Card.Body>
                   <div>
-                      <ToggleButton href='#'>2.3k ❤︎</ToggleButton>
+                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
                       <div className="vr" />
                       <Button>Comments</Button>
                       <div className="vr" />
@@ -45,19 +78,22 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
-                      <>
+     <>
     </>
-                  </div>
-                  <div>11/02/2022</div>
-              </Card>
+  </div>
+  <Card style={{ width: '5rem' }}></Card>
+<div>11/02/2022</div>
+</Card>
               <Card>
                   <Card.Header>NewUser23</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./smallcatscreaming.jpg")}/>
                    </div>
+                   <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
+                   <Card style={{ width: '3rem' }}></Card>
                   <Card.Body>Hello, I am new here, be my friend please</Card.Body>
                   <div>
-                      <ToggleButton href='#'>3 ❤︎</ToggleButton>
+                  <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
                       <div className="vr" />
                       <Button>Comments</Button>
                       <div className="vr" />
@@ -68,19 +104,21 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
-                      <>
-    </>
-                  </div>
-                  <div>11/02/2022</div>
-              </Card>
+   <>
+  </>
+</div>
+ <div>11/02/2022</div>
+</Card>
               <Card>
                   <Card.Header>JWood03</Card.Header>
                   <div class = 'profile-image'>
                    <img src ={require("./cryingcat.jpg")}/>
                    </div>
-                  <Card.Body>This is a test UI and it does not actually work yet. Yikes</Card.Body>
+                   <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
+                  <Card style={{ width: '3rem' }}></Card>
+                  <Card.Body >This is a test UI and it does not actually work yet. Yikes</Card.Body>
                   <div>
-                  <ToggleButton href='#'>3.5k ❤︎</ToggleButton>
+                  <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
                   <div className="vr" />
                   <Button href='#'>Comments</Button>
                   <div className="vr" />
@@ -91,11 +129,12 @@ const ShowPublicUser = (currentUserId) => {
                      style={{ height: '80px' }}
         />
       </FloatingLabel>
-                      <>
+     <>
     </>
-                  </div>
-                  <div>11/02/2022</div>
-              </Card>
+ </div>
+ <Card style={{ width: '5rem' }}></Card>
+ <div>11/02/2022</div>
+ </Card>
           </div>
       </>
   )
