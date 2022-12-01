@@ -28,8 +28,13 @@ const ShowPublicUser = (currentUserId) => {
              
                   <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-lightblue bg-opacity-10" >Ms.LaStarr</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
+<<<<<<< HEAD
                   <div className = "d-flex flex-wrap justify-content-md-center">
                    <Image  width = "150"roundedCircle src ={require("./patrickwig.webp")}/>
+=======
+                  <div class = 'profile-image'>
+                   <img src ={require("./pictures/patrickwig.webp")}/>
+>>>>>>> 12203a34a81d3918fc30937cafa378b7d6d4d6fe
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
@@ -58,8 +63,13 @@ const ShowPublicUser = (currentUserId) => {
 <Card>
 <Card.Header className ="col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">HandsomeSponge</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
+<<<<<<< HEAD
                   <div className = "d-flex flex-wrap justify-content-md-center">
                    <Image width = "150" roundedCircle src ={require("./handsomespongebob.jpg")}/>
+=======
+                  <div class = 'profile-image'>
+                   <img src ={require("./pictures/handsomespongebob.jpg")}/>
+>>>>>>> 12203a34a81d3918fc30937cafa378b7d6d4d6fe
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
@@ -87,8 +97,13 @@ const ShowPublicUser = (currentUserId) => {
 <Card>
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">CheeseB0iiiiiYarde</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
+<<<<<<< HEAD
                   <div className = "d-flex flex-wrap justify-content-md-center">
                    <Image width = "150" roundedCircle src ={require("./elmo.jpeg")}/>
+=======
+                  <div class = 'profile-image'>
+                   <img src ={require("./pictures/elmo.jpeg")}/>
+>>>>>>> 12203a34a81d3918fc30937cafa378b7d6d4d6fe
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '10rem' }}></Card>
@@ -115,8 +130,13 @@ const ShowPublicUser = (currentUserId) => {
 
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">NewUser23</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
+<<<<<<< HEAD
                   <div className = "d-flex flex-wrap justify-content-md-center">
                    <Image width = "150" roundedCircle src ={require("./smallcatscreaming.jpg")}/>
+=======
+                  <div class = 'profile-image'>
+                   <img src ={require("./pictures/smallcatscreaming.jpg")}/>
+>>>>>>> 12203a34a81d3918fc30937cafa378b7d6d4d6fe
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                    <Card style={{ width: '3rem' }}></Card>
@@ -143,8 +163,13 @@ const ShowPublicUser = (currentUserId) => {
               <Card>
                   <Card.Header className = "col-50 text-center fw-bolder bg-primary p-2 text-dark bg-opacity-10">JWood03</Card.Header>
                   <Button className = "col-50 text-end" variant = "link" id = "follow" type = "Button "  href = "/components/PrivateUserProfile">Follow </Button>
+<<<<<<< HEAD
                   <div className = "d-flex flex-wrap justify-content-md-center">
                    <Image width = "150" roundedCircle src ={require("./cryingcat.jpg")}/>
+=======
+                  <div class = 'profile-image'>
+                   <img src ={require("./pictures/cryingcat.jpg")}/>
+>>>>>>> 12203a34a81d3918fc30937cafa378b7d6d4d6fe
                    </div>
                    <Card.Subtitle className="mb-2 text-muted">posts</Card.Subtitle>
                   <Card style={{ width: '3rem' }}></Card>
