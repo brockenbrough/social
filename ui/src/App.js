@@ -16,7 +16,7 @@ import Login from './components/users/Login'
 import Signup from './components/register/Register'
 import Feed from './components/feed/Feed';
 import EditUserPage from "./components/users/editUserPage";
-//import PublicProfile from "./components/users/PublicProfilePage";
+import PublicProfilePage from "./components/users/PublicProfilePage";
 import PrivateUserProfile from "./components/users/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
@@ -38,13 +38,13 @@ const App = () => {
         <Route exact path="/editUserPage" element={<EditUserPage />} />
         <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         <Route path="/privateUserLikeList" element={<PrivateUserLikeList />}/>
+        <Route path="/publicProfilePage" element={<PublicProfilePage />}/>
         <Route path="/project-notes/contributors" element={<ContributorList />} />
         <Route path="/project-notes/editContributor/:id" element={<EditContributor />} />
         <Route path="/project-notes/create" element={<CreateContributor />} />
         <Route path="/oldfeed" element={<Feed />} />
         <Route path="/feed" element={<FeedPage />} />
         <Route path="/comments" element={<commentsHome />} />
-        
         <Route path = "/test" element = {<Test/>} />
         <Route path = "/followers/:id" element = {<FollowerList/>} />
         <Route path = "/following/:id" element = {<FollowingList/>} />
