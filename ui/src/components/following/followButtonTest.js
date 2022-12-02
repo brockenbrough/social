@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
 
 // The ContributorList component.  This is the main component in this file.
 export default function FollowButton() {
 
+  window.onload = function() {
+    isFollowing();
+  };
+
 
   const [user, setUser] = useState()
-  const [followers, setFollowing] = useState([]);
   const params = useParams();
 
 
@@ -20,6 +24,8 @@ export default function FollowButton() {
 useEffect(() => {setUser(getUserInfo())}, [])
   // A method to delete a contributor
   async function followUser() {
+
+    console.log(user.username+ " followed " +params.id.toString())
    
     const addFollowing = {
       userId: user.username,
@@ -28,16 +34,14 @@ useEffect(() => {setUser(getUserInfo())}, [])
     const url = "http://localhost:8085/followers/follow";
 
     const res = await axios.post(url, addFollowing)
-    console.log(res)
 
 
     // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowing = followers.filter((el) => el !== el);
-    setFollowing(newFollowing);  // This causes a re-render because we change state.
+    isFollowing()
   }
 
   async function unfollowUser() {
-   console.log(params.id.toString(),user.username)
+   console.log(user.username+ " unfollowed " +params.id.toString())
     const unFollow = {
       userId: user.username,
       targetUserId: params.id.toString(),
@@ -47,18 +51,21 @@ useEffect(() => {setUser(getUserInfo())}, [])
     const res = await axios.delete(url, {
       data: unFollow,
     })
-    console.log(res)
 
 
     // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowing = followers.filter((el) => el !== el);
-    setFollowing(newFollowing);  // This causes a re-render because we change state.
+    // This causes a re-render because we change state.
+    isFollowing()
   }
+
+  const [followState, setFollowState] = useState([]);
 
   async function isFollowing() {
     const response = await fetch(
       `http://localhost:8085/followers/${params.id.toString()}`
     );
+
+    
 
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
@@ -66,24 +73,31 @@ useEffect(() => {setUser(getUserInfo())}, [])
       return;
     }
 
+    try{
     const fetchedFollowers = await response.json();
 
-    setFollowing(fetchedFollowers[0].followers); // update state.  when state changes, we automatically re-render.
-    if (followers.includes(user.username)) {
-      console.log(true);
-      return true;
-    } else {
-      console.log(false);
-      return false;
+    setFollowState(fetchedFollowers[0].followers);
+    console.log(fetchedFollowers[0].followers)
+    }catch(e){
+      console.log("User doesn't exist in Followers Collection yet.")
     }
+  
   }
 
-  let isBroken = async () => {
-    let result = await isFollowing();
-    console.log(result)
-    return result
-  }
+
+
+
+  // const [buttonText, setButtonText] = useState([]);
   
+  // if (isFollowing2){
+  //   const changeText = (text) => setButtonText("Unfollow");
+  // }
+  //   else{
+  //     const changeText = (text) => setButtonText("Follow");
+  //   }
+  
+  
+
 
   // This method will map out the records on the table.
   // Records.map means for each item in 'records' do something.
@@ -97,13 +111,14 @@ useEffect(() => {setUser(getUserInfo())}, [])
   // This is what RecordList returns: a rendering.  Notice that recordList() is
   // doing a lot of work.
 
+  
+
 
   return (
     <div>
-    <button onClick={(e) => unfollowUser()}>Unfollow</button>
-    <button onClick={(e) => followUser()}>Follow</button>
-    <button onClick={(e) => isFollowing()}>Is following?</button>
-    { isBroken ? <button onClick={(e) => unfollowUser()}>Unfollow</button> : <button onClick={(e) => followUser()}>Follow</button> }
+    {followState.find(x => (x === user.username)) ?             
+      <Button variant="outline-danger" size="lg" onClick={(e) => unfollowUser()}>Unfollow</Button>:
+      <Button variant="primary" size="lg" onClick={(e) => followUser()}>Follow</Button>}
     </div>
   );
 }

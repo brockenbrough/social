@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
 // The ContributorList component.  This is the main component in this file.
 export default function FollowingList() {
@@ -11,6 +12,7 @@ export default function FollowingList() {
   const [user, setUser] = useState()
   const [followings, setFollowing] = useState([]);
   const params = useParams();
+  const [error, setError] = useState({});
 
 
   // Hook useState - we are saying: call our state 'records' and use 'setRecords' to change it's value.
@@ -30,9 +32,14 @@ export default function FollowingList() {
         return;
       }
 
+      try{
+
       const fetchedFollowing = await response.json();
 
       setFollowing(fetchedFollowing[0].following);  // update state.  when state changes, we automatically re-render.
+      }catch(error){
+        setError(error)
+      }
 
     }
 
@@ -64,7 +71,7 @@ export default function FollowingList() {
   const Following = ({ record, user, deletePerson }) => (
     <tr>
       <td><a href="/publicprofile">{record}</a></td>
-      {user.username == params.id.toString() ? <td><button className="btn btn-link" onClick={() => { deletePerson(record); }}>Unfollow</button></td> : <p></p>}  
+      {user.username == params.id.toString() ? <td><Button size="sm" variant="outline-danger" onClick={() => { deletePerson(record); }}>Unfollow</Button></td> : <p></p>}  
     </tr>
   );
 
@@ -82,6 +89,12 @@ export default function FollowingList() {
       });
     }
 
+    function errorMessage() {
+   
+      return (
+        <h6 style = {{color: 'red'}}>Error Occurred! User could exist, but not in the Following's Collection yet. GO FOLLOW SOME PEOPLE!</h6>);
+      }
+
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
   // This following section will display the table with the records of individuals.
@@ -91,6 +104,7 @@ export default function FollowingList() {
 
   return (
     <div>
+      {error.message ? errorMessage() : <p></p>}
       <h3>Following</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
