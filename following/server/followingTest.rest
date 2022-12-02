@@ -1,4 +1,4 @@
-
+###
 GET http://localhost:8085/following
 Content-Type: application/json
 
@@ -16,30 +16,18 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8085/followers/deleteFollower
-Content-Type: application/json 
-
-{
-    "userId" : "John",
-    "targetUserId" : "Larry"
-}
-
-###
-DELETE http://localhost:8085/followers/unfollowUser
+POST http://localhost:8085/followers/unfollow
 Content-Type: application/json 
 
 {
     "userId" : "John",
     "targetUserId" : "Jerry"
 }
-###
 
+###
 GET http://localhost:8085/followers/Bryan
 Accept: application/json 
 
 ###
-
 GET http://localhost:8085/following/Jackson
 Accept: application/json 
-
-###

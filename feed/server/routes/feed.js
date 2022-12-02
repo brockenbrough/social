@@ -6,53 +6,45 @@ const router = express.Router();
 //Gets posts from post service API
 async function getPosts() {
   const response = await axios.get("http://localhost:8083/posts/getAllPosts");
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 }
 
 //Gets likes from statistics service API
 async function getLikes() {
-  const response = await axios.get("http://localhost:8087/statistics/like-list");
+  const response = await axios.get(
+    "http://localhost:8087/statistics/like-list"
+  );
+  // console.log(response.data);
   return response.data;
 }
 
 //Gets views from statistics service API
 async function getViews() {
   const response = await axios.get("http://localhost:8087/statistics/views");
+  // console.log(response.data);
   return response.data;
 }
 
 //gets a list of the users that are followed from the logged in user
 async function getFollowing(userId) {
   const response = await axios.get(`http://localhost:8085/following/${userId}`);
+  // console.log(response.data);
   return response.data;
 }
 
 async function getAllUserIds() {
   const response = await axios.get(`http://localhost:8081/user/getAll`);
-  ids = [];
-  for (i=0;i<response.data.length;i++) {
-    ids[i] = response.data[i].username
-  }
-  return ids
+  // console.log(response.data);
+  return response.data;
 }
 
-//get posts from a specific user
-async function getUsersPosts(userName) {
-  const response = await getFollowing(userName);
-  const followingList = response[0].following;
-  let finalArr = [];
-
-  for (i = 0; i < followingList.length; i++) {
-    await axios
-      .get(`http://localhost:8083/posts/getAllByUsername/${followingList[i]}`)
-      .then((e) => finalArr.push(e.data))
-      .catch((e) =>
-        console.log(`something went wrong with this user - ${followingList[i]}`)
-      );
-  }
-
-  return finalArr;
+async function getAllPostsByUserId(userId) {
+  const response = await axios.get(
+    `http://localhost:8083/posts/getAllByUsername/${userId}`
+  );
+  // console.log(response.data);
+  return response.data;
 }
 
 //Feed sorting algorithm
@@ -159,36 +151,51 @@ router
 //returns sorted feed for the loged in user
 router.route("/feed/:userId").get(async function (req, res) {
   //shows the feed
-  const userId = req.params.userId
+  const userId = req.params.userId;
   const allUserId = await getAllUserIds();
-  if (!allUserId.includes(userId)) {
-    return res
-      .status(400)
-      .send(
-        "Error: invalid user ID"
-      );
+  const following = await getFollowing(userId);
+
+  let postIDs = [];
+  let userIdList = [];
+  let followingUsersPosts = [];
+
+  for (i = 0; i < allUserId.length; i++) {
+    userIdList[i] = allUserId[i].username;
   }
 
-  const followingUsersPosts = await getUsersPosts(userId);
-  if (followingUsersPosts != null) {
-    var postIDs = [];
-    for (i = 0; i < followingUsersPosts.length; i++) {
-      postIDs[i] = followingUsersPosts[i]._id;
-    }
+  if (!userIdList.includes(userId)) {
+    return res.status(400).send("Error: invalid user ID");
+  }
+
+  if (following[0] == null) {
+    return res
+      .status(400)
+      .send("Error: User ID was found but does not exist in following API");
+  }
+
+  const followingList = following[0].following;
+  
+  for (i = 0; i < followingList.length; i++) {
+    userPosts = await getAllPostsByUserId(followingList[i]);
+    followingUsersPosts.push(userPosts);
+  }
+
+
+    followingUsersPosts.map(e => {
+      e.map(e => {
+        postIDs.push(e._id);
+      })
+    })
+  
     const sortedPosts = await sortPosts(postIDs);
+
     let obj = {
       feed: sortedPosts,
     };
+
     res.json(obj);
   }
-});
-
-//TEST CODE DELETE LATER
-//getViews().then((e) => console.log(e))
-const userName = "Viky11";
-getUsersPosts(userName).then((e) => console.log(e));
-getAllUserIds().then((e) => console.log(e))
-// getFollowing(userName).then((e) => console.log(e))
+);
 
 //(DO NOT delete this one)
 module.exports = router;
