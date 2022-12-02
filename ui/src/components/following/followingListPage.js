@@ -5,7 +5,7 @@ import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 
-// The ContributorList component.  This is the main component in this file.
+// The FollowingList component.  This is the main component in this file.
 export default function FollowingList() {
 
 
@@ -14,14 +14,8 @@ export default function FollowingList() {
   const params = useParams();
   const [error, setError] = useState({});
 
-
-  // Hook useState - we are saying: call our state 'records' and use 'setRecords' to change it's value.
-
-  // This method fetches the records from the database.
-  // Hook useEffect - this hook is used to invoke something after rendering.
   useEffect(() => {
-    // Define a function to get records. We are going to call it below.
-    // We use async keyword so we can later say "await" to block on finish.
+    // Define a function to get the user's following. People that they follow.
     async function getFollowing() {
 
       const response = await fetch(`http://localhost:8085/following/${params.id.toString()}`);
@@ -43,13 +37,13 @@ export default function FollowingList() {
 
     }
 
-    getFollowing();   // Now that we defined it, call the function. 
+    getFollowing();   
     setUser(getUserInfo())
 
     return;
   }, [followings.length]);  // If record length ever changes, this useEffect() is automatically called.
 
-  // A method to delete a contributor
+  // A method to unfollow a user from the following list.
   async function deleteFollowing(userId, targetUserId) {
     const deleteFollowing = {
       userId: userId,
@@ -61,9 +55,7 @@ export default function FollowingList() {
     data: deleteFollowing,
   });
       
-    
-    // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowing = followings.filter((el) => el !== el);
+    const newFollowing = followings.filter((el) => el !== el); // This causes a re-render because we change state.
     setFollowing(newFollowing);  // This causes a re-render because we change state.
   }
 
@@ -76,10 +68,6 @@ export default function FollowingList() {
   );
 
   // This method will map out the records on the table.
-  // Records.map means for each item in 'records' do something.
-  // In our case we're return a presentation tag that will invoke rendering on a record.
-  // We are returning component tags for records. See use in rendering below.
-  // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
   function followingList() {
     console.log(user)
     console.log(params.id.toString())
@@ -97,10 +85,7 @@ export default function FollowingList() {
 
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
-  // This following section will display the table with the records of individuals.
-  // This is what RecordList returns: a rendering.  Notice that recordList() is
-  // doing a lot of work.
-
+  // This following section will display the table with the user's following. People that they are following.
 
   return (
     <div>
