@@ -20,7 +20,7 @@ import Button from 'react-bootstrap/Button';
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(post);
-        axios.post('http://localhost:8083/posts', post)
+        axios.post('http://localhost:8083/posts/createPost', post)
         .then(res => {
             console.log(res);
             console.log(res.data);

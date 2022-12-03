@@ -28,7 +28,7 @@ const updatePost = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(state);
-        axios.put('http://localhost:8083/posts', state)
+        axios.put('http://localhost:8083/posts//updatePost/:postId', state)
         .then(res => {
             console.log(res);
             console.log(res.data);

@@ -6,7 +6,7 @@ const getAllPost = () => {
  const [posts, setPosts] = useState([])
 
  const fetchPosts = () => {
-    axios.get('http://localhost:8083/posts')
+    axios.get('http://localhost:8083/posts/getAllPosts')
     .then(res => {
         console.log(res);
         setPosts(res.data)
