@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 const updatePost = (props) => {
     const [state, setState] = useState({
         username: '',
-        content: ''
+        content: '',
+        date: ''
 
     })
     const {username, content} = state;
@@ -12,7 +13,7 @@ const updatePost = (props) => {
         axios.get(`http://localhost:8083/posts/${props.match.params.id}`)
         .then(res => {
             const post = res.data;
-            setState({...state, username: post.username, content: post.content})
+            setState({...state, username: post.username, content: post.content, date: post.date})
         })
         .catch(err => {
             console.log(err);
@@ -31,7 +32,7 @@ const updatePost = (props) => {
         .then(res => {
             console.log(res);
             console.log(res.data);
-            setState({...state, content:'', username:''})
+            setState({...state, content:'', username:'', date:''})
         })
         .catch(err => {
             console.log(err);
@@ -72,8 +73,9 @@ const updatePost = (props) => {
     }
 
   return (
-     // need to call navbar below div
+     
     <div className="container pb-5">
+        <DefaultLayout />
     <h1>UPDATE POST</h1>
     {showUpdateForm()}
 </div>

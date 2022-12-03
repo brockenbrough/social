@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-
+import DefaultLayout from './defaultLayout'
 const getAllPost = () => {
 
 
@@ -47,7 +47,7 @@ const showAllPosts = () => {
                     <div className="card-body">
                         <h5 className="card-title">{post.username}</h5>
                         <p className="card-text">{post.content}</p>
-                        <Link to={`/post/${post._id}`} className="btn btn-raised btn-primary btn-sm">Read more</Link>
+                        <Link to={`/post/${post._id}`} className="btn btn-raised btn-primary btn-sm">Post</Link>
                         <Button
                             onClick={() => deleteConfirm(post.Id)}
                             className="btn btn-danger ml-1"
@@ -66,7 +66,8 @@ const showAllPosts = () => {
     
   return (
     <div className="container">
-        <h2 className="mt-5 mb-5">Recent Posts</h2>
+        <DefaultLayout />
+        <h2 className="mt-5 mb-5">All Posts</h2>
         <div className="row">
             {showAllPosts()}
         </div>

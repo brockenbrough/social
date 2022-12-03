@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import DefaultLayout from './defaultLayout';
 import Button from 'react-bootstrap/Button';
 
 
-  const createPost = ({username, content}) => {
+  const createPost = ({username, content, date}) => {
     const [post, setPost] = useState({
         username: username,
-        content: content
+        content: content,
+        date: date
     });
  // destructure values from state
-    const {content, username } = post;
+    const {content, username, date } = post;
 
     const  handleChange = name => {
         setPost({...post, [name]: value});
@@ -23,7 +24,7 @@ import Button from 'react-bootstrap/Button';
         .then(res => {
             console.log(res);
             console.log(res.data);
-            setPost({...post, content:'', username:''})
+            setPost({...post, content:'', username:'', date:''})
         })
         .catch(err => {
             console.log(err);
@@ -36,7 +37,7 @@ import Button from 'react-bootstrap/Button';
 
     return(
         <div className="container pb-5">
-   
+          <DefaultLayout />
         <br />
         <h1>CREATE POST</h1>
         <br />
