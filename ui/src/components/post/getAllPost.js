@@ -1,80 +1,50 @@
-import React, { useEffect } from 'react'
-import DefaultLayout from './defaultLayout'
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+//import Navbar from '../../components/navbar';
+
 const getAllPost = () => {
 
 
  const [posts, setPosts] = useState([])
 
- const fetchPosts = () => {
-    axios.get('http://localhost:8083/posts/getAllPosts')
-    .then(res => {
-        console.log(res);
-        setPosts(res.data)
-    })
-    .catch(err => {
-        console.log(err);
-    })
-    }
     useEffect(() => {
-        fetchPosts()
-    },[])
-
-  
-
-
-    const deletePost = (postId) => {
-        axios.delete(`http://localhost:8083/posts/${postId}`)
+        axios.get('http://localhost:8083/posts/getAllPost')
         .then(res => {
-            console.log(res);
-            fetchPosts()
+            console.log(res.data);
+            setPosts(res.data);
         })
         .catch(err => {
             console.log(err);
         })
-    }
-    
-const deleteConfirm = (postId) => {
-    let answer = window.confirm('Are you sure you want to delete your post?')
-    if(answer){
-        deletePost(postId)
-    }
-}
-const showAllPosts = () => {
-    return posts.map((post, i) => {
-        return(
-            <div className="col-md-4" key={i}>
-                <div className="card mb-5">
-                    <div className="card-body">
-                        <h5 className="card-title">{post.username}</h5>
-                        <p className="card-text">{post.content}</p>
-                        <Link to={`/post/${post._id}`} className="btn btn-raised btn-primary btn-sm">Post</Link>
-                        <Button
-                            onClick={() => deleteConfirm(post.Id)}
-                            className="btn btn-danger ml-1"
-                            style={{ marginTop: '1cm' }}
-                        >
-                            Delete
-                        </Button>
+    }, [])
+
+    return (
+        <div className="container">
+            <h1>Posts</h1>
+            <div className="row">
+                {posts.map(post => (
+                    <div className="col-md-4" key={post._id}>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
+                                <Card.Title>{post.username}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">{post.date}</Card.Subtitle>
+                                <Card.Text>
+                                    {post.content}
+                                </Card.Text>
+                                <Card.Img variant="top" src={post.postImage} />
+                                <Link to={`/posts/${post._id}`} className="btn btn-primary">View Post</Link>
+                            </Card.Body>
+                        </Card>
                     </div>
-                </div>
+                ))}
             </div>
-        )
-    })
-}
-
-
-    
-  return (
-    <div className="container">
-        <DefaultLayout />
-        <h2 className="mt-5 mb-5">All Posts</h2>
-        <div className="row">
-            {showAllPosts()}
         </div>
-    </div>
     )
-  }
-
+}
 
 
 export default getAllPost
