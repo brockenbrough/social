@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-
-
+import React, { useState } from 'react';
+import Button from "react-bootstrap/Button";
   const createPost = () => {
     const [state, setState] = useState({
         content:'',
-        username:''
+        username:'',
+        postImage:'',
+        date:''
+
   });
-    const { content, username } = state; 
+    const { content, username,postImage} = state; 
     const onChange = e => {
         setState({ ...state, [e.target.name]: e.target.value });
     };
@@ -20,7 +21,10 @@ import Button from 'react-bootstrap/Button';
             setState({
                 ...state,
                 content:'',
-                username:''
+                username:'',
+                postImage:'',
+                date:''
+
             })
         })
         .catch(err => {
@@ -44,6 +48,18 @@ import Button from 'react-bootstrap/Button';
                     />
                 </div>
                 <div className="form-group">
+                    <label className="text-muted">Image</label>
+                    <input
+                        onChange={onChange}
+                        value={postImage}
+                        type="file"
+                        name="postImage"
+                        className="form-control"
+                        placeholder="Write something..."
+                        required
+                    />
+                </div>
+                <div className="form-group">
                     <label className="text-muted">Username</label>
                     <input
                         onChange={onChange}
@@ -56,7 +72,7 @@ import Button from 'react-bootstrap/Button';
                     />
                 </div>
                 <div>
-                    <Button variant="primary" type="submit">
+                    <Button  style={{marginTop:'1cm'}} variant="primary" type="submit">
                         Create Post
                     </Button>
                 </div>
