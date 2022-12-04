@@ -75,7 +75,7 @@ const updatePost = (props) => {
   return (
      
     <div className="container pb-5">
-        <DefaultLayout />
+       
     <h1>UPDATE POST</h1>
     {showUpdateForm()}
 </div>
