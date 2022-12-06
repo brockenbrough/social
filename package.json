@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/brockenbrough/social/issues"
   },
-  "homepage": "https://github.com/brockenbrough/social#readme"
+  "homepage": "https://github.com/brockenbrough/social#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
