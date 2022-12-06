@@ -9,7 +9,7 @@ const createPost = () => {
         content: '',
         username: '',
         postImage: '',
-        date: ''
+     
     })
     const navigate = useNavigate();
 
@@ -28,72 +28,32 @@ const createPost = () => {
             content,
             username,
             postImage,
-            date
+            
         }
         await axios.post('posts/createPost', post)
         navigate('/')
     }
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 mt-5 mx-auto">
-                    <form noValidate onSubmit={handleSubmit}>
-                        <h1 className="h3 mb-3 font-weight-normal">Create Post</h1>
-                        <div className="form-group">
-                            <label htmlFor="content">Content</label>
-                            <input type="text"
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
 
-                                className="form-control"
-                                name="content"
-                                placeholder="Enter Content"
-                                value={state.content}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="username">Username</label>
-                            <input type="text"
+                <Form.Control type="text" placeholder="Enter username" value={state.username} onChange={handleChange} name="username" style={{ height: '2cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+            </Form.Group>
 
-                                className="form-control"
-                                name="username"
-                                placeholder="Enter Username"
-                                value={state.username}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="postImage">Post Image</label>
-                            <input type="text"
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control type="file" placeholder="Enter postImage" value={state.postImage} onChange={handleChange} name="postImage" style={{ height: '2cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+            </Form.Group>
 
-                                className="form-control"
-                                name="postImage"
-                                placeholder="Enter Post Image"
-                                value={state.postImage}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="date">Date</label>
-                            <input type="text"
+            <span className="badge">{new Date(post.createdAt).toLocaleString()}</span>
 
-                                className="form-control"
-                                name="date"
-                                placeholder="Enter Date"
-                                value={state.date}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="btn btn-lg btn-primary btn-block"
-                        >
-                            Create Post
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control type="text" placeholder="Content" name="content" value={state.content} onChange={handleChange} s style={{ height: '3cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+            </Form.Group>
+            <Button style={{ width: '4cm', marginRight: '25cm', marginTop: '2cm' }} variant="primary" type="submit">
+                Post
+            </Button>
+        </Form>
 
     )
 

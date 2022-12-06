@@ -4,45 +4,59 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-//import Navbar from '../../components/navbar';
+
 
 const getAllPost = () => {
 
 
- const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([])
+
+    const fetchPosts = async () => {
+        const res = await axios.get('posts/getAllPost')
+            .then(res => {
+                setPosts(res.data)
+            })
+            .catch(error => alert('error fetching data'))
+    }
 
     useEffect(() => {
-        axios.get('http://localhost:8083/posts/getAllPost')
-        .then(res => {
-            console.log(res.data);
-            setPosts(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        fetchPosts()
     }, [])
 
+    const deleteConfirm = posts => {
+        let answer = window.confirm('Are you sure you want to delete your post?')
+        if (answer) {
+            deletePost(posts)
+        }
+    }
+
+    const deletePost = async (posts) => {
+        axios.delete(`posts/deletePost/${posts._id}`)
+            .then(response => {
+                alert('Post deleted successfully')
+                fetchPosts()
+            })
+            .catch(error => alert('Error deleting post'))
+    }
+
     return (
-        <div className="container">
-            <h1>Posts</h1>
-            <div className="row">
-                {posts.map(post => (
-                    <div className="col-md-4" key={post._id}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title>{post.username}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{post.date}</Card.Subtitle>
-                                <Card.Text>
-                                    {post.content}
-                                </Card.Text>
-                                <Card.Img variant="top" src={post.postImage} />
-                                <Link to={`/posts/${post._id}`} className="btn btn-primary">View Post</Link>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                ))}
+        <div>
+        <h1>All Posts</h1>
+        {posts.map((posts, index) => (
+            <div key={index}>
+                <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'21cm'}}>
+                    <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card.Body>
+                        <Card.Title>{posts.postImage}</Card.Title>
+                        <Card.Title><h5>Username:</h5>{posts.username}</Card.Title>
+                        <Card.Text><h3>Content:</h3>{posts.content}</Card.Text>
+                        <Link style={{ marginRight: '1cm' }} to={`/updatepost/${posts._id}`}><Button variant="primary">Update</Button></Link>
+                        <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
+                    </Card.Body>
+                </Card>
             </div>
-        </div>
+        ))}
+    </div>
     )
 }
 
