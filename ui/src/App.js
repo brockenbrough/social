@@ -21,7 +21,7 @@ import PrivateUserProfile from "./components/users/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
-import FollowButtonTest from "./components/following/followButtonTest";
+import FollowCompsTestPage from "./components/following/followCompsTestPage";
 import FeedPage from "./components/post/feedPage";
 import CommentList from "./components/comments/commentListPage";
 import EditComment from "./components/comments/editComment";
@@ -70,7 +70,7 @@ const App = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/followers/:id" element={<FollowerList />} />
         <Route path="/following/:id" element={<FollowingList />} />
-        <Route path="/followButton/:id" element={<FollowButtonTest />} />
+        <Route path="/followCompsTestPage/:id" element={<FollowCompsTestPage />} />
       </Routes>
       </UserContext.Provider>
     </>
