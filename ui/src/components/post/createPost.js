@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import Button from "react-bootstrap/Button";
+
 import { Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ const createPost = () => {
         content: '',
         username: '',
         postImage: '',
-     
+
     })
     const navigate = useNavigate();
 
@@ -23,14 +23,14 @@ const createPost = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const { content, username, postImage, date } = state
+        const { content, username, postImage, } = state
         const post = {
             content,
             username,
             postImage,
-            
+
         }
-        await axios.post('posts/createPost', post)
+        await axios.post('/posts/createPost', post)
         navigate('/')
     }
 
@@ -42,15 +42,13 @@ const createPost = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control type="file" placeholder="Enter postImage" value={state.postImage} onChange={handleChange} name="postImage" style={{ height: '2cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+                <Form.Control type="file" placeholder="Enter postImage" value={state.postImage} onChange={handleChange} name="postImage" style={{ height: '1cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
             </Form.Group>
-
-            <span className="badge">{new Date(post.createdAt).toLocaleString()}</span>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control type="text" placeholder="Content" name="content" value={state.content} onChange={handleChange} s style={{ height: '3cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
             </Form.Group>
-            <Button style={{ width: '4cm', marginRight: '25cm', marginTop: '2cm' }} variant="primary" type="submit">
+            <Button style={{ width: '4cm', marginLeft: '10cm', marginTop: '2cm' }} variant="primary" type="submit">
                 Post
             </Button>
         </Form>
@@ -58,9 +56,5 @@ const createPost = () => {
     )
 
 }
-
-
-
-
 
 export default createPost;
