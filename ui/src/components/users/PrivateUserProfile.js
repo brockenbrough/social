@@ -13,6 +13,7 @@ import Modal from 'react-bootstrap/Modal';
 //link to service 
 //http://localhost:8096/privateUserProfile
 
+
 const PrivateUserProfile = () =>{
 	const [show, setShow] = useState(false);
   	const handleClose = () => setShow(false);
