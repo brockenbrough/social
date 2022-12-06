@@ -97,7 +97,7 @@ export default function EditComment() {
                 placeholder="Enter comment"
                 id="comment"
                 value={form.comment}
-                onChange={(e) => updateForm({ comment: e.target.value })}
+                onChange={(e) => updateForm({ commentContent: e.target.value })}
               />
             </Form.Group>
 
