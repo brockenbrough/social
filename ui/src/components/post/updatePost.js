@@ -4,10 +4,47 @@ const updatePost = (props) => {
     const [state, setState] = useState({
         username: '',
         content: '',
+<<<<<<< HEAD
+      
+
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setState({
+            ...state,
+            [name]: value
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const { content, username } = state
+        const post = {
+            content,
+            username
+        }
+        await axios.put(`http://localhost:8083/posts/updatePost/${props.match.params.id}`, post)
+            .then(
+                res => {
+                    console.log(res.data);
+                    const { content, username } = res.data;
+                    // empty state
+                    setState({ ...state, content, username });
+                    // show sucess alert
+                    alert(`Post content ${content} is updated`);
+                })
+            .catch(error => {
+                console.log(error.response);
+                alert(error.res.data.error);
+            });
+    }
+=======
         date: ''
 
     })
     const {username, content} = state;
+>>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
 
     useEffect(() => {
         axios.get(`http://localhost:8083/posts/${props.match.params.id}`)

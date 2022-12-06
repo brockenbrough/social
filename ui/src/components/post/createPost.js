@@ -4,6 +4,13 @@ import DefaultLayout from './defaultLayout';
 import Button from 'react-bootstrap/Button';
 
 
+<<<<<<< HEAD
+const createPost = () => {
+    const [state, setState] = useState({
+        content: '',
+        username: '',
+     
+=======
   const createPost = ({username, content, date}) => {
     const [post, setPost] = useState({
         username: username,
@@ -12,6 +19,7 @@ import Button from 'react-bootstrap/Button';
     });
  // destructure values from state
     const {content, username, date } = post;
+>>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
 
     const  handleChange = name => {
         setPost({...post, [name]: value});
@@ -26,21 +34,40 @@ import Button from 'react-bootstrap/Button';
             console.log(res.data);
             setPost({...post, content:'', username:'', date:''})
         })
+<<<<<<< HEAD
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const { content, username,  } = state
+        const post = {
+            content,
+            username,
+        
+
+        }
+        await axios.post('http://localhost:8083/posts/createPost', post)
+        navigate('/')
+=======
         .catch(err => {
             console.log(err);
             alert(err.res.data.error)
         }
         )
+>>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
     }
 
 
 
+<<<<<<< HEAD
+=======
     return(
         <div className="container pb-5">
           <DefaultLayout />
         <br />
         <h1>CREATE POST</h1>
         <br />
+>>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
 
         <form onSubmit={handleSubmit}>
 
