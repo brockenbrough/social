@@ -26,7 +26,7 @@ import FeedPage from "./components/post/feedPage";
 import CommentList from "./components/comments/commentListPage";
 import EditComment from "./components/comments/editComment";
 import CreateComments from "./components/comments/createComment";
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import PrivateUserLikeList from "./components/privateUserLikeList/PrivateUserLikeListPage";
 import getUserInfo from "./utilities/decodeJwt";
 
