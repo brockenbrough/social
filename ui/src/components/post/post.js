@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-  const Post = ({username, content,date}) => {
+  const Post = ({posts, isLiked}) => {
     return(
        <div className='d-inline-flex p-2'>
             <Card style={{ width: '18rem' }}>
                 <Card.Body>
-                    <Card.Title>{username}</Card.Title>
+                    <Card.Title>{posts.username}</Card.Title>
                     <Card.Text>
-                        {content}
+                        {posts.content}
                     </Card.Text>
                     <div class = "text-center">
-                        <Button variant="outline-danger">Like</Button> 
+                         {isLiked ? <Button variant="danger">Unlike</Button> 
+                         : <Button variant="outline-danger">Like</Button> }
                     </div>
+                
                 </Card.Body>
             </Card>
         </div>

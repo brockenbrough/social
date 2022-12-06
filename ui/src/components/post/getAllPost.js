@@ -69,9 +69,11 @@ const getAllPost = () => {
 
   return (
     <div className="container">
-      <DefaultLayout />
-      <h2 className="mt-5 mb-5">All Posts</h2>
-      <div className="row">{showAllPosts()}</div>
+        <DefaultLayout />
+        <h2 className="mt-5 mb-5">All Posts</h2>
+        <div className="row">
+            {showAllPosts()}
+        </div>
     </div>
   );
 };

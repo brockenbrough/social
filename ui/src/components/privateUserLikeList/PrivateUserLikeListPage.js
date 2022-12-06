@@ -16,7 +16,7 @@ const PrivateUserLikeListPage = () => {
     useEffect(() => {
         const fetchLikes = async () => {
             try {
-                
+                console.log(user)
                 await api.get(`/${user.id}`).then(e => {
                     /**
                      * Iterates through the array of objects
@@ -31,19 +31,20 @@ const PrivateUserLikeListPage = () => {
                 })
 
             } catch (error) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
+                /**
+                 * This breaks the code
+                 */
+                // console.log(error.response.data);
+                // console.log(error.response.status);
+                // console.log(error.response.headers);
             }
         }
         fetchLikes()
-    }, [])
-    console.log(user)
+    }, [user])
     return (
         <div>
-            <h2>{user.username}'s liked posts:</h2>
             {post.map(e => {
-               return <Post username ={e.username} content={e.content} date={e.date}/>
+               return <Post posts = {e} isLiked={"true"}/>
             })}
         </div>
     )
