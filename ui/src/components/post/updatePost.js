@@ -4,50 +4,13 @@ const updatePost = (props) => {
     const [state, setState] = useState({
         username: '',
         content: '',
-<<<<<<< HEAD
       
 
     })
-
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setState({
-            ...state,
-            [name]: value
-        })
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const { content, username } = state
-        const post = {
-            content,
-            username
-        }
-        await axios.put(`http://localhost:8083/posts/updatePost/${props.match.params.id}`, post)
-            .then(
-                res => {
-                    console.log(res.data);
-                    const { content, username } = res.data;
-                    // empty state
-                    setState({ ...state, content, username });
-                    // show sucess alert
-                    alert(`Post content ${content} is updated`);
-                })
-            .catch(error => {
-                console.log(error.response);
-                alert(error.res.data.error);
-            });
-    }
-=======
-        date: ''
-
-    })
     const {username, content} = state;
->>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
 
     useEffect(() => {
-        axios.get(`http://localhost:8083/posts/${props.match.params.id}`)
+        axios.get(`http://localhost:8083/posts/getPostById/${props.match.params.post_Id}`)
         .then(res => {
             const post = res.data;
             setState({...state, username: post.username, content: post.content, date: post.date})
@@ -65,7 +28,7 @@ const updatePost = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(state);
-        axios.put('http://localhost:8083/posts//updatePost/:postId', state)
+        axios.put('http://localhost:8083/posts/updatePost/:postId', state)
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -79,40 +42,26 @@ const updatePost = (props) => {
     }
     const showUpdateForm =()=>{
         return(
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label className="text-muted">Content</label>
-                    <textarea
-                        onChange={handleChange('content')}
-                        value={content}
-                        type="text"
-                        className="form-control"
-                        placeholder="Write something.."
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label className="text-muted">Username</label>
-                    <input
-                        onChange={handleChange('username')}
-                        value={username}
-                        type="text"
-                        className="form-control"
-                        placeholder="Your username"
-                        required
-                    />
-                </div>
-                <div>
-                    <button className="btn btn-primary">Update</button>
-                </div>
-            </form>
+            <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+
+                <Form.Control type="text" placeholder="Enter username" value={state.username} onChange={handleChange} name="username" style={{ height: '2cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control type="text" placeholder="Content" name="content" value={state.content} onChange={handleChange} s style={{ height: '3cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+            </Form.Group>
+        
+            <Button style={{ width: '4cm', marginLeft: '10cm', marginTop: '2cm' }} variant="primary" type="submit">
+                Update
+            </Button>
+        </Form>
+
         )
     }
-
   return (
      
     <div className="container pb-5">
-        <DefaultLayout />
     <h1>UPDATE POST</h1>
     {showUpdateForm()}
 </div>
