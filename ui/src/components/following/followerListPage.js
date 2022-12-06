@@ -2,24 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
 
-// The ContributorList component.  This is the main component in this file.
+// The FollowerList component.  This is the main component in this file.
 export default function FollowerList() {
 
 
   const [user, setUser] = useState({})
   const [followers, setFollowers] = useState([]);
   const params = useParams();
+  const [error, setError] = useState({});
   
-
-  // Hook useState - we are saying: call our state 'records' and use 'setRecords' to change it's value.
-  
-  // This method fetches the records from the database.
-  // Hook useEffect - this hook is used to invoke something after rendering.
+  // This method fetches the user's followers from the database.
   useEffect(() => {
-    // Define a function to get records. We are going to call it below.
-    // We use async keyword so we can later say "await" to block on finish.
     async function getFollowers() {
         
       const response = await fetch(`http://localhost:8085/followers/${params.id.toString()}`);
@@ -30,19 +26,23 @@ export default function FollowerList() {
         return;
       }
       
+      try{
       const fetchedFollowers = await response.json();
 
       setFollowers(fetchedFollowers[0].followers);  // update state.  when state changes, we automatically re-render.
+      }catch(error){
+        setError(error)
+      }
       
     }
     
-    getFollowers();   // Now that we defined it, call the function. 
+    getFollowers();   
     setUser(getUserInfo())
     
     return; 
-  }, [followers.length]);  // If record length ever changes, this useEffect() is automatically called.
+  }, [followers.length]);  
   
-  // A method to delete a contributor
+  // A method to delete a follower.
   async function deleteFollower(userId, targetUserId) {
     const deleteFollower = {
         userId: userId,
@@ -54,40 +54,37 @@ export default function FollowerList() {
         data: deleteFollower,
       })
       
-    
-    // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowers = followers.filter((el) => el !== el);
+    const newFollowers = followers.filter((el) => el !== el); // This causes a re-render because we change state. Helps cause a re-render.
     setFollowers(newFollowers);  // This causes a re-render because we change state.
   }
 
   const Follower = ({record, user, deletePerson}) => (
     <tr>
-      <td><a href="/publicprofile">{record}</a></td>
-      {user.username == params.id.toString() ? <td><button className="btn btn-link" onClick={() => {deletePerson(record);}}>Delete</button></td> : <p></p>}
+      <td><a href="/privateUserProfile">{record}</a></td>
+      {user.username == params.id.toString() ? <td><Button variant="danger" size="sm"onClick={() => {deletePerson(record);}}>Delete</Button></td> : <p></p>}
     </tr>
   );
   
-  // This method will map out the records on the table.
-  // Records.map means for each item in 'records' do something.
-  // In our case we're return a presentation tag that will invoke rendering on a record.
-  // We are returning component tags for records. See use in rendering below.
-  // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
+
   function followerList() {
-    console.log(user)
-    console.log(params.id.toString())
     return followers.map((record) => {
       return (
         <Follower record={record} deletePerson={() => deleteFollower(record, params.id.toString())}key={record} user={user}/>);
     });
   }
 
+  function errorMessage() {
+   
+      return (
+        <h6 style = {{color: 'red'}}>Error Occurred! User could exist, but not in the Follower's Collection yet. GET SOME FOLLOWERS!</h6>);
+      }
+
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
-  // This following section will display the table with the records of individuals.
-  // This is what RecordList returns: a rendering.  Notice that recordList() is
-  // doing a lot of work.
+  // This following section will display the table with the records of individuals and all their followers.
   return (
     <div>
+      {error.message ? errorMessage() : <p></p>}
       <h3>Followers</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>

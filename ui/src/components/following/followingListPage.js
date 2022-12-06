@@ -3,23 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
-// The ContributorList component.  This is the main component in this file.
+// The FollowingList component.  This is the main component in this file.
 export default function FollowingList() {
 
 
   const [user, setUser] = useState()
   const [followings, setFollowing] = useState([]);
   const params = useParams();
+  const [error, setError] = useState({});
 
-
-  // Hook useState - we are saying: call our state 'records' and use 'setRecords' to change it's value.
-
-  // This method fetches the records from the database.
-  // Hook useEffect - this hook is used to invoke something after rendering.
   useEffect(() => {
-    // Define a function to get records. We are going to call it below.
-    // We use async keyword so we can later say "await" to block on finish.
+    // Define a function to get the user's following. People that they follow.
     async function getFollowing() {
 
       const response = await fetch(`http://localhost:8085/following/${params.id.toString()}`);
@@ -30,19 +26,24 @@ export default function FollowingList() {
         return;
       }
 
+      try{
+
       const fetchedFollowing = await response.json();
 
       setFollowing(fetchedFollowing[0].following);  // update state.  when state changes, we automatically re-render.
+      }catch(error){
+        setError(error)
+      }
 
     }
 
-    getFollowing();   // Now that we defined it, call the function. 
+    getFollowing();   
     setUser(getUserInfo())
 
     return;
   }, [followings.length]);  // If record length ever changes, this useEffect() is automatically called.
 
-  // A method to delete a contributor
+  // A method to unfollow a user from the following list.
   async function deleteFollowing(userId, targetUserId) {
     const deleteFollowing = {
       userId: userId,
@@ -54,25 +55,19 @@ export default function FollowingList() {
     data: deleteFollowing,
   });
       
-    
-    // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newFollowing = followings.filter((el) => el !== el);
+    const newFollowing = followings.filter((el) => el !== el); // This causes a re-render because we change state.
     setFollowing(newFollowing);  // This causes a re-render because we change state.
   }
 
 
   const Following = ({ record, user, deletePerson }) => (
     <tr>
-      <td><a href="/publicprofile">{record}</a></td>
-      {user.username == params.id.toString() ? <td><button className="btn btn-link" onClick={() => { deletePerson(record); }}>Unfollow</button></td> : <p></p>}  
+      <td><a href="/privateUserProfile">{record}</a></td>
+      {user.username == params.id.toString() ? <td><Button size="sm" variant="outline-danger" onClick={() => { deletePerson(record); }}>Unfollow</Button></td> : <p></p>}  
     </tr>
   );
 
   // This method will map out the records on the table.
-  // Records.map means for each item in 'records' do something.
-  // In our case we're return a presentation tag that will invoke rendering on a record.
-  // We are returning component tags for records. See use in rendering below.
-  // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
   function followingList() {
     console.log(user)
     console.log(params.id.toString())
@@ -82,15 +77,19 @@ export default function FollowingList() {
       });
     }
 
+    function errorMessage() {
+   
+      return (
+        <h6 style = {{color: 'red'}}>Error Occurred! User could exist, but not in the Following's Collection yet. GO FOLLOW SOME PEOPLE!</h6>);
+      }
+
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
-  // This following section will display the table with the records of individuals.
-  // This is what RecordList returns: a rendering.  Notice that recordList() is
-  // doing a lot of work.
-
+  // This following section will display the table with the user's following. People that they are following.
 
   return (
     <div>
+      {error.message ? errorMessage() : <p></p>}
       <h3>Following</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
