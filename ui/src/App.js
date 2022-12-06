@@ -65,7 +65,7 @@ const App = () => {
         <Route path="/feed" element={<FeedPage />} />
      
         <Route path="/comments/comment" element={<CommentList />} />
-        <Route path="/comments/editComments/:id" element={<EditComment />} />
+        <Route path="/comments/editComment/:id" element={<EditComment />} />
         <Route path="/comments/create" element={<CreateComments />} />
         <Route path="/test" element={<Test />} />
         <Route path="/followers/:id" element={<FollowerList />} />

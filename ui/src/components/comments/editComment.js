@@ -63,7 +63,7 @@ export default function EditComment() {
 
     // This will send a post request to update the data in the database.
     await fetch(
-      `http://localhost:8444/comments/comment/update/${params.id.toString()}`,
+      `http://localhost:8089/comments/comment/update/${params.id.toString()}`,
       {
         method: "PUT",
         body: JSON.stringify(editedComment),
