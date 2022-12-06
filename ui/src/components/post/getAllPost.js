@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import DefaultLayout from './defaultLayout'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 const getAllPost = () => {
 
 
  const [posts, setPosts] = useState([])
 
-<<<<<<< HEAD
-    const fetchPosts = async () => {
-        const res = await axios.get('http://localhost:8083/posts/getAllPosts')
-            .then(res => {
-                setPosts(res.data)
-            })
-            .catch(error => alert('error fetching data'))
-=======
  const fetchPosts = () => {
     axios.get('http://localhost:8083/posts/getAllPosts')
     .then(res => {
@@ -22,7 +17,6 @@ const getAllPost = () => {
     .catch(err => {
         console.log(err);
     })
->>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
     }
     useEffect(() => {
         fetchPosts()
@@ -32,7 +26,7 @@ const getAllPost = () => {
 
 
     const deletePost = (postId) => {
-        axios.delete(`http://localhost:8083/posts/${postId}`)
+        axios.delete(`http://localhost:8083/posts/deletePost/${postId}`)
         .then(res => {
             console.log(res);
             fetchPosts()
@@ -41,22 +35,11 @@ const getAllPost = () => {
             console.log(err);
         })
     }
-<<<<<<< HEAD
-
-    const deletePost = async (posts) => {
-        axios.delete(`http://localhost:8083/posts/deletePost/${posts._id}`)
-            .then(response => {
-                alert('Post deleted successfully')
-                fetchPosts()
-            })
-            .catch(error => alert('Error deleting post'))
-=======
     
 const deleteConfirm = (postId) => {
     let answer = window.confirm('Are you sure you want to delete your post?')
     if(answer){
         deletePost(postId)
->>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
     }
 }
 const showAllPosts = () => {
