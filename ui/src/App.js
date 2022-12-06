@@ -21,7 +21,7 @@ import PrivateUserProfile from "./components/users/PrivateUserProfile";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
-import FollowCompsTestPage from "./components/following/followComponentsTestPage";
+import FollowButtonTest from "./components/following/followButtonTest";
 import FeedPage from "./components/post/feedPage";
 import CommentList from "./components/comments/commentListPage";
 import EditComment from "./components/comments/editComment";
@@ -29,8 +29,6 @@ import CreateComments from "./components/comments/createComment";
 import { createContext, useState, useContext, useEffect } from "react";
 import PrivateUserLikeList from "./components/privateUserLikeList/PrivateUserLikeListPage";
 import getUserInfo from "./utilities/decodeJwt";
-import GetAllPost from "./components/post/getAllPost";
-import CreatePost from "./components/post/createPost";
 
 export const UserContext = createContext();
 //test change
@@ -72,9 +70,7 @@ const App = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/followers/:id" element={<FollowerList />} />
         <Route path="/following/:id" element={<FollowingList />} />
-        <Route path="/followCompsTestPage/:id" element={<FollowCompsTestPage />} />
-        <Route path="/allpost" element={<GetAllPost />} />
-        <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/followButton/:id" element={<FollowButtonTest />} />
       </Routes>
       </UserContext.Provider>
     </>

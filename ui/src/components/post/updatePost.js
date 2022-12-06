@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Layout from './Layout';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, { useState, useEffect } from 'react'
 
-const UpdatePost = props => {
+const updatePost = (props) => {
     const [state, setState] = useState({
         username: '',
         content: '',
+<<<<<<< HEAD
       
 
     })
@@ -42,54 +39,84 @@ const UpdatePost = props => {
                 alert(error.res.data.error);
             });
     }
+=======
+        date: ''
+
+    })
+    const {username, content} = state;
+>>>>>>> 44280400a98fc06c79d07bbd47315b59bd23b81b
 
     useEffect(() => {
-        const fetchPost = async () => {
-            const res = await axios.get(`posts/getPostById/${props.match.params.id}`)
-            const { content, username } = res.data
-            setState({ content, username })
+        axios.get(`http://localhost:8083/posts/${props.match.params.id}`)
+        .then(res => {
+            const post = res.data;
+            setState({...state, username: post.username, content: post.content, date: post.date})
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    },[])
+
+
+
+    const handleChange = name => event => {
+        setState({...state, [name]: event.target.value})
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(state);
+        axios.put('http://localhost:8083/posts//updatePost/:postId', state)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            setState({...state, content:'', username:'', date:''})
+        })
+        .catch(err => {
+            console.log(err);
+            alert(err.res.data.error)
         }
-        fetchPost()
-    }, [props.match.params.id])
+        )
+    }
+    const showUpdateForm =()=>{
+        return(
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label className="text-muted">Content</label>
+                    <textarea
+                        onChange={handleChange('content')}
+                        value={content}
+                        type="text"
+                        className="form-control"
+                        placeholder="Write something.."
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Username</label>
+                    <input
+                        onChange={handleChange('username')}
+                        value={username}
+                        type="text"
+                        className="form-control"
+                        placeholder="Your username"
+                        required
+                    />
+                </div>
+                <div>
+                    <button className="btn btn-primary">Update</button>
+                </div>
+            </form>
+        )
+    }
 
-    const showUpdateForm = () => (
-        <form onSubmit={handleSubmit}>
+  return (
+     
+    <div className="container pb-5">
+        <DefaultLayout />
+    <h1>UPDATE POST</h1>
+    {showUpdateForm()}
+</div>
+  )
+}
 
-            <div className="form-group">
-                <label className="text-muted">Content</label>
-                <textarea
-                    onChange={handleChange('content')}
-                    value={content}
-                    type="text"
-                    className="form-control"
-                    placeholder="Write something.."
-                    required
-                />
-            </div>
-            <div className="form-group">
-                <label className="text-muted">User</label>
-                <input
-                    onChange={handleChange('username')}
-                    value={user}
-                    type="text"
-                    className="form-control"
-                    placeholder="Your name"
-                    required
-                />
-            </div>
-            <div>
-                <button variant="primary">Update</button>
-            </div>
-        </form>
-    );
-    return (
-        <div className="container pb-5">
-            <Layout />
-            <br />
-            <h1>UPDATE POST</h1>
-            {showUpdateForm()}
-        </div>
-    );
-};
-
-export default UpdatePost;
+export default updatePost
