@@ -8,8 +8,7 @@ const UpdatePost = props => {
     const [state, setState] = useState({
         username: '',
         content: '',
-        postImage: '',
-        date: ''
+      
 
     })
 
@@ -28,7 +27,7 @@ const UpdatePost = props => {
             content,
             username
         }
-        await axios.put(`posts/updatePost/${props.match.params.id}`, post)
+        await axios.put(`http://localhost:8083/posts/updatePost/${props.match.params.id}`, post)
             .then(
                 res => {
                     console.log(res.data);
