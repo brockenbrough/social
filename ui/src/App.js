@@ -58,7 +58,7 @@ const App = () => {
           />
           <Route path="/publicProfilePage" element={<PublicProfilePage />} />
           <Route
-            path="/project-notes/contributors"
+            path="/user/publicprofilepage"
             element={<ContributorList />}
           />
           <Route
