@@ -7,8 +7,6 @@ import Button from 'react-bootstrap/Button';
 
 // The FollowerList component.  This is the main component in this file.
 export default function FollowerList() {
-
-
   const [user, setUser] = useState({})
   const [followers, setFollowers] = useState([]);
   const params = useParams();
