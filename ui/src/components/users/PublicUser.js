@@ -1,24 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Image } from "react-bootstrap";
+import {Row, Col} from 'react-bootstrap';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Stack from 'react-bootstrap/Stack';
+import Modal from 'react-bootstrap/Modal';
 
-const PublicUser = (user) => {
+const PublicUser = () => {
   const [user, setUser] = useState({})
 
-    return(
-      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
-        <Card.Body> 
-            <Stack> 
-              <div><h4>{user.name}</h4></div>
-              <div>{user.position}</div>
-              <div>
-                <Button variant="primary" className="mx-1 my-1" href={`/publicProfile/publicprofile/${user._id}`} >Edit</Button>
-              </div>
-            </Stack>
-        </Card.Body>
-      </Card>
+    return( 
+  
+    <Card.Header>Enoc</Card.Header>
+
+
     )
 };
 
