@@ -27,6 +27,7 @@ export default function Navbar() {
         <Nav.Link href="/privateUserProfile">Profile</Nav.Link>
         <Nav.Link href="/createpost">Create-Post</Nav.Link>
         <Nav.Link href="/getallpost">Post-List</Nav.Link>
+      
       </Nav>
     </Container>
   </ReactNavbar>

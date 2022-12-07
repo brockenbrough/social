@@ -68,7 +68,7 @@ const createPost = () => {
         variant="primary"
         type="submit"
       >
-        Post
+        Create Post
       </Button>
     </Form>
   );

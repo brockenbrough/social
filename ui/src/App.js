@@ -31,6 +31,8 @@ import PrivateUserLikeList from "./components/privateUserLikeList/PrivateUserLik
 import getUserInfo from "./utilities/decodeJwt";
 import CreatePost from "./components/post/createPost";
 import GetAllPost from "./components/post/getAllPost";
+import UpdatePost from "./components/post/updatePost";
+import SinglePost from "./components/post/singlePost";
 
 export const UserContext = createContext();
 //test change
@@ -81,6 +83,8 @@ const App = () => {
           />
           <Route path="/createpost" element={<CreatePost />} />
           <Route path="/getallpost" element={<GetAllPost />} />
+          <Route path="/updatepost/:postId" element={<UpdatePost />} />
+          <Route path="/singlepost/:postId" element={<SinglePost />} />
         </Routes>
       </UserContext.Provider>
     </>

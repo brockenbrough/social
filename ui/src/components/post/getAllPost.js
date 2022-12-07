@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import moment from "moment";
+
+
 
 const getAllPost = () => {
   
@@ -49,7 +52,8 @@ const getAllPost = () => {
                             <Card.Text><h3>Content:</h3>
                                 {posts.content}
                             </Card.Text>
-                            <Link style={{ marginRight: '1cm' }} to={`/updatepost/${posts._id}`}><Button variant="primary">Update</Button></Link>
+                            <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
+                            <Link style={{ marginRight: '1cm' }} to={`/updatePost/${posts._id}`}  className="btn btn-warning ">Update</Link>
                             <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
                         </Card.Body>
                     </Card>
