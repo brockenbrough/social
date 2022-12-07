@@ -3,11 +3,13 @@ const router = express.Router();
 const newPostModel = require('../models/postModel')
 
 router.put("/updatePost/:postId", async (req, res) => { 
-    const { postId } = req.params
+    const { postId } = req.params;
+    const { content, username } = req.body;
+    newPostModel.findByIdAndUpdate
+    (postId, { content, username } , { new: true }).exec((err,this.post))
+    if (err) console.log(err);
+    res.json(post);     
 
-    const updatePost = newPostModel.findByIdAndUpdate(req.params.postId, req.body)
-        .then(post => res.json({msg: 'Post sucessfully updated'}))
-        .catch(err =>res.status(400).json({ error: 'Unable to update the Database' }));
 })
   
 module.exports = router;
