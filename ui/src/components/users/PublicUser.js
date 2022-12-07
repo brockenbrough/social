@@ -19,13 +19,12 @@ const PublicUser = () => {
       <a href='#'>for some fun stuff click here</a></Link></h3></div>)
     const { id, email, username, password } = user
     return (
-        <>
-            <div>
-                <h2>
-                    Welcome
-                    <span className='username'> @{username}</span>
-                </h2>
-            </div>
+        <><div>
+           <h2>
+           Welcome
+           <span className='username'> @{username}</span>
+          </h2>
+          </div>
         </>
     )
 }

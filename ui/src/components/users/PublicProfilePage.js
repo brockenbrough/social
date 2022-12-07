@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams} from "react-router";
-import getUserInfo from '../../utilities/decodeJwt'
 import PublicUser from './PublicUser';
 import FollowButton from "../following/followButton";
-import PostList from "../post/getAllPost";
-import Feed from "../feed/Feed";
+import getUserInfo from '../../utilities/decodeJwt'
+import Comment from '../comments/comment'
+import Feed from '../feed/Feed'
+import PostList from '../post/feedPage'
+
 import { Button } from "react-bootstrap";
 
 import axios from 'axios'
@@ -19,6 +21,7 @@ export default function PublicUserList() {
   const navigate = useNavigate()
   const params = useParams();
   const [postListRouteChange, setpostListRouteChange] = useState([])
+  const { username} = user
  
  
   // 2. function getUserId
@@ -65,16 +68,11 @@ export default function PublicUserList() {
       <div>
         <h3>
            Please Login in{" "}
-          <Link to={"/login"}>
+          <Link to={'http://localhost:8093/feed/Feed'}>
             <a href="#">here</a>
           </Link>
-        </h3>
-    <h1>Profile Name: {params.id.toString()}</h1>
-    <FollowButton/>
-    <br></br>
-    <Button onClick={postListRouteChange}><PostList/></Button> 
-    <Button onClick={postListRouteChange}><PostList/></Button>
-    </div>
+          </h3>
+          </div>
     );
     return (
       <div>
@@ -83,6 +81,11 @@ export default function PublicUserList() {
           <thead>
             <tr>
               <th>Name</th>
+              <h1><span className='username'> @{username}</span></h1>
+              <FollowButton/>
+              <br></br>
+              <Button onClick={postListRouteChange}><PostList/></Button> 
+               <Button onClick={postListRouteChange}><PostList/></Button>
             </tr>
           </thead>
           <tbody>{PublicUserList()}</tbody>
