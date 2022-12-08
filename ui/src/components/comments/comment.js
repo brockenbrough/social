@@ -10,7 +10,7 @@ const Comment = (props) => {
   const deleteComment = async (comment) => {
     axios.delete(`http://localhost:8089/comments/comment/${comment._id}`)
         .then(response => {
-            alert('Comment deleted.')
+            alert('Comment was deleted.')
         })
         .catch(error => alert('Error deleting comment'))
   }
