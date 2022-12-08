@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Image } from "react-bootstrap";
 import {Row, Col} from 'react-bootstrap';
 import ToggleButton from 'react-bootstrap/ToggleButton';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {UserContext} from "../../App"
 
 //link to service 
 //http://localhost:8096/privateUserProfile
@@ -17,39 +14,26 @@ import Modal from 'react-bootstrap/Modal';
 const PrivateUserProfile = () =>{
 	const [show, setShow] = useState(false);
   	const handleClose = () => setShow(false);
-  	const handleShow = () => setShow(true);
-//   const [user, setUser] = useState({})
-//   useEffect(() => {
-//     setUser(getUserInfo())
-//   }, [])
+	const handleShow = () => setShow(true);
+	const user = useContext(UserContext)
+//const username = user.username;
 
-//   if (!user) return (
-//     <div>
-//         <h3>
-//             You are not authorized to view this page, Please Login in 
-//             <Link to={'/login'}>
-//                 <a href='#'>
-//                     here
-//                 </a>
-//             </Link>
-//         </h3>
-//     </div>
-// )
 
-//   )
+
+
 
 return(
 	<div class="container">
-		<div class="profile">
-				<h2 class="profile-username">Enoc</h2>
-        <div class = 'profile-image'>
-          <img src ={require("./elmo.jpeg")}/>
+		<div class="col-md-12 text-center">
+<h1>{user && user.username}</h1>
+        <div class = 'col-md-12 text-center'>
+          <Image roundedCircle src={require("./elmo.jpeg")}/>
         </div>
-			<div class="profile-stats">
+			<div class="col-md-12 text-center">
 				<ul>
-					<span><b>164</b> Followers </span> 
-					<span><b>18</b> Following</span> 
-					<span><b>800</b>Likes</span>
+					<span><b>164</b>&nbsp;Followers </span>&nbsp; 
+					<span><b>18</b>&nbsp;Following</span>&nbsp; 
+					<span><b> 800</b>&nbsp;Likes</span>
 				</ul> 
 			</div>
 			<div class = "col-md-12 text-center">
@@ -79,7 +63,7 @@ return(
 		</div>
     <h3 class = 'txt'>Post</h3>
 	
-	<Card.Header>Enoc</Card.Header>
+<Card.Header>{user && user.username}</Card.Header>
                   <div>
 				  <Row>
    			 <Col xs={12} sm={4} md={4}>
