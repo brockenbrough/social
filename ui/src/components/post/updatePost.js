@@ -5,8 +5,6 @@ import Navbar from '../navbar';
 
 import { Form, Button } from 'react-bootstrap'
 
-
-
     const updatePost = (props) => {
         const [state, setState] = useState({
             username: '',
