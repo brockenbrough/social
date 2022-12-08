@@ -6,6 +6,7 @@ import PublicUser from './PublicUser';
 import FollowButton from "../following/followButton";
 import getUserInfo from '../../utilities/decodeJwt'
 import Comment from '../comments/comment'
+import CommentList from "../comments/commentListPage";
 import Feed from '../feed/Feed'
 import PostList from '../post/feedPage'
 
@@ -20,7 +21,7 @@ export default function PublicUserList() {
   const [userList, setUserList] = useState([])
   const navigate = useNavigate()
   const params = useParams();
-  const [postListRouteChange, setpostListRouteChange] = useState([])
+  const [commentListRouteChange, setcommentListRouteChange] = useState([])
   const { username} = user
  
  
@@ -39,7 +40,7 @@ export default function PublicUserList() {
       setUserList(fetchedRecords); 
 
       const postListRouteChange = () =>{ 
-      navigate(`/getAllPost/${params.id.toString()}`); // To use in the following button to switch to the user's following list.
+      navigate(`/commentListPage/${params.id.toString()}`); // To use in the following button to switch to the user's following list.
       }
 
        
@@ -63,17 +64,18 @@ export default function PublicUserList() {
       );
     });
   }
-  if (user)
+  if (!user)
     return (
       <div>
         <h3>
            Please Login in{" "}
-          <Link to={'http://localhost:8093/feed/Feed'}>
+          <Link to={'http://localhost:8093/comments/commentListPage'}>
             <a href="#">here</a>
           </Link>
           </h3>
           </div>
     );
+    if (user)
     return (
       <div>
         <h3>Users Public Page</h3>
@@ -84,8 +86,8 @@ export default function PublicUserList() {
               <h1><span className='username'> @{username}</span></h1>
               <FollowButton/>
               <br></br>
-              <Button onClick={postListRouteChange}><PostList/></Button> 
-               <Button onClick={postListRouteChange}><PostList/></Button>
+              <Button onClick={commentListRouteChange}><PostList/></Button> 
+               <Button onClick={commentListRouteChange}><PostList/></Button>
             </tr>
           </thead>
           <tbody>{PublicUserList()}</tbody>
