@@ -17,7 +17,7 @@ const Contributor = (props) => {
     }
 
     return(
-      <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
+      <Card body outline  color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
         <Card.Body> 
             <Stack> 
               <div><h4>{contributor.name}</h4></div>
