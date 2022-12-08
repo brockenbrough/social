@@ -10,10 +10,11 @@ const Comment = (props) => {
   const deleteComment = async (comment) => {
     axios.delete(`http://localhost:8089/comments/comment/${comment._id}`)
         .then(response => {
-            alert('Comment was deleted.')
+            alert('Comment deleted.')
         })
         .catch(error => alert('Error deleting comment'))
   }
+
 
   return (
     <Card
