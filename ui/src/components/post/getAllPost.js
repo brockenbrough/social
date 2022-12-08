@@ -47,13 +47,11 @@ const getAllPost = () => {
             <h1>All Posts</h1>
             {posts.map((posts, index) => (
                 <div key={index}>
-                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'0cm',background:'aliceblue'}}>
+                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
                         
                         <Card.Body>
                             <Card.Title><h5>Username:</h5><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
-                            <Card.Text><h3>Content:</h3>
                                 {posts.content}
-                            </Card.Text>
                             <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
                             <Link style={{ marginRight: '1cm' }} to={`/updatePost/${posts._id}`}  className="btn btn-warning ">Update</Link>
                             <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
