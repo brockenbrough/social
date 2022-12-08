@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ContributorNavbar from "./contributorNavbar";
 import getUserInfo from '../../utilities/decodeJwt'
-import Contributor from './contributor';
+import axios from 'axios'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Stack from 'react-bootstrap/Stack';
 
 
 // The ContributorList component.  This is the main component in this file.
@@ -35,15 +38,16 @@ export default function ContributorList() {
     
     return; 
   }, [contributors.length]);  // If record length ever changes, this useEffect() is automatically called.
-  
-  // A method to delete a contributor
-  async function deleteContributor(id) {
-    await fetch(`http://localhost:8095/project_notes/contributor/${id}`, {
-      method: "DELETE"
-    });
-    
-    // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newRecords = contributors.filter((el) => el._id !== id);
+
+  const deleteContributor = async (contributor) => {
+    axios.delete(`http://localhost:8095/project_notes/contributor/${contributor._id}`)
+        .then(response => {
+            alert('Contributor deleted.')
+        })
+        .catch(error => alert('Error deleting contributor'));
+
+            // We're going to patch up our state by removing the records corresponding to id in our current state.
+    const newRecords = contributors.filter((el) => el._id !== contributor._id);
     setContributors(newRecords);  // This causes a re-render because we change state.
   }
   
@@ -53,13 +57,22 @@ export default function ContributorList() {
   // We are returning component tags for records. See use in rendering below.
   // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
   function contributorList() {
-    return contributors.map((record) => {
+    return contributors.map((contributor) => {
       return (
-        <Contributor
-          record={record}
-          deleteContributor={() => deleteContributor(record._id)}
-          key={record._id}
-        />
+        <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
+        <Card.Body> 
+            <Stack> 
+              <div><h4>{contributor.name}</h4></div>
+              <div>{contributor.position}</div>
+              <div>
+                <Button variant="primary" className="mx-1 my-1" href={`/project-notes/editContributor/${contributor._id}`} >Edit</Button>
+              </div>
+              <div>
+                <Button variant="primary" className="mx-1 my-1" onClick={() => deleteContributor(contributor)}>Delete</Button>
+              </div>
+            </Stack>
+        </Card.Body>
+      </Card>
       );
     });
   }
