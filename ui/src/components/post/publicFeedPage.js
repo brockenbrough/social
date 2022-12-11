@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import getUserInfo from "../../utilities/decodeJwt";
 import Post from "./post";
 import Card from 'react-bootstrap/Card';
 import Button from "react-bootstrap/Button";
