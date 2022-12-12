@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {UserContext} from "../../App"
+import { Link, useNavigate } from 'react-router-dom'
 
 //link to service 
 //http://localhost:8096/privateUserProfile
@@ -18,9 +19,18 @@ const PrivateUserProfile = () =>{
 	const user = useContext(UserContext)
 //const username = user.username;
 
+const navigate = useNavigate();
 
+// handle logout button
+const handleLogout = async => {
+	localStorage.clear()
+    navigate("/");
+  }
 
-
+// handle Edit User Information button
+const handleEditUser = async => {
+    navigate("/editUserPage");
+  }
 
 return(
 	<div class="container">
@@ -38,7 +48,7 @@ return(
 			</div>
 			<div class = "col-md-12 text-center">
 		<>
-		<Button onClick={handleShow}>Log Out</Button> 
+		<Button className="me-2" onClick={handleShow}>Log Out</Button> 
       		<Modal
        		show={show}
         	onHide={handleClose}
@@ -55,9 +65,12 @@ return(
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Yes</Button>
+          <Button variant="primary" onClick={handleLogout}>
+			  Yes
+		  </Button>
         </Modal.Footer>
       </Modal>
+	  <Button onClick={handleEditUser}>Edit User Information</Button> 
     </>
 			</div>
 		</div>
