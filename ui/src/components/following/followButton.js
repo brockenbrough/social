@@ -7,7 +7,7 @@ import './followingSheet.css'
 
 
 // The FollowButton component.  This is the main component in this file. We will talk to the user team to implement this component.
-export default function FollowButton() {
+export default function FollowButton(props) {
 
 
   const routeChange = () =>{ 
@@ -28,11 +28,11 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
   async function followUser() {
 
-    console.log(user.username+ " followed " +params.id.toString())
+    console.log(user.username+ " followed " +props.username)
 
     const addFollowing = {
       userId: user.username,
-      targetUserId: params.id.toString(),
+      targetUserId: props.username,
     }
     const url = "http://localhost:8085/followers/follow";
 
@@ -45,11 +45,11 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
   async function unfollowUser() {
 
-   console.log(user.username+ " unfollowed " +params.id.toString())
+   console.log(user.username+ " unfollowed " +props.username)
 
     const unFollow = {
       userId: user.username,
-      targetUserId: params.id.toString(),
+      targetUserId: props.username,
     }
     const url = "http://localhost:8085/followers/unfollow";
 
@@ -69,7 +69,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
 
     const response = await fetch(
-      `http://localhost:8085/followers/${params.id.toString()}`
+      `http://localhost:8085/followers/${props.username}`
     );
 
     if (!response.ok) {
@@ -95,7 +95,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
 
     } 
-
+    
     isFollowing();
     return;
   }, [followersState.length]);

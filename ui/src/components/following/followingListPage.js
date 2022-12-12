@@ -90,7 +90,7 @@ export default function FollowingList() {
   return (
     <div>
       {error.message ? errorMessage() : <p></p>}
-      <h3>Following</h3>
+      <h2 style={{ marginLeft: 20 }}>Following</h2>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
