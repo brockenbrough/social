@@ -1,6 +1,6 @@
 //This is a comment about imports
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState} from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useParams} from "react-router";
 import PublicUser from './PublicUser';
 import FollowButton from "../following/followButton";
@@ -9,9 +9,8 @@ import Comment from '../comments/comment'
 import CommentList from "../comments/commentListPage";
 import Feed from '../feed/Feed'
 import PostList from '../post/feedPage'
-
+import Card from 'react-bootstrap/Card';
 import { Button } from "react-bootstrap";
-
 import axios from 'axios'
 
 // The PublicUserList component.  This is the main component in this file.
@@ -22,12 +21,28 @@ export default function PublicUserList() {
   const navigate = useNavigate()
   const params = useParams();
   const [commentListRouteChange, setcommentListRouteChange] = useState([])
+<<<<<<< HEAD
   const { username} = user
   const [post, setPosts] = useState([])
  
  
+=======
+  const { state : { publicUser } = {} } = useLocation()
+  const [posts, setPosts] = useState([])
+  
+  const fetchPosts = async () => {
+	  const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${publicUser.username}`)
+		  .then(res => {
+			  setPosts(res.data)
+		  })
+		  .catch(error => alert('error fetching data'))
+	}
+
+>>>>>>> 962bd205784b0c92722497b5d5d26b2eeb91762e
   // 2. function getUserId
   useEffect(() => {
+
+    fetchPosts()
 
     async function getUser() {
       const response = await fetch('http://localhost:8096/components/users/publicProfilePage');
@@ -87,20 +102,21 @@ export default function PublicUserList() {
     if (user)
     return (
       <div>
-        <h3>Users Public Page</h3>
-        <table className="table table-striped" style={{ marginTop: 20 }}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <h1><span className='username'> @{username}</span></h1>
-              <FollowButton/>
-              <br></br>
-              <Button onClick={commentListRouteChange}><PostList/></Button> 
-               <Button onClick={commentListRouteChange}><PostList/></Button>
-            </tr>
-          </thead>
-          <tbody>{PublicUserList()}</tbody>
-        </table>
+        <h3>@{publicUser.username}</h3>
+        
+        <h3>All Posts</h3>
+            {posts.map((posts, index) => (
+                <div key={index}>
+                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
+                        
+                        <Card.Body>
+                            <Card.Title><h5>Username:</h5><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                                {posts.content}
+
+                        </Card.Body>
+                    </Card>
+                </div>
+            ))}
       </div>
     );
     
