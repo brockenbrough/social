@@ -61,6 +61,9 @@ export default function PostList() {
       <h1>
         Welcome to your feed {user.username}
       </h1>
+      <p>
+        If you are not seeing any posts, try <a href="http://localhost:8096/publicfeed">the public feed page</a>
+      </p>
       <Button variant="primary" className="mx-1 my-1" href={`/createpost/`}>
         Create Post
       </Button>
