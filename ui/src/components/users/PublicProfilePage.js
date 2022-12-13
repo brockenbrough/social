@@ -12,6 +12,7 @@ import PostList from '../post/feedPage'
 import Card from 'react-bootstrap/Card';
 import { Button } from "react-bootstrap";
 import axios from 'axios'
+import Post from "../post/post";
 
 // The PublicUserList component.  This is the main component in this file.
 // 1. function PublicUserList
@@ -21,10 +22,17 @@ export default function PublicUserList() {
   const navigate = useNavigate()
   const params = useParams();
   const [commentListRouteChange, setcommentListRouteChange] = useState([])
-  const { username} = user
-  const [post, setPosts] = useState([])
- 
- 
+  const { state : { publicUser } = {} } = useLocation()
+  const [posts, setPosts] = useState([])
+  
+  const fetchPosts = async () => {
+	  const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${publicUser.username}`)
+		  .then(res => {
+			  setPosts(res.data)
+		  })
+		  .catch(error => alert('error fetching data'))
+	}
+
   // 2. function getUserId
   useEffect(() => {
 
@@ -43,14 +51,6 @@ export default function PublicUserList() {
 
       const postListRouteChange = () =>{ 
       navigate(`/commentListPage/${params.id.toString()}`); // To use in the following button to switch to the user's following list.
-      }
-
-      const fetchPosts = async () => {
-        const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${username}`)
-          .then(res => {
-            setPosts(res.data)
-          })
-          .catch(error => alert('error fetching data'))
       }
 
        
@@ -88,21 +88,10 @@ export default function PublicUserList() {
     if (user)
     return (
       <div>
-        <h3>@{publicUser.username}</h3>
-        
-        <h3>All Posts</h3>
-            {posts.map((posts, index) => (
-                <div key={index}>
-                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
-                        
-                        <Card.Body>
-                            <Card.Title><h5>Username:</h5><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
-                                {posts.content}
-
-                        </Card.Body>
-                    </Card>
-                </div>
-            ))}
+          <h3>@{publicUser.username}</h3>
+              {posts.map((posts, index) => {
+              return (<Post posts={posts} />)
+          })}
       </div>
     );
     
