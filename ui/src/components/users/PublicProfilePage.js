@@ -21,24 +21,10 @@ export default function PublicUserList() {
   const navigate = useNavigate()
   const params = useParams();
   const [commentListRouteChange, setcommentListRouteChange] = useState([])
-<<<<<<< HEAD
   const { username} = user
   const [post, setPosts] = useState([])
  
  
-=======
-  const { state : { publicUser } = {} } = useLocation()
-  const [posts, setPosts] = useState([])
-  
-  const fetchPosts = async () => {
-	  const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${publicUser.username}`)
-		  .then(res => {
-			  setPosts(res.data)
-		  })
-		  .catch(error => alert('error fetching data'))
-	}
-
->>>>>>> 962bd205784b0c92722497b5d5d26b2eeb91762e
   // 2. function getUserId
   useEffect(() => {
 
