@@ -14,7 +14,7 @@ export default function PostList() {
   async function getPosts(user) {
     let feed = [];
     let postData = [];
-    try {
+
       if (user !== null) {
         const res = await axios.get(`http://localhost:8093/feed/${user.username}`)
         .then(res => {
@@ -22,8 +22,7 @@ export default function PostList() {
         })
         .catch(error => alert("An error has occure while fetching feed data"))
       }
-    }
-    catch {}
+    
     
     for (let i = 0; i < feed.length; i++) {
       const res = await axios.get(`http://localhost:8083/posts/getPostById/${feed[i]}`)
