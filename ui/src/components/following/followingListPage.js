@@ -62,7 +62,7 @@ export default function FollowingList() {
 
   const Following = ({ record, user, deletePerson }) => (
     <tr>
-      <td><a href="/privateUserProfile">{record}</a></td>
+      <td><a href={`/publicProfilePage/${record}`}>{record}</a></td>
       {user.username == params.id.toString() ? <td><Button size="sm" variant="outline-danger" onClick={() => { deletePerson(record); }}>Unfollow</Button></td> : <p></p>}  
     </tr>
   );
