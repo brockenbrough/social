@@ -47,3 +47,6 @@ Content-Type: application/json
 {
     "userId" : "634edb2a16710b2cda6fb370"
 }
+
+###
+POST  http://localhost:8081/user/deleteAll

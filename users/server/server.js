@@ -7,6 +7,7 @@ const registerRoute = require('./routes/user.signup')
 const getUserByIdRoute = require('./routes/user.getuserById')
 const dbConnection = require('./config/db.config')
 const editUser = require('./routes/user.editUser')
+const deleteUser = require('./routes/user.deleteall')
 
 require('dotenv').config();
 const SERVER_PORT = 8081
@@ -19,6 +20,7 @@ app.use('/user', registerRoute)
 app.use('/user', getAllUsersRoute)
 app.use('/user', getUserByIdRoute)
 app.use('/user', editUser)
+app.use('/user', deleteUser)
 
 app.listen(SERVER_PORT, (req, res) => {
     console.log(`The user service is running on port ${SERVER_PORT}`);
