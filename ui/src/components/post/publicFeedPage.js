@@ -44,7 +44,7 @@ export default function PostList() {
             <div key={index}>
               <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>       
                 <Card.Body>
-                  <Card.Title><h5>Username:</h5><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                  <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
                   {posts.content}
                   <div>
                     <ToggleButton href='#'>❤︎</ToggleButton>
