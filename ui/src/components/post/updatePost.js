@@ -1,96 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Layout from './Layout';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import {useParams, useNavigate } from "react-router";
+import Navbar from '../navbar';
 
-const UpdatePost = props => {
-    const [state, setState] = useState({
-        username: '',
-        content: '',
-        postImage: '',
-        date: ''
+import { Form, Button } from 'react-bootstrap'
 
-    })
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setState({
-            ...state,
-            [name]: value
+
+    const updatePost = (props) => {
+        const [state, setState] = useState({
+            username: '',
+            content: '',
         })
-    }
+        const params = useParams()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const { content, username } = state
-        const post = {
-            content,
-            username
-        }
-        await axios.put(`posts/updatePost/${props.match.params.id}`, post)
-            .then(
-                res => {
-                    console.log(res.data);
-                    const { content, username } = res.data;
-                    // empty state
-                    setState({ ...state, content, username });
-                    // show sucess alert
-                    alert(`Post content ${content} is updated`);
+       const navigate = useNavigate();
+
+        useEffect(() => {
+            axios.get(`http://localhost:8083/posts/getPostById/${params.postId}`)
+                .then(res => {
+                    setState(res.data)
                 })
-            .catch(error => {
-                console.log(error.response);
-                alert(error.res.data.error);
-            });
+                .catch(err => {
+                    console.log(err)
+                })
+        }, [])
+
+        const handleChange = (e) => {
+            setState({
+                ...state,
+                [e.target.name]: e.target.value
+            })
+        }
+
+        const handleSubmit = (e) => {
+            e.preventDefault()
+            axios.put(` http://localhost:8083/posts/updatePost/${params.postId}`, state)
+                .then(res => {
+                    console.log(res)
+                    navigate(` http://localhost:8083/posts/getAllPosts/${params.postId}`)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+
+
+        const showUpdateForm =()=>{
+
+            
+
+            return(
+
+             
+                <div className="container">
+                   
+                    <div className="row">
+                        <div className="col-md-6 offset-md-3">
+                           
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+    
+                                    <Form.Control type="text" placeholder="Enter username" value={state.username} onChange={handleChange} name="username" style={{ height: '2cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+                                </Form.Group>
+    
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Control type="text" placeholder="Content" name="content" value={state.content} onChange={handleChange}  style={{ height: '3cm', width: '12cm', marginLeft: '10cm', marginTop: '2cm' }} />
+                                </Form.Group>
+                            
+                                <Button style={{ width: '4cm', marginLeft: '10cm', marginTop: '2cm' }} variant="primary" type="submit">
+                                    Update
+                                </Button>
+                            </Form>
+                        </div>
+                    </div>
+                </div>
+
+            )
+
+        }
+    
+    
+      return (
+         
+        <div className="container pb-5">
+        <h1>UPDATE POST</h1>
+        {showUpdateForm()}
+    </div>
+      )
     }
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            const res = await axios.get(`posts/getPostById/${props.match.params.id}`)
-            const { content, username } = res.data
-            setState({ content, username })
-        }
-        fetchPost()
-    }, [props.match.params.id])
 
-    const showUpdateForm = () => (
-        <form onSubmit={handleSubmit}>
-
-            <div className="form-group">
-                <label className="text-muted">Content</label>
-                <textarea
-                    onChange={handleChange('content')}
-                    value={content}
-                    type="text"
-                    className="form-control"
-                    placeholder="Write something.."
-                    required
-                />
-            </div>
-            <div className="form-group">
-                <label className="text-muted">User</label>
-                <input
-                    onChange={handleChange('username')}
-                    value={user}
-                    type="text"
-                    className="form-control"
-                    placeholder="Your name"
-                    required
-                />
-            </div>
-            <div>
-                <button variant="primary">Update</button>
-            </div>
-        </form>
-    );
-    return (
-        <div className="container pb-5">
-            <Layout />
-            <br />
-            <h1>UPDATE POST</h1>
-            {showUpdateForm()}
-        </div>
-    );
-};
-
-export default UpdatePost;
+export default updatePost

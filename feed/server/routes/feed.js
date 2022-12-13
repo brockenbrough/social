@@ -176,8 +176,13 @@ router.route("/feed/:userId").get(async function (req, res) {
   const followingList = following[0].following;
   
   for (i = 0; i < followingList.length; i++) {
-    userPosts = await getAllPostsByUserId(followingList[i]);
-    followingUsersPosts.push(userPosts);
+    try {
+      userPosts = await getAllPostsByUserId(followingList[i]);
+      followingUsersPosts.push(userPosts);
+    }
+    catch(e){
+      console.log("issue with user " + followingList[i] + " user has not made any posts");
+    }
   }
 
 

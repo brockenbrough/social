@@ -22,8 +22,8 @@ export default function TestPage() {
 
   const params = useParams(); // MUST ALWAYS USE PARAMS to gather info from the following and follower collections.
 
-  
-  
+
+
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
 

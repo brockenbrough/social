@@ -13,7 +13,7 @@ export default function FollowButton() {
   const routeChange = () =>{ 
     navigate("/editUserPage");
   } 
- 
+
 
   const [user, setUser] = useState([])
   const [isFollowingBool, setIsFollowing] = useState()
@@ -25,11 +25,11 @@ export default function FollowButton() {
 useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
   // A method to follow a user. Take the id from the params in the link.
-  
+
   async function followUser() {
 
     console.log(user.username+ " followed " +params.id.toString())
-   
+
     const addFollowing = {
       userId: user.username,
       targetUserId: params.id.toString(),
@@ -61,7 +61,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
   }
 
-  
+
 
   // This function is very important, it helps figure out which state the button should be in.
   useEffect(() => {
@@ -93,14 +93,14 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
         setIsFollowing(false); // Follow state, to false. Sets the button UI view.
       }
 
-   
+
     } 
 
     isFollowing();
     return;
   }, [followersState.length]);
 
-  
+
 
   function MainFollowButton(){ // Main follow button to follow a user or unfollow a user.
     if (isFollowingBool){            

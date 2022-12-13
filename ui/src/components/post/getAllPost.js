@@ -1,18 +1,21 @@
-
+import axios from 'axios'
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import moment from "moment";
+
+
 
 
 const getAllPost = () => {
-
-
+  
     const [posts, setPosts] = useState([])
 
+
+
     const fetchPosts = async () => {
-        const res = await axios.get('posts/getAllPost')
+        const res = await axios.get('http://localhost:8083/posts/getAllPosts')
             .then(res => {
                 setPosts(res.data)
             })
@@ -31,7 +34,7 @@ const getAllPost = () => {
     }
 
     const deletePost = async (posts) => {
-        axios.delete(`posts/deletePost/${posts._id}`)
+        axios.delete(`http://localhost:8083/posts/deletePost/${posts._id}`)
             .then(response => {
                 alert('Post deleted successfully')
                 fetchPosts()
@@ -41,24 +44,23 @@ const getAllPost = () => {
 
     return (
         <div>
-        <h1>All Posts</h1>
-        {posts.map((posts, index) => (
-            <div key={index}>
-                <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'21cm'}}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>{posts.postImage}</Card.Title>
-                        <Card.Title><h5>Username:</h5>{posts.username}</Card.Title>
-                        <Card.Text><h3>Content:</h3>{posts.content}</Card.Text>
-                        <Link style={{ marginRight: '1cm' }} to={`/updatepost/${posts._id}`}><Button variant="primary">Update</Button></Link>
-                        <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
-                    </Card.Body>
-                </Card>
-            </div>
-        ))}
-    </div>
+            <h1>All Posts</h1>
+            {posts.map((posts, index) => (
+                <div key={index}>
+                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
+                        
+                        <Card.Body>
+                            <Card.Title><h5>Username:</h5><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                                {posts.content}
+                            <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
+                            <Link style={{ marginRight: '1cm' }} to={`/updatePost/${posts._id}`}  className="btn btn-warning ">Update</Link>
+                            <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
+                        </Card.Body>
+                    </Card>
+                </div>
+                
+            ))}
+        </div>
     )
 }
-
-
 export default getAllPost

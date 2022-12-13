@@ -1,33 +1,22 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import getUserInfo from "../../utilities/decodeJwt";
 import Post from "./post";
 import Card from 'react-bootstrap/Card';
 import Button from "react-bootstrap/Button";
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 export default function PostList() {
-  const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
 
-  async function getPosts(user) {
+  async function getPosts() {
     let feed = [];
     let postData = [];
-    if (user !== null) {
-      const res = await axios.get(`http://localhost:8093/feed/${user.username}`)
+    const res = await axios.get(`http://localhost:8093/feed/`)
       .then(res => {
         feed = res.data.feed
       })
       .catch(error => alert("An error has occure while fetching feed data"))
-    }
-    else {
-      const res = await axios.get(`http://localhost:8093/feed/`)
-      .then(res => {
-        feed = res.data.feed
-      })
-      .catch(error => alert("An error has occure while fetching feed data"))
-    }
     for (let i = 0; i < feed.length; i++) {
       const res = await axios.get(`http://localhost:8083/posts/getPostById/${feed[i]}`)
         .then(res => {
@@ -39,27 +28,13 @@ export default function PostList() {
   }
 
   useEffect(() => {
-    setUser(getUserInfo());
-    getPosts(user);
+    getPosts();
   }, [posts.length]);
-
-  if (!user) {
-    return (
-      <div>
-        <h3>
-          You are not authorized to view this page, Please Login in{" "}
-          <Link to={"/login"}>
-            <a href="#">here</a>
-          </Link>
-        </h3>
-      </div>
-    );
-  }
 
   return (
     <div>
       <h1>
-        Welcome to your feed {user.username}
+        Welcome to the public feed page
       </h1>
       <Button variant="primary" className="mx-1 my-1" href={`/createpost/`}>
         Create Post

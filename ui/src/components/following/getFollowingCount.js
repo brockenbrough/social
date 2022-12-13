@@ -15,15 +15,15 @@ export default function FollowingCount() {
 
     // Gets the following count of the user.
     async function getFollowingCount() {
-        
+
       const response = await fetch(`http://localhost:8085/following/${params.id.toString()}`);
-      
+
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
         return;
       }
-      
+
       try{
       const fetchedFollowers = await response.json();
 
@@ -32,11 +32,11 @@ export default function FollowingCount() {
       }catch(error){
         setError(error)
       }
-      
+
     }
-    
+
     getFollowingCount();   
-    
+
     return; 
   }, [followState.length]);  
 

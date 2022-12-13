@@ -18,32 +18,32 @@ export default function FollowerCount() {
 
     // Gets the follower count of the user.
     async function getFollowerCount() {
-        
+
       const response = await fetch(`http://localhost:8085/followers/${params.id.toString()}`);
-      
+
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
         return;
       }
-      
+
       try{
       const fetchedFollowers = await response.json();
 
       setFollowerCount(fetchedFollowers[0].followers);  // Sets the fetched followers of the user.
       console.log(fetchedFollowers[0].followers);
 
-      
+
 
       }catch(error){
         setError(error)
       }
 
-      
+
     }
-    
+
     getFollowerCount();  
-    
+
     return; 
   }, [followState.length]);  
 

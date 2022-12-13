@@ -7,16 +7,11 @@ const newPostSchema = new mongoose.Schema(
         required: true,
         label: "username",
     },
-    date: {
-        type: Date,
-        default: Date.now,
-    },
     content: {
         type: String,
         required: true,
     },
   
-    postImage: { type: String}
   },
     {collection: "posts"}
 );
