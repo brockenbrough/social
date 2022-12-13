@@ -65,26 +65,26 @@ export default function PostList() {
         Create Post
       </Button>
       <div>
-      {posts.map((posts, index) => (
-            <div key={index}>
-              <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>       
-                <Card.Body>
-                  <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
-                  {posts.content}
-                  <div>
-                    <ToggleButton href='#'>👍</ToggleButton>
-                  </div>
-                </Card.Body>
-                <Card.Footer>{posts.date}</Card.Footer>
-              </Card>
-            </div>
-          ))}
-        </div>
-        {/* <div>
-          {posts.map(e => {
-            return <Post posts = {e} isLiked={"true"}/>
-          })}
-        </div> */}
+        {posts.map((posts, index) => (
+          <div key={index}>
+            <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>       
+              <Card.Body>
+                <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                {posts.content}
+                <div>
+                  <ToggleButton href='#'>👍</ToggleButton>
+                </div>
+              </Card.Body>
+              <Card.Footer>{posts.date}</Card.Footer>
+            </Card>
+          </div>
+        ))}
       </div>
+      {/* <div>
+        {posts.map(e => {
+          return <Post posts = {e} isLiked={"true"}/>
+        })}
+      </div> */}
+    </div>
   );
 }
