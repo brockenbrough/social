@@ -7,7 +7,7 @@ import './followingSheet.css'
 
 
 // The FollowButton component.  This is the main component in this file. We will talk to the user team to implement this component.
-export default function FollowButton() {
+export default function FollowButton(props) {
 
 
   const routeChange = () =>{ 
@@ -28,11 +28,11 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
   async function followUser() {
 
-    console.log(user.username+ " followed " +params.id.toString())
+    console.log(props.username+ " followed " +props.targetUserId)
 
     const addFollowing = {
-      userId: user.username,
-      targetUserId: params.id.toString(),
+      userId: props.username,
+      targetUserId: props.targetUserId,
     }
     const url = "http://localhost:8085/followers/follow";
 
@@ -45,11 +45,11 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
   async function unfollowUser() {
 
-   console.log(user.username+ " unfollowed " +params.id.toString())
+   console.log(props.username+ " unfollowed " +props.targetUserId)
 
     const unFollow = {
-      userId: user.username,
-      targetUserId: params.id.toString(),
+      userId: props.username,
+      targetUserId: props.targetUserId,
     }
     const url = "http://localhost:8085/followers/unfollow";
 
@@ -69,7 +69,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
 
     const response = await fetch(
-      `http://localhost:8085/followers/${params.id.toString()}`
+      `http://localhost:8085/followers/${props.targetUserId}`
     );
 
     if (!response.ok) {
@@ -83,7 +83,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
         setFollowers(fetchedFollowers[0].followers);
 
-        if (followersState.find((x) => x === user.username)) {
+        if (followersState.find((x) => x === props.username)) {
           setIsFollowing(true); // Follow state, to true. Sets the button UI view.
         } else {
           setIsFollowing(false); // Follow state, to false. Sets the button UI view.
@@ -118,7 +118,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
   // Returns the unfollow button or the follow button depending on the IsFollowing() state. Also shows an Edit Profile Button if the user is viewing their own profile.
   return (
     <div>
-    {user.username === params.id.toString() ? <Button id="editProfileButton" onClick={routeChange} size="lg">Edit Profile</Button> : <MainFollowButton/>}
+    {props.username === props.targetUserId ? <Button id="editProfileButton" onClick={routeChange} size="lg">Edit Profile</Button> : <MainFollowButton/>}
     </div>
   );
 }
