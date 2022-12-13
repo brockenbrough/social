@@ -35,6 +35,8 @@ import CreatePost from "./components/post/createPost";
 import GetAllPost from "./components/post/getAllPost";
 import UpdatePost from "./components/post/updatePost";
 import SinglePost from "./components/post/singlePost";
+import CommentsHome from "./components/comments/commentsHome";
+
 
 export const UserContext = createContext();
 //test change
@@ -62,15 +64,23 @@ const App = () => {
           />
           <Route path="/publicProfilePage" element={<PublicProfilePage />} />
           <Route path="/publicUser" element={<PublicUser />} />
-          <Route path="/project-notes/editContributor/:id" element={<EditContributor />}  />
+          <Route
+            path="/project-notes/editContributor/:id"
+            element={<EditContributor />}
+          />
           <Route path="/project-notes/create" element={<CreateContributor />} />
-          <Route path="/project-notes/contributors" element={<ContributorList />} />
+          <Route
+            path="/project-notes/contributors"
+            element={<ContributorList />}
+          />
           <Route path="/oldfeed" element={<Feed />} />
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/publicFeed" element={<PublicFeedPage />} />
           <Route path="/comments/comment" element={<CommentList />} />
           <Route path="/comments/editComment/:id" element={<EditComment />} />
           <Route path="/comments/create" element={<CreateComments />} />
+          <Route path="/comments/allcomments" element={<CommentsHome />} />
+
           <Route path="/test" element={<Test />} />
           <Route path="/followers/:id" element={<FollowerList />} />
           <Route path="/following/:id" element={<FollowingList />} />
