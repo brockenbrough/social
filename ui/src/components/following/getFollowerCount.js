@@ -8,8 +8,6 @@ import Button from 'react-bootstrap/Button';
 
 export default function FollowerCount(props) {
 
-  let navigate = useNavigate() 
-
     const [followState, setFollowerCount] = useState([]);
     const [error, setError] = useState([]);
 
@@ -22,7 +20,7 @@ export default function FollowerCount(props) {
     // Gets the follower count of the user.
     async function getFollowerCount() {
 
-      const response = await fetch(`http://localhost:8085/followers/${params.id.toString()}`);
+      const response = await fetch(`http://localhost:8085/followers/${props.username}`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;

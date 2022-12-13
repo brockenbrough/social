@@ -11,8 +11,8 @@ POST http://localhost:8085/followers/follow
 Content-Type: application/json 
 
 {
-    "userId" : "Doodle",
-    "targetUserId" : "John"
+    "userId" : "viky11",
+    "targetUserId" : "p_kaur"
 }
 
 ###

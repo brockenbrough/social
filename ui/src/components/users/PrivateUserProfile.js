@@ -6,6 +6,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {UserContext} from "../../App"
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import moment from "moment";
+import getUserInfo from '../../utilities/decodeJwt';
+import Form from 'react-bootstrap/Form';
 
 //link to service 
 //http://localhost:8096/privateUserProfile
@@ -16,11 +21,57 @@ const PrivateUserProfile = () =>{
   	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const user = useContext(UserContext)
-//const username = user.username;
+	const username = getUserInfo().username
+	const [form, setValues] = useState({content : ""})
+	const [posts, setPosts] = useState([])
+	const navigate = useNavigate();
 
+	// handle logout button
+	const handleLogout = async => {
+		localStorage.clear()
+    	navigate("/");
+  	}
 
+	// handle Edit User Information button
+	const handleEditUser = async => {
+	   navigate("/editUserPage");
+	}
 
+	const fetchPosts = async () => {
+	  const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${username}`)
+		  .then(res => {
+			  setPosts(res.data)
+		  })
+		  .catch(error => alert('error fetching data'))
+	}
 
+	useEffect(() => {
+		  fetchPosts()
+	}, [])
+
+	const handleChange = ({ currentTarget: input }) => {
+		setValues({ ...form, [input.id]: input.value });
+	};
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		const { content } = form;
+    	const post = {content, username};
+    	await axios.post(" http://localhost:8083/posts/createPost", post)
+			.then(response => {
+				fetchPosts()
+				form.content = ""
+			})
+			.catch(error => alert('Error creating new post.'))
+	}
+
+	const deleteConfirm = async (posts) =>{
+		axios.delete(`http://localhost:8083/posts/deletePost/${posts._id}`)
+            .then(response => {
+				fetchPosts()
+            })
+            .catch(error => alert('Error deleting post'))
+	}
 
 return(
 	<div class="container">
@@ -38,7 +89,7 @@ return(
 			</div>
 			<div class = "col-md-12 text-center">
 		<>
-		<Button onClick={handleShow}>Log Out</Button> 
+		<Button className="me-2" onClick={handleShow}>Log Out</Button> 
       		<Modal
        		show={show}
         	onHide={handleClose}
@@ -55,40 +106,62 @@ return(
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Yes</Button>
+          <Button variant="primary" onClick={handleLogout}>
+			  Yes
+		  </Button>
         </Modal.Footer>
       </Modal>
+	  <Button onClick={handleEditUser}>Edit User Information</Button> 
     </>
 			</div>
 		</div>
-    <h3 class = 'txt'>Post</h3>
+    <h3 class = 'txt'>Create Post</h3>
 	
 <Card.Header>{user && user.username}</Card.Header>
                   <div>
 				  <Row>
    			 <Col xs={12} sm={4} md={4}>
-			 	<Image width="150" roundedCircle src={require("./elmo.jpeg")} />
+			 	<Image width="150" roundedCircle src={'https://robohash.org/' + Math.random()} />
     		 </Col>
 			</Row>
 			<Card style={{ width: '5rem' }}></Card>
-				<div>11/02/2022</div>
                    </div>
-                   <Card style={{ width: '45rem' }}>
-                  <Card.Body>Want to go on a picnic? Alpaca lunch
-				  </Card.Body>
-				  </Card>
+        <Form.Group className="mb-3" controlId="formContent" style={{ width: '50rem'}}>
+             <Form.Control type="text" placeholder="Enter post here" 
+                         id="content"
+                         value={form.content}
+                         onChange={handleChange}
+             />
+          </Form.Group>
                   <div>
-                      <ToggleButton href='#'  className = "me-2 " aria-label = "Second group">2.3k ❤︎</ToggleButton>
-					  <Button  className = "me-2 ">Update</Button> 
-				  	  <Button  className = "me-2 ">Delete</Button> 
+		  <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
      <>
     </>
   </div>
+   <div>
+            <h3>All Posts</h3>
+            {posts.map((posts, index) => (
+                <div key={index}>
+                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
+                        
+                        <Card.Body>
+                            <Card.Title><h5>Username:</h5><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                                {posts.content}
+                            <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
+                            <Link style={{ marginRight: '1cm' }} to={`/updatePost/${posts._id}`}  className="btn btn-warning ">Update</Link>
+                            <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
+                        </Card.Body>
+                    </Card>
+                </div>
+                
+            ))}
+   </div>
   </div>
-  
 )
 
 
-    }
+}
 
 export default PrivateUserProfile

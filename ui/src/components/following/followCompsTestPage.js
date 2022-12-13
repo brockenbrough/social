@@ -1,13 +1,29 @@
-import React from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import Button from 'react-bootstrap/Button';
 import FollowButton from './followButton.js';
 import FollowingCount from './getFollowingCount.js';
 import FollowerCount from './getFollowerCount.js';
 import './followingSheet.css'
+import getUserInfo from '../../utilities/decodeJwt'
 
 
 // Test page for the following service components.
 export default function TestPage() {
+
+  const [user, setUser] = useState([])
+
+  useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
+
+    let navigate = useNavigate() 
+
+    const followerRouteChange = () =>{ 
+      navigate(`/followers/${params.id.toString()}`); // To use in the follower's button to switch to the user's follower's list.
+    }
+
+    const followingRouteChange = () =>{ 
+        navigate(`/following/${params.id.toString()}`); // To use in the following button to switch to the user's following list.
+      }
 
   const params = useParams(); // MUST ALWAYS USE PARAMS to gather info from the following and follower collections.
 
@@ -19,13 +35,12 @@ export default function TestPage() {
   // Returns a Button with the followerCount and you can click it to go to the Follower list of the user.
   // Returns a Button with the followingCount and you can click it to go to the Following list of the user.
   return (
-    <div id="followPage">
-    <h1>{params.id.toString()}</h1>
-    <FollowButton username={params.id.toString()}/>
+    <div>
+    <h1>Profile Name: {params.id.toString()}</h1>
+    <h1>Logged in: {user.username}</h1>
+    <FollowButton username={user.username} targetUserId={params.id.toString()}/>
     <br></br>
-    <div className='d-inline-flex p-2 gap-3'>
-      <FollowerCount username={params.id.toString()}/> <FollowingCount username={params.id.toString()}/>
-    </div>
+    <Button onClick={followerRouteChange}><FollowerCount username={params.id.toString()}/></Button> <Button onClick={followingRouteChange}><FollowingCount username={params.id.toString()}/></Button>
     </div>
   );
 }

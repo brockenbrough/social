@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 // The FollowingList component.  This is the main component in this file.
 export default function FollowingList() {
@@ -62,8 +63,8 @@ export default function FollowingList() {
 
   const Following = ({ record, user, deletePerson }) => (
     <tr>
-      <td><a href="/privateUserProfile">{record}</a></td>
-      {user.username == params.id.toString() ? <td><Button size="sm" variant="outline-danger" onClick={() => { deletePerson(record); }}>Unfollow</Button></td> : <p></p>}  
+      <td className="fs-4"><Link to={`/publicProfilePage/${record}`} style={{ textDecoration: 'none', color: 'black'}}>{record}</Link></td>
+      {user.username == params.id.toString() ? <td><Button size="lg" variant="outline-danger" onClick={() => { deletePerson(record); }}>Unfollow</Button></td> : <p></p>}  
     </tr>
   );
 
@@ -90,7 +91,7 @@ export default function FollowingList() {
   return (
     <div>
       {error.message ? errorMessage() : <p></p>}
-      <h2 style={{ marginLeft: 20 }}>Following</h2>
+      <h2 style={{ marginLeft: 30 }}>Following</h2>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>

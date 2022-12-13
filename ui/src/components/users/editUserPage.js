@@ -58,7 +58,7 @@ const EditUserPage = () =>{
         const { accessToken } = res;
         //store token in localStorage
         localStorage.setItem("accessToken", accessToken);
-        navigate("/test");
+        navigate("/privateuserprofile");
       } catch (error) {
       if (
         error.response &&
@@ -79,7 +79,7 @@ const EditUserPage = () =>{
 
   // handle cancel button
   const handleCancel = async => {
-    navigate("/test");
+    navigate("/privateuserprofile");
   }
 
   return(

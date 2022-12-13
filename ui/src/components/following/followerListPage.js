@@ -3,6 +3,8 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button';
+import FollowButton from './followButton.js';
+import { Link } from 'react-router-dom';
 
 
 // The FollowerList component.  This is the main component in this file.
@@ -58,8 +60,9 @@ export default function FollowerList() {
 
   const Follower = ({record, user, deletePerson}) => (
     <tr>
-      <td><a href="/privateUserProfile">{record}</a></td>
-      {user.username == params.id.toString() ? <td><Button variant="danger" size="sm"onClick={() => {deletePerson(record);}}>Delete</Button></td> : <p></p>}
+      <td className="fs-4"><Link to={`/publicProfilePage/${record}`} style={{ textDecoration: 'none', color: 'black'}}>{record}</Link></td>
+      <td>{user.username != record ? <FollowButton username={user.username} targetUserId={record}/>: <p></p> }</td>
+      {user.username == params.id.toString() ? <td><Button variant="danger" size="lg"onClick={() => {deletePerson(record);}}>Delete</Button></td> : <p></p>}
     </tr>
   );
   
@@ -83,7 +86,7 @@ export default function FollowerList() {
   return (
     <div>
       {error.message ? errorMessage() : <p></p>}
-      <h2 style={{ marginLeft: 20 }}>Followers</h2>
+      <h2 style={{ marginLeft: 30 }}>Followers</h2>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
