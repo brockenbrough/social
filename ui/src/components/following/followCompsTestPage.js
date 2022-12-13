@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import Button from 'react-bootstrap/Button';
 import FollowButton from './followButton.js';
 import FollowingCount from './getFollowingCount.js';
 import FollowerCount from './getFollowerCount.js';
 import './followingSheet.css'
+import getUserInfo from '../../utilities/decodeJwt'
 
 
 // Test page for the following service components.
 export default function TestPage() {
+
+  const [user, setUser] = useState([])
+
+  useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
     let navigate = useNavigate() 
 
@@ -33,8 +38,9 @@ export default function TestPage() {
   // Returns a Button with the followingCount and you can click it to go to the Following list of the user.
   return (
     <div>
-    <h1>Profile Name: {params.id.toString()}</h1>
-    <FollowButton/>
+    <h1>Profile Name: viky11</h1>
+    <h1>Logged in: {user.username}</h1>
+    <FollowButton username={user.username} targetUserId="viky11"/>
     <br></br>
     <Button onClick={followerRouteChange}><FollowerCount/></Button> <Button onClick={followingRouteChange}><FollowingCount/></Button>
     </div>

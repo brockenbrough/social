@@ -73,13 +73,7 @@ export default function CommentList() {
               <h4>{comment.commentContent}</h4>
             </div>
             <div>
-            <Button
-                variant="primary"
-                className="mx-1 my-1"
-                href={`/comments/replyComment/${comment._id}`}
-              >
-                Reply
-              </Button>
+            
               <Button
                 variant="primary"
                 className="mx-1 my-1"

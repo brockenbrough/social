@@ -5,9 +5,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import moment from "moment";
 
-
-
-
 const getAllPost = () => {
   
     const [posts, setPosts] = useState([])
@@ -50,7 +47,8 @@ const getAllPost = () => {
                     <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
                         
                         <Card.Body>
-                            <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                            <Card.Title> <Link to={'/publicprofilepage'} state={{ publicUser : posts }}>{posts.username}
+                            </Link>{}</Card.Title>
                                 {posts.content}
                             <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
                             <Link style={{ marginRight: '1cm' }} to={`/updatePost/${posts._id}`}  className="btn btn-warning ">Update</Link>
