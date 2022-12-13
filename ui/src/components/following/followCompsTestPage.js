@@ -38,11 +38,11 @@ export default function TestPage() {
   // Returns a Button with the followingCount and you can click it to go to the Following list of the user.
   return (
     <div>
-    <h1>Profile Name: viky11</h1>
+    <h1>Profile Name: {params.id.toString()}</h1>
     <h1>Logged in: {user.username}</h1>
-    <FollowButton username={user.username} targetUserId="viky11"/>
+    <FollowButton username={user.username} targetUserId={params.id.toString()}/>
     <br></br>
-    <Button onClick={followerRouteChange}><FollowerCount/></Button> <Button onClick={followingRouteChange}><FollowingCount/></Button>
+    <Button onClick={followerRouteChange}><FollowerCount username={params.id.toString()}/></Button> <Button onClick={followingRouteChange}><FollowingCount username={params.id.toString()}/></Button>
     </div>
   );
 }

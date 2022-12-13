@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 
+
 export default function CreateComments() {
      const currentDate = new Date();
   // We define the state for the form.
@@ -63,8 +64,8 @@ export default function CreateComments() {
               <Form.Label>Comment</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter name"
-                id="name"
+                placeholder="Enter comment"
+                id="comment"
                 value={form.commentContent}
                 onChange={(e) => updateForm({ commentContent: e.target.value })}
               />

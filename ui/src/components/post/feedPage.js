@@ -14,17 +14,20 @@ export default function PostList() {
   async function getPosts(user) {
     let feed = [];
     let postData = [];
-    try {
-      if (user !== null) {
-        const res = await axios.get(`http://localhost:8093/feed/${user.username}`)
-        .then(res => {
-          feed = res.data.feed
-        })
-        .catch(error => alert("An error has occure while fetching feed data"))
-      }
+    if (user !== null) {
+      const res = await axios.get(`http://localhost:8093/feed/${user.username}`)
+      .then(res => {
+        feed = res.data.feed
+      })
+      .catch(error => alert("An error has occure while fetching feed data"))
     }
-    catch {}
-    
+    else {
+      const res = await axios.get(`http://localhost:8093/feed/`)
+      .then(res => {
+        feed = res.data.feed
+      })
+      .catch(error => alert("An error has occure while fetching feed data"))
+    }
     for (let i = 0; i < feed.length; i++) {
       const res = await axios.get(`http://localhost:8083/posts/getPostById/${feed[i]}`)
         .then(res => {
@@ -58,15 +61,18 @@ export default function PostList() {
       <h1>
         Welcome to your feed {user.username}
       </h1>
+      <p>
+        If you are not seeing any posts, try <a href="http://localhost:8096/publicfeed">the public feed page</a>
+      </p>
       <Button variant="primary" className="mx-1 my-1" href={`/createpost/`}>
         Create Post
       </Button>
-      <div>
+      {/* <div>
         {posts.map((posts, index) => (
           <div key={index}>
             <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>       
               <Card.Body>
-                <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                <Card.Title><Link to={'/publicprofilepage'} state={{ publicUser : posts }}>{posts.username}</Link>{}</Card.Title>
                 {posts.content}
                 <div>
                   <ToggleButton href='#'>👍</ToggleButton>
@@ -76,12 +82,12 @@ export default function PostList() {
             </Card>
           </div>
         ))}
-      </div>
-      {/* <div>
+      </div> */}
+      <div>
         {posts.map(e => {
           return <Post posts = {e} isLiked={"true"}/>
         })}
-      </div> */}
+      </div>
     </div>
   );
 }

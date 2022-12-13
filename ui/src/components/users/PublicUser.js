@@ -7,10 +7,10 @@ import PostList from '../post/feedPage'
 import CommentList from '../comments/commentListPage'
 import axios from 'axios'
 // using axois 
-
 const PublicUser = () => {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
+   const [posts, setPosts] = useState([])
 
     useEffect(() => {
         setUser(getUserInfo())
@@ -36,6 +36,14 @@ const PublicUser = () => {
       </>
       
     );
+
+    const fetchPosts = async () => {
+      const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${username}`)
+        .then(res => {
+          setPosts(res.data)
+        })
+        .catch(error => alert('error fetching data'))
+    }
 
 }
 
