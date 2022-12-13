@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 
 export default function FollowerCount(props) {
 
+  let navigate = useNavigate()
+
     const [followState, setFollowerCount] = useState([]);
     const [error, setError] = useState([]);
 
@@ -69,5 +71,5 @@ export default function FollowerCount(props) {
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
   // Returns the Follower count of the user.
-  return (<div><Button onClick={followerRouteChange}><FollowersCount/> Followers</Button></div>);
+  return (<div><FollowersCount/> Followers</div>);
 }

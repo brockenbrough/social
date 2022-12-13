@@ -64,5 +64,5 @@ export default function FollowingCount(props) {
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
   // Returns the Follow count of the user.
-  return (<div><Button onClick={followingRouteChange}><FollowCount/> Following</Button></div>);
+  return (<div><FollowCount/> Following</div>);
 }
