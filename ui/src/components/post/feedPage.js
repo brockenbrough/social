@@ -64,12 +64,12 @@ export default function PostList() {
       <Button variant="primary" className="mx-1 my-1" href={`/createpost/`}>
         Create Post
       </Button>
-      <div>
+      {/* <div>
         {posts.map((posts, index) => (
           <div key={index}>
             <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>       
               <Card.Body>
-                <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
+                <Card.Title><Link to={'/publicprofilepage'} state={{ publicUser : posts }}>{posts.username}</Link>{}</Card.Title>
                 {posts.content}
                 <div>
                   <ToggleButton href='#'>👍</ToggleButton>
@@ -79,12 +79,12 @@ export default function PostList() {
             </Card>
           </div>
         ))}
-      </div>
-      {/* <div>
+      </div> */}
+      <div>
         {posts.map(e => {
           return <Post posts = {e} isLiked={"true"}/>
         })}
-      </div> */}
+      </div>
     </div>
   );
 }
