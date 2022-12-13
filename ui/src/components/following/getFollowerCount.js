@@ -5,7 +5,7 @@ import './followingSheet.css'
 
 // The FollowerCount component.  This is the main component in this file.
 
-export default function FollowerCount() {
+export default function FollowerCount(props) {
 
     const [followState, setFollowerCount] = useState([]);
     const [error, setError] = useState([]);
@@ -19,7 +19,7 @@ export default function FollowerCount() {
     // Gets the follower count of the user.
     async function getFollowerCount() {
 
-      const response = await fetch(`http://localhost:8085/followers/${params.id.toString()}`);
+      const response = await fetch(`http://localhost:8085/followers/${props.username}`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
