@@ -1,5 +1,4 @@
 import React from "react";
-
 // We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
 /*
@@ -34,6 +33,9 @@ import getUserInfo from "./utilities/decodeJwt";
 import CreatePost from "./components/post/createPost";
 import GetAllPost from "./components/post/getAllPost";
 import UpdatePost from "./components/post/updatePost";
+
+import CommentsHome from "./components/comments/commentsHome";
+
 export const UserContext = createContext();
 //test change
 //test again
