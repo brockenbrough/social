@@ -23,6 +23,7 @@ export default function PublicUserList() {
   const params = useParams();
   const [commentListRouteChange, setcommentListRouteChange] = useState([])
   const { username} = user
+  const [post, setPosts] = useState([])
  
  
   // 2. function getUserId
@@ -41,6 +42,14 @@ export default function PublicUserList() {
 
       const postListRouteChange = () =>{ 
       navigate(`/commentListPage/${params.id.toString()}`); // To use in the following button to switch to the user's following list.
+      }
+
+      const fetchPosts = async () => {
+        const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${username}`)
+          .then(res => {
+            setPosts(res.data)
+          })
+          .catch(error => alert('error fetching data'))
       }
 
        
