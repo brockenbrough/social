@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import getUserInfo from '../../utilities/decodeJwt'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button';
+import FollowButton from './followButton.js';
 import { Link } from 'react-router-dom';
 
 // The FollowingList component.  This is the main component in this file.
@@ -45,26 +46,27 @@ export default function FollowingList() {
   }, [followings.length]);  // If record length ever changes, this useEffect() is automatically called.
 
   // A method to unfollow a user from the following list.
-  async function deleteFollowing(userId, targetUserId) {
-    const deleteFollowing = {
-      userId: userId,
-      targetUserId: targetUserId,
-    }
-    const url = "http://localhost:8085/followers/unfollow";
 
-  await axios.delete(url, {
-    data: deleteFollowing,
-  });
+  // async function deleteFollowing(userId, targetUserId) {
+  //   const deleteFollowing = {
+  //     userId: userId,
+  //     targetUserId: targetUserId,
+  //   }
+  //   const url = "http://localhost:8085/followers/unfollow";
+
+  // await axios.delete(url, {
+  //   data: deleteFollowing,
+  // });
       
-    const newFollowing = followings.filter((el) => el !== el); // This causes a re-render because we change state.
-    setFollowing(newFollowing);  // This causes a re-render because we change state.
-  }
+  //   const newFollowing = followings.filter((el) => el !== el); // This causes a re-render because we change state.
+  //   setFollowing(newFollowing);  // This causes a re-render because we change state.
+  // }
 
 
-  const Following = ({ record, user, deletePerson }) => (
+  const Following = ({ record, user}) => (
     <tr>
       <td className="fs-4"><Link to={`/publicProfilePage/${record}`} style={{ textDecoration: 'none', color: 'black'}}>{record}</Link></td>
-      {user.username == params.id.toString() ? <td><Button size="lg" variant="outline-danger" onClick={() => { deletePerson(record); }}>Unfollow</Button></td> : <p></p>}  
+      <td>{user.username != record ? <FollowButton username={user.username} targetUserId={record}/>: <p></p> }</td>
     </tr>
   );
 
@@ -74,7 +76,7 @@ export default function FollowingList() {
     console.log(params.id.toString())
       return followings.map((record) => {
         return (
-          <Following record={record} deletePerson={() => deleteFollowing(params.id.toString(), record)} key={record} user={user} />);
+          <Following record={record} key={record} user={user} />);
       });
     }
 

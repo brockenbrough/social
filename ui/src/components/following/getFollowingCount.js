@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
 import './followingSheet.css'
-import Button from 'react-bootstrap/Button';
 
 
 // The FollowerCount component.  This is the main component in this file.
 
 export default function FollowingCount(props) {
-
-  let navigate = useNavigate() 
-
-  const params = useParams();
   const [followState, setFollowCount] = useState([]);
   const [error, setError] = useState([]);
 
@@ -42,12 +36,6 @@ export default function FollowingCount(props) {
 
     return; 
   }, [followState.length]);  
-
-  const followingRouteChange = () =>{ 
-    navigate(`/following/${props.username}`); // To use in the following button to switch to the user's following list.
-  }
-
-
 
   // This function is very important, it returns the following count.
 
