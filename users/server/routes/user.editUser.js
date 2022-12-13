@@ -18,8 +18,7 @@ router.post('/editUser', async (req, res) =>
     // check if username is available
     const user = await newUserModel.findOne({ username: username })
     if (user) userIdReg = JSON.stringify(user._id).replace(/["]+/g, '')
-    if (user && userIdReg !== userId) 
-        return res.status(409).send({ message: "Username is taken, pick another" })
+    if (user && userIdReg !== userId) return res.status(409).send({ message: "Username is taken, pick another" })
 
     // generates the hash
     const generateHash = await bcrypt.genSalt(Number(10))

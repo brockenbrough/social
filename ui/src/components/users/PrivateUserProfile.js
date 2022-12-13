@@ -121,7 +121,7 @@ return(
                   <div>
 				  <Row>
    			 <Col xs={12} sm={4} md={4}>
-			 	<Image width="150" roundedCircle src={require("./elmo.jpeg")} />
+			 	<Image width="150" roundedCircle src={'https://robohash.org/' + Math.random()} />
     		 </Col>
 			</Row>
 			<Card style={{ width: '5rem' }}></Card>
