@@ -5,11 +5,10 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import moment from "moment";
 
-
-
 const getAllPost = () => {
   
     const [posts, setPosts] = useState([])
+
 
 
     const fetchPosts = async () => {
@@ -45,24 +44,20 @@ const getAllPost = () => {
             <h1>All Posts</h1>
             {posts.map((posts, index) => (
                 <div key={index}>
-                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'21cm'}}>
-                        <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
+                        
                         <Card.Body>
-                            <Card.Title><h5>Username:</h5>{posts.username}</Card.Title>
-                            <Card.Text><h3>Content:</h3>
+                            <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
                                 {posts.content}
-                            </Card.Text>
                             <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
                             <Link style={{ marginRight: '1cm' }} to={`/updatePost/${posts._id}`}  className="btn btn-warning ">Update</Link>
                             <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
                         </Card.Body>
                     </Card>
                 </div>
+                
             ))}
         </div>
     )
 }
-  
-
-
 export default getAllPost

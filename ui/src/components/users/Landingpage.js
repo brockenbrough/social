@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import './landingpage.css'
 import { Link } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 import Stack from 'react-bootstrap/Stack';

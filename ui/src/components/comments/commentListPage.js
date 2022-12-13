@@ -1,6 +1,10 @@
 //This is a comment about imports
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Stack from "react-bootstrap/Stack";
 
 import getUserInfo from "../../utilities/decodeJwt";
 import Comment from "./comment";
@@ -54,13 +58,35 @@ export default function CommentList() {
   // We are returning component tags for records. See use in rendering below.
   // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
   function commentList() {
-    return comments.map((record) => {
+    return comments.map((comment) => {
       return (
-        <Comment
-          record={record}
-          deleteComment={() => deleteComment(record._id)}
-          key={record._id}
-        />
+        <Card
+        body
+        outline
+        color="success"
+        className="mx-1 my-2"
+        style={{ width: "30rem" }}
+      >
+        <Card.Body>
+          <Stack>
+            <div>
+              <h4>{comment.commentContent}</h4>
+            </div>
+            <div>
+            
+              <Button
+                variant="primary"
+                className="mx-1 my-1"
+                href={`/comments/editComment/${comment._id}`}
+              >
+                Edit
+              </Button>
+              
+              <Button variant="primary" className="mx-1 my-1" onClick={() => deleteComment(comment._id)}>Delete</Button>
+            </div>
+          </Stack>
+        </Card.Body>
+      </Card>
       );
     });
   }
