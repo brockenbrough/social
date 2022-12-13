@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 // The FollowerCount component.  This is the main component in this file.
 
 export default function FollowingCount(props) {
-export default function FollowingCount(props) {
 
   let navigate = useNavigate() 
 
