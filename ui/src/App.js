@@ -34,7 +34,6 @@ import getUserInfo from "./utilities/decodeJwt";
 import CreatePost from "./components/post/createPost";
 import GetAllPost from "./components/post/getAllPost";
 import UpdatePost from "./components/post/updatePost";
-import SinglePost from "./components/post/singlePost";
 
 export const UserContext = createContext();
 //test change
@@ -60,7 +59,7 @@ const App = () => {
             path="/privateUserLikeList"
             element={<PrivateUserLikeList />}
           />
-          <Route path="/publicProfilePage" element={<PublicProfilePage />} />
+          <Route path="/publicProfilePage/:username" element={<PublicProfilePage />} />
           <Route path="/publicUser" element={<PublicUser />} />
           <Route path="/project-notes/editContributor/:id" element={<EditContributor />}  />
           <Route path="/project-notes/create" element={<CreateContributor />} />
@@ -81,7 +80,6 @@ const App = () => {
           <Route path="/createpost" element={<CreatePost />} />
           <Route path="/getallpost" element={<GetAllPost />} />
           <Route path="/updatepost/:postId" element={<UpdatePost />} />
-          <Route path="/singlepost/:postId" element={<SinglePost />} />
         </Routes>
       </UserContext.Provider>
     </>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import moment from "moment";
+import Post from './post';
 
 const getAllPost = () => {
   
@@ -13,7 +14,9 @@ const getAllPost = () => {
 
     const fetchPosts = async () => {
         const res = await axios.get('http://localhost:8083/posts/getAllPosts')
+     
             .then(res => {
+              
                 setPosts(res.data)
             })
             .catch(error => alert('error fetching data'))
@@ -44,17 +47,7 @@ const getAllPost = () => {
             <h1>All Posts</h1>
             {posts.map((posts, index) => (
                 <div key={index}>
-                    <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
-                        
-                        <Card.Body>
-                            <Card.Title> <Link to={'/publicprofilepage'} state={{ publicUser : posts }}>{posts.username}
-                            </Link>{}</Card.Title>
-                                {posts.content}
-                            <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
-                            <Link style={{ marginRight: '1cm' }} to={`/updatePost/${posts._id}`}  className="btn btn-warning ">Update</Link>
-                            <Button variant="danger" onClick={() => deleteConfirm(posts)}>Delete</Button>
-                        </Card.Body>
-                    </Card>
+                    <Post posts={posts}/>
                 </div>
                 
             ))}
