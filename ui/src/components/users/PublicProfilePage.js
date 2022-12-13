@@ -12,6 +12,7 @@ import PostList from '../post/feedPage'
 import Card from 'react-bootstrap/Card';
 import { Button } from "react-bootstrap";
 import axios from 'axios'
+import Post from "../post/post";
 
 // The PublicUserList component.  This is the main component in this file.
 // 1. function PublicUserList
@@ -87,7 +88,7 @@ export default function PublicUserList() {
     if (user)
     return (
       <div>
-        <h3>@{publicUser.username}</h3>
+        {/* <h3>@{publicUser.username}</h3>
         
         <h3>All Posts</h3>
             {posts.map((posts, index) => (
@@ -101,7 +102,10 @@ export default function PublicUserList() {
                         </Card.Body>
                     </Card>
                 </div>
-            ))}
+            ))} */}
+            {posts.map((posts, index) => {
+              return (<Post posts={posts} />)
+            })}
       </div>
     );
     
