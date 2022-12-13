@@ -21,7 +21,6 @@ const PublicUser = () => {
   const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const user = useContext(UserContext)
-	const username = getUserInfo().username
 	const [form, setValues] = useState({content : ""})
 	const [posts, setPosts] = useState([])
 	const navigate = useNavigate();
