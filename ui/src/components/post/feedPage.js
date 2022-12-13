@@ -72,7 +72,7 @@ export default function PostList() {
                   <Card.Title><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
                   {posts.content}
                   <div>
-                    <ToggleButton href='#'>❤︎</ToggleButton>
+                    <ToggleButton href='#'>👍</ToggleButton>
                   </div>
                 </Card.Body>
                 <Card.Footer>{posts.date}</Card.Footer>
