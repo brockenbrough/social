@@ -13,7 +13,7 @@ import getUserInfo from '../../utilities/decodeJwt';
 import Form from 'react-bootstrap/Form';
 import FollowerCount from '../following/getFollowerCount';
 import FollowingCount from '../following/getFollowingCount';
-import { useParams } from "react-router";
+import likes from '../privateUserLikeList/PrivateUserLikeListPage';
 
 //link to service 
 //http://localhost:8096/privateUserProfile
@@ -28,10 +28,15 @@ const PrivateUserProfile = () =>{
 	const [form, setValues] = useState({content : ""})
 	const [posts, setPosts] = useState([])
 	const navigate = useNavigate();
-	const [users, setUser] = useState([])
 
-//    getUserInfo()
-//    setUser(getUserInfo());
+
+	const followerRouteChange = () =>{ 
+		navigate(`/followers/${username}`); // To use in the follower's button to switch to the user's follower's list.
+	  }
+  
+	  const followingRouteChange = () =>{ 
+		  navigate(`/following/${username}`); // To use in the following button to switch to the user's following list.
+		}
 
 	// handle logout button
 	const handleLogout = async => {
@@ -54,7 +59,7 @@ const PrivateUserProfile = () =>{
 
 	useEffect(() => {
 		  fetchPosts()
-		  setUser(getUserInfo())
+		  //setUser(getUserInfo())
 	}, [])
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -64,7 +69,7 @@ const PrivateUserProfile = () =>{
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const { content } = form;
-    	const post = {content, username};
+		const post = {content, username};
     	await axios.post(" http://localhost:8083/posts/createPost", post)
 			.then(response => {
 				fetchPosts()
@@ -81,6 +86,13 @@ const PrivateUserProfile = () =>{
             .catch(error => alert('Error deleting post'))
 	}
 
+	const followerButtonOnClick =()=>
+	{
+
+	}
+
+// 	<span><b>{<FollowerCount username = {username}/>}</b></span>&nbsp; 
+// <span><b>{<FollowingCount username = {username}/>}</b></span>; 
 return(
 	<div class="container">
 		<div class="col-md-12 text-center">
@@ -90,9 +102,9 @@ return(
         </div>
 			<div class="col-md-12 text-center">
 				<ul>
-<span><b>{<FollowerCount username = {users}/>}</b></span>&nbsp; 
-<span><b>{<FollowingCount username = {users}/>}</b></span>&nbsp; 
-					<span><b> 800</b>&nbsp;Likes</span>
+				<Button onClick ={followerRouteChange} variant="light">{<FollowerCount username = {username}/>}</Button>{' '}			
+				<Button onClick ={followingRouteChange} variant="light">{<FollowingCount username = {username}/>}</Button>{' '}	
+				<Button variant="light">800 Likes</Button>{' '}
 				</ul> 
 			</div>
 			<div class = "col-md-12 text-center">
