@@ -36,7 +36,7 @@ export default function PostList() {
       <h1>
         Welcome to the public feed page
       </h1>
-      <div>
+      {/* <div>
         {posts.map((posts, index) => (
           <div key={index}>
             <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>       
@@ -51,12 +51,12 @@ export default function PostList() {
             </Card>
           </div>
         ))}
-      </div>
-      {/* <div>
+      </div> */}
+      <div>
         {posts.map(e => {
           return <Post posts = {e} isLiked={"true"}/>
         })}
-      </div> */}
+      </div>
     </div>
   );
 }

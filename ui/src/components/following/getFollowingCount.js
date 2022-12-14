@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import './followingSheet.css'
 
 
 // The FollowerCount component.  This is the main component in this file.
 
 export default function FollowingCount(props) {
-
-  const params = useParams();
   const [followState, setFollowCount] = useState([]);
   const [error, setError] = useState([]);
 
@@ -39,8 +36,6 @@ export default function FollowingCount(props) {
 
     return; 
   }, [followState.length]);  
-
-
 
   // This function is very important, it returns the following count.
 

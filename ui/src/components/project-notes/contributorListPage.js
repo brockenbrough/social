@@ -7,6 +7,7 @@ import axios from 'axios'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
+import Contributor from "./contributor";
 
 
 // The ContributorList component.  This is the main component in this file.
@@ -39,15 +40,16 @@ export default function ContributorList() {
     return; 
   }, [contributors.length]);  // If record length ever changes, this useEffect() is automatically called.
 
-  const deleteContributor = async (contributor) => {
-    axios.delete(`http://localhost:8095/project_notes/contributor/${contributor._id}`)
+  const deleteContributor = async (_id) => {
+    await axios.delete(`http://localhost:8095/project_notes/contributor/${_id}`)
         .then(response => {
-            alert('Contributor deleted.')
+            // alert('Contributor deleted.')
+            console.log('deleted')
         })
         .catch(error => alert('Error deleting contributor'));
 
             // We're going to patch up our state by removing the records corresponding to id in our current state.
-    const newRecords = contributors.filter((el) => el._id !== contributor._id);
+    const newRecords = contributors.filter((el) => el._id !== _id);
     setContributors(newRecords);  // This causes a re-render because we change state.
   }
   
@@ -56,23 +58,11 @@ export default function ContributorList() {
   // In our case we're return a presentation tag that will invoke rendering on a record.
   // We are returning component tags for records. See use in rendering below.
   // Note that component <Record> below has 3 props being passed (record, deleteRecord(), key)
-  function contributorList() {
+  function ContributorList() {
     return contributors.map((contributor) => {
+      const {level, name , position, _id} = contributor
       return (
-        <Card body outline color="success" className="mx-1 my-2" style={{ width: '30rem' }}>
-        <Card.Body> 
-            <Stack> 
-              <div><h4>{contributor.name}</h4></div>
-              <div>{contributor.position}</div>
-              <div>
-                <Button variant="primary" className="mx-1 my-1" href={`/project-notes/editContributor/${contributor._id}`} >Edit</Button>
-              </div>
-              <div>
-                <Button variant="primary" className="mx-1 my-1" onClick={() => deleteContributor(contributor)}>Delete</Button>
-              </div>
-            </Stack>
-        </Card.Body>
-      </Card>
+      <Contributor name={name} position={position} _id={_id} deleteFunction={deleteContributor} />
       );
     });
   }
@@ -85,7 +75,8 @@ export default function ContributorList() {
     <div>
       <ContributorNavbar/>
       <table className="table table-striped" style={{ marginTop: 20 }}>
-        <tbody>{contributorList()}</tbody>
+      <ContributorList />
+        {/* <tbody>{contributorList()}</tbody> */}
       </table>
     </div>
   );

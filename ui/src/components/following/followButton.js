@@ -97,7 +97,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
 
     } 
-
+    
     isFollowing();
     return;
   }, [followersState.length]);
