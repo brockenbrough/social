@@ -44,14 +44,19 @@ export default function PublicUserList() {
 
     if (user)
     return (
-      <div>
-      <Button>FollowButton</Button>
-      <Button>Unfollow Button</Button>
+      
+      <div class = "text-center">
             {posts.map((posts, index) => {
               
-              return (<Post posts={posts} />)
+              return (<Post posts={posts}
+                 />)
             })}
-      </div>
+            <Button class="justify-content-between w-100" size = "sm" >
+             Follow Button
+            </Button>
+            
+             </div>
+             
     );
     
     

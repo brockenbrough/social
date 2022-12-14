@@ -46,9 +46,9 @@ return(
 
 <h1>{Post && Post.PostList}</h1>
         
-			<div class="col-md-12 text-center">
+			<div class="text-center">
 			</div>
-			<div class = "col-md-12 text-center">
+			<div class = "text-center">
 			</div>
 		</div>
 	
@@ -61,15 +61,14 @@ return(
    </div>
    <div>
             {posts.map((posts, index) => (
-                <div key={index}>
+                <div class = "text-center" key={index}>
                     <Card style={{ width: '18rem' , marginTop:'1cm', marginLeft:'.5cm',background:'aliceblue'}}>
-                        
-                        <Card.Body>
-                            <Card.Title><h5>User:</h5><Link to={'/publicprofilepage'}>{posts.username}</Link>{}</Card.Title>
-                                {posts.content}
+                            <Card.Title>
+                              <h5>User:</h5>
+                              <Link to={'/publicprofilepage'}>{posts.username}</Link>{}
+                              </Card.Title>
+                              {posts.content}
                             <p>{moment(posts.createdAt).format("MMM DD yyyy")}</p>
-                            
-                        </Card.Body>
                     </Card>
                 </div>
                 
