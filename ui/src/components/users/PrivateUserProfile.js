@@ -11,6 +11,9 @@ import axios from 'axios'
 import moment from "moment";
 import getUserInfo from '../../utilities/decodeJwt';
 import Form from 'react-bootstrap/Form';
+import FollowerCount from '../following/getFollowerCount';
+import FollowingCount from '../following/getFollowingCount';
+import { useParams } from "react-router";
 
 //link to service 
 //http://localhost:8096/privateUserProfile
@@ -25,6 +28,10 @@ const PrivateUserProfile = () =>{
 	const [form, setValues] = useState({content : ""})
 	const [posts, setPosts] = useState([])
 	const navigate = useNavigate();
+	const [users, setUser] = useState([])
+
+//    getUserInfo()
+//    setUser(getUserInfo());
 
 	// handle logout button
 	const handleLogout = async => {
@@ -47,6 +54,7 @@ const PrivateUserProfile = () =>{
 
 	useEffect(() => {
 		  fetchPosts()
+		  setUser(getUserInfo())
 	}, [])
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -82,8 +90,8 @@ return(
         </div>
 			<div class="col-md-12 text-center">
 				<ul>
-					<span><b>164</b>&nbsp;Followers </span>&nbsp; 
-					<span><b>18</b>&nbsp;Following</span>&nbsp; 
+<span><b>{<FollowerCount username = {users}/>}</b></span>&nbsp; 
+<span><b>{<FollowingCount username = {users}/>}</b></span>&nbsp; 
 					<span><b> 800</b>&nbsp;Likes</span>
 				</ul> 
 			</div>
