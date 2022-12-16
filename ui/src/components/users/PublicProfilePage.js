@@ -52,10 +52,6 @@ export default function PublicUserList() {
               return (<Post posts={posts}
                  />)
             })}
-            <Button class="justify-content-between w-100" size = "sm" >
-             Follow Button
-            </Button>
-            
              </div>
              
     );

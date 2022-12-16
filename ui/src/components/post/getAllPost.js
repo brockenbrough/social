@@ -1,57 +1,54 @@
-import axios from 'axios'
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import moment from "moment";
-import Post from './post';
+import Post from "./post";
 
 const getAllPost = () => {
-  
-    const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
+  const fetchPosts = async () => {
+    const res = await axios
+      .get("http://localhost:8083/posts/getAllPosts")
 
+      .then((res) => {
+        setPosts(res.data);
+      })
+      .catch((error) => alert("error fetching data"));
+  };
 
-    const fetchPosts = async () => {
-        const res = await axios.get('http://localhost:8083/posts/getAllPosts')
-     
-            .then(res => {
-              
-                setPosts(res.data)
-            })
-            .catch(error => alert('error fetching data'))
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const deleteConfirm = (posts) => {
+    let answer = window.confirm("Are you sure you want to delete your post?");
+    if (answer) {
+      deletePost(posts);
     }
+  };
 
-    useEffect(() => {
-        fetchPosts()
-    }, [])
+  const deletePost = async (posts) => {
+    axios
+      .delete(`http://localhost:8083/posts/deletePost/${posts._id}`)
+      .then((response) => {
+        alert("Post deleted successfully");
+        fetchPosts();
+      })
+      .catch((error) => alert("Error deleting post"));
+  };
 
-    const deleteConfirm = posts => {
-        let answer = window.confirm('Are you sure you want to delete your post?')
-        if (answer) {
-            deletePost(posts)
-        }
-    }
-
-    const deletePost = async (posts) => {
-        axios.delete(`http://localhost:8083/posts/deletePost/${posts._id}`)
-            .then(response => {
-                alert('Post deleted successfully')
-                fetchPosts()
-            })
-            .catch(error => alert('Error deleting post'))
-    }
-
-    return (
-        <div>
-            <h1>All Posts</h1>
-            {posts.map((posts, index) => (
-                <div key={index}>
-                    <Post posts={posts}/>
-                </div>
-                
-            ))}
-        </div>
-    )
-}
-export default getAllPost
+  return (
+    <>
+      <h1>All Posts</h1>
+      <div className="d-flex flex-wrap">
+        {posts.map((posts, index) => (
+          <Post posts={posts} />
+        ))}
+      </div>
+    </>
+  );
+};
+export default getAllPost;
