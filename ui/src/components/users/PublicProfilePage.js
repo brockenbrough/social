@@ -49,9 +49,15 @@ export default function PublicUserList() {
      <FollowButton username = {user.username} targetUserId = {username}/>
             {posts.map((posts, index) => {
               
-              return (<Post posts={posts} />)
+              return (<Post posts={posts}
+                 />)
             })}
-      </div>
+            <Button class="justify-content-between w-100" size = "sm" >
+             Follow Button
+            </Button>
+            
+             </div>
+             
     );
     
     

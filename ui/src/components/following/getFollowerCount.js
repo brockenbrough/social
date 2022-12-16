@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import './followingSheet.css'
-
 
 // The FollowerCount component.  This is the main component in this file.
 
@@ -9,10 +7,6 @@ export default function FollowerCount(props) {
 
     const [followState, setFollowerCount] = useState([]);
     const [error, setError] = useState([]);
-
-
-
-  const params = useParams();
 
   useEffect(() => {
 
@@ -47,8 +41,6 @@ export default function FollowerCount(props) {
     return; 
   }, [followState.length]);  
 
-
-
   // This function is very important, it returns the follower count.
 
   function FollowersCount(){
@@ -63,6 +55,5 @@ export default function FollowerCount(props) {
   //if (!user) return (<div><h3>You are not authorized to view this page, Please Login in <Link to={'/login'}><a href='#'>here</a></Link></h3></div>)
 
   // Returns the Follower count of the user.
-  return (<div><FollowersCount/> Followers</div>
-  );
+  return (<div><FollowersCount/> Followers</div>);
 }

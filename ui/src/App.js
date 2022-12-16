@@ -1,5 +1,4 @@
 import React from "react";
-
 // We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
 /*
@@ -21,6 +20,7 @@ import EditUserPage from "./components/users/editUserPage";
 import PublicProfilePage from "./components/users/PublicProfilePage";
 import PublicUser from "./components/users/PublicUser";
 import PrivateUserProfile from "./components/users/PrivateUserProfile";
+import postLikedByPage from "./components/postLikedByPage/postLikedByPage";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
@@ -34,6 +34,9 @@ import getUserInfo from "./utilities/decodeJwt";
 import CreatePost from "./components/post/createPost";
 import GetAllPost from "./components/post/getAllPost";
 import UpdatePost from "./components/post/updatePost";
+
+import CommentsHome from "./components/comments/commentsHome";
+
 export const UserContext = createContext();
 //test change
 //test again
@@ -57,6 +60,10 @@ const App = () => {
           <Route
             path="/privateUserLikeList"
             element={<PrivateUserLikeList />}
+          />
+           <Route
+            path="/postLikedByPage"
+            element={<postLikedByPage />}
           />
           <Route path="/publicProfilePage/:username" element={<PublicProfilePage />} />
           <Route path="/publicUser" element={<PublicUser />} />
