@@ -20,6 +20,7 @@ import EditUserPage from "./components/users/editUserPage";
 import PublicProfilePage from "./components/users/PublicProfilePage";
 import PublicUser from "./components/users/PublicUser";
 import PrivateUserProfile from "./components/users/PrivateUserProfile";
+import postLikedByPage from "./components/postLikedByPage/postLikedByPage";
 import Test from "./Test";
 import FollowerList from "./components/following/followerListPage";
 import FollowingList from "./components/following/followingListPage";
@@ -59,6 +60,10 @@ const App = () => {
           <Route
             path="/privateUserLikeList"
             element={<PrivateUserLikeList />}
+          />
+           <Route
+            path="/postLikedByPage"
+            element={<postLikedByPage />}
           />
           <Route path="/publicProfilePage/:username" element={<PublicProfilePage />} />
           <Route path="/publicUser" element={<PublicUser />} />
