@@ -75,7 +75,7 @@ const App = () => {
           <Route path="/comments/comment" element={<CommentList />} />
           <Route path="/comments/editComment/:id" element={<EditComment />} />
           <Route path="/comments/create" element={<CreateComments />} />
-          <Route path="/comments/allcomments" element={<CommentsHome />} />
+          {/* <Route path="/comments/allcomments" element={<CommentsHome />} /> */}
 
           <Route path="/test" element={<Test />} />
           <Route path="/followers/:id" element={<FollowerList />} />

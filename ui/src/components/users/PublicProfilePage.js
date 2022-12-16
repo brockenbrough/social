@@ -13,6 +13,7 @@ import getUserInfo from '../../utilities/decodeJwt'
 import { Button } from "react-bootstrap";
 import axios from 'axios'
 import Post from "../post/post";
+import FollowButton from '../following/followButton'
 
 // The PublicUserList component.  This is the main component in this file.
 // 1. function PublicUserList
@@ -45,8 +46,7 @@ export default function PublicUserList() {
     if (user)
     return (
       <div>
-      <Button>FollowButton</Button>
-      <Button>Unfollow Button</Button>
+     <FollowButton username = {user.username} targetUserId = {username}/>
             {posts.map((posts, index) => {
               
               return (<Post posts={posts} />)
