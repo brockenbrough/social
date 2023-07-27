@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import moment from "moment";
 import Post from "./post";
 
-const getAllPost = () => {
+const GetAllPost = () => {
   const [posts, setPosts] = useState([]);
 
   const fetchPosts = async () => {
@@ -51,4 +51,4 @@ const getAllPost = () => {
     </>
   );
 };
-export default getAllPost;
+export default GetAllPost;

@@ -7,7 +7,7 @@ import { Form, Button } from 'react-bootstrap'
 
 
 
-    const updatePost = (props) => {
+    const UpdatePost = (props) => {
         const [state, setState] = useState({
             username: '',
             content: '',
@@ -92,4 +92,4 @@ import { Form, Button } from 'react-bootstrap'
     }
 
 
-export default updatePost
+export default UpdatePost

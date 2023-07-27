@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import api, { postURL } from './api/api';
 import Modal from 'react-bootstrap/Modal';
 
-function postLikedByPage() {
+function PostLikedByPage() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -31,4 +31,4 @@ function postLikedByPage() {
   );
 }
 
-export default postLikedByPage 
+export default PostLikedByPage 
