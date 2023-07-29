@@ -10,7 +10,7 @@ import getUserInfo from '../../utilities/decodeJwt';
 
 const EditUserPage = () =>{
 
-  const url = "http://localhost:8081/user/editUser";
+  const url = "http://localhost:8095/user/editUser";
   const navigate = useNavigate();
 
   // form validation checks
