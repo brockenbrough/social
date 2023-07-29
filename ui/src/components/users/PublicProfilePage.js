@@ -25,7 +25,7 @@ export default function PublicUserList() {
   const [posts, setPosts] = useState([])
  
   const fetchPosts = async () => {
-	  const res = await axios.get(`http://localhost:8083/posts/getAllByUsername/${username}`)
+	  const res = await axios.get(`http://localhost:8095/posts/getAllByUsername/${username}`)
 		  .then(res => {
 			  setPosts(res.data)
 		  })

@@ -18,7 +18,7 @@ export default function PostList() {
       })
       .catch(error => alert("An error has occure while fetching feed data"))
     for (let i = 0; i < feed.length; i++) {
-      const res = await axios.get(`http://localhost:8083/posts/getPostById/${feed[i]}`)
+      const res = await axios.get(`http://localhost:8095/posts/getPostById/${feed[i]}`)
         .then(res => {
           postData.push(res.data)
         })

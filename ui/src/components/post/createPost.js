@@ -25,7 +25,7 @@ const CreatePost = () => {
       content,
       username,
     };
-    await axios.post(" http://localhost:8083/posts/createPost", post);
+    await axios.post(" http://localhost:8095/posts/createPost", post);
     navigate("/");
   };
 

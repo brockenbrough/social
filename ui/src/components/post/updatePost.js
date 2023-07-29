@@ -17,7 +17,7 @@ import { Form, Button } from 'react-bootstrap'
        const navigate = useNavigate();
 
         useEffect(() => {
-            axios.get(`http://localhost:8083/posts/getPostById/${params.postId}`)
+            axios.get(`http://localhost:8095/posts/getPostById/${params.postId}`)
                 .then(res => {
                     setState(res.data)
                 })
@@ -35,10 +35,10 @@ import { Form, Button } from 'react-bootstrap'
 
         const handleSubmit = (e) => {
             e.preventDefault()
-            axios.put(` http://localhost:8083/posts/updatePost/${params.postId}`, state)
+            axios.put(` http://localhost:8095/posts/updatePost/${params.postId}`, state)
                 .then(res => {
                     console.log(res)
-                    navigate(` http://localhost:8083/posts/getAllPosts/${params.postId}`)
+                    navigate(` http://localhost:8095/posts/getAllPosts/${params.postId}`)
                 })
                 .catch(err => {
                     console.log(err)

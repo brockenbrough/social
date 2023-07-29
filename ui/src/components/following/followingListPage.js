@@ -20,7 +20,7 @@ export default function FollowingList() {
     // Define a function to get the user's following. People that they follow.
     async function getFollowing() {
 
-      const response = await fetch(`http://localhost:8085/following/${params.id.toString()}`);
+      const response = await fetch(`http://localhost:8095/following/${params.id.toString()}`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -52,7 +52,7 @@ export default function FollowingList() {
   //     userId: userId,
   //     targetUserId: targetUserId,
   //   }
-  //   const url = "http://localhost:8085/followers/unfollow";
+  //   const url = "http://localhost:8095/followers/unfollow";
 
   // await axios.delete(url, {
   //   data: deleteFollowing,

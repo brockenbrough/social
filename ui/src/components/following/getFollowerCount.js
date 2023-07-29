@@ -13,7 +13,7 @@ export default function FollowerCount(props) {
     // Gets the follower count of the user.
     async function getFollowerCount() {
 
-      const response = await fetch(`http://localhost:8085/followers/${props.username}`);
+      const response = await fetch(`http://localhost:8095/followers/${props.username}`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;

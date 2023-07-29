@@ -49,7 +49,7 @@ const PrivateUserProfile = () => {
 
   const fetchPosts = async () => {
     const res = await axios
-      .get(`http://localhost:8083/posts/getAllByUsername/${username}`)
+      .get(`http://localhost:8095/posts/getAllByUsername/${username}`)
       .then((res) => {
         setPosts(res.data);
       })
@@ -70,7 +70,7 @@ const PrivateUserProfile = () => {
     const { content } = form;
     const post = { content, username };
     await axios
-      .post(" http://localhost:8083/posts/createPost", post)
+      .post(" http://localhost:8095/posts/createPost", post)
       .then((response) => {
         fetchPosts();
         form.content = "";
@@ -80,7 +80,7 @@ const PrivateUserProfile = () => {
 
   const deleteConfirm = async (posts) => {
     axios
-      .delete(`http://localhost:8083/posts/deletePost/${posts._id}`)
+      .delete(`http://localhost:8095/posts/deletePost/${posts._id}`)
       .then((response) => {
         fetchPosts();
       })

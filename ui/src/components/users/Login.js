@@ -81,7 +81,7 @@ const Login = () => {
             style={backgroundStyling}>
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
-                src="https://cdn.dribbble.com/users/1080850/screenshots/11585265/media/01aaa0e9a2325d1032112e98d5c78474.png?compress=1&resize=700x600"
+                src="https://cdn.dribbble.com/users/1080950/screenshots/11585265/media/01aaa0e9a2325d1032112e98d5c78474.png?compress=1&resize=700x600"
                 className="img-fluid"
                 alt="test image"
               />

@@ -18,7 +18,7 @@ export default function FollowerList() {
   useEffect(() => {
     async function getFollowers() {
         
-      const response = await fetch(`http://localhost:8085/followers/${params.id.toString()}`);
+      const response = await fetch(`http://localhost:8095/followers/${params.id.toString()}`);
       
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -48,7 +48,7 @@ export default function FollowerList() {
         userId: userId,
         targetUserId: targetUserId,
       }
-    const url = "http://localhost:8085/followers/unfollow";
+    const url = "http://localhost:8095/followers/unfollow";
 
     await axios.delete(url, {
         data: deleteFollower,

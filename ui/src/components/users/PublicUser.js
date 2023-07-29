@@ -28,7 +28,7 @@ const PublicUser = () => {
 
 
 	const fetchPosts = async () => {
-	  const res = await axios.get(`http://localhost:8083/posts/getAllPosts/${posts}`)
+	  const res = await axios.get(`http://localhost:8095/posts/getAllPosts/${posts}`)
 		  .then(res => {
 			  setPosts(res.data)
 		  })

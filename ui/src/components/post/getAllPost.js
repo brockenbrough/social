@@ -11,7 +11,7 @@ const GetAllPost = () => {
 
   const fetchPosts = async () => {
     const res = await axios
-      .get("http://localhost:8083/posts/getAllPosts")
+      .get("http://localhost:8095/posts/getAllPosts")
 
       .then((res) => {
         setPosts(res.data);
@@ -32,7 +32,7 @@ const GetAllPost = () => {
 
   const deletePost = async (posts) => {
     axios
-      .delete(`http://localhost:8083/posts/deletePost/${posts._id}`)
+      .delete(`http://localhost:8095/posts/deletePost/${posts._id}`)
       .then((response) => {
         alert("Post deleted successfully");
         fetchPosts();

@@ -30,7 +30,7 @@ export default function CreateComments() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newComment = { ...form };
 
-    await fetch("http://localhost:8089/comments/comment/add", {
+    await fetch("http://localhost:8095/comments/comment/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

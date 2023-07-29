@@ -36,7 +36,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
       userId: props.username,
       targetUserId: props.targetUserId,
     }
-    const url = "http://localhost:8085/followers/follow";
+    const url = "http://localhost:8095/followers/follow";
 
     const res = await axios.post(url, addFollowing)
     setIsFollowing(true); // Follow state, to true. Sets the button UI view.
@@ -53,7 +53,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
       userId: props.username,
       targetUserId: props.targetUserId,
     }
-    const url = "http://localhost:8085/followers/unfollow";
+    const url = "http://localhost:8095/followers/unfollow";
 
     const res = await axios.delete(url, {
       data: unFollow,
@@ -71,7 +71,7 @@ useEffect(() => {setUser(getUserInfo())}, []) // Get user's info
 
 
     const response = await fetch(
-      `http://localhost:8085/followers/${props.targetUserId}`
+      `http://localhost:8095/followers/${props.targetUserId}`
     );
 
     if (!response.ok) {
