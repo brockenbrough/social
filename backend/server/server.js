@@ -31,8 +31,13 @@ const connectDB = require("./db/conn");
 // Connect database.
 connectDB();
 
-app.listen(port, () => {
-  setTimeout(() => {
-    console.log(`All services are running on port: ${port}`);
-  }, 1000); // Add a 1-second delay
-});
+// Conditionally start the server only if not in test mode
+if (process.env.NODE_ENV !== "test") {
+    app.listen(port, () => {
+      setTimeout(() => {
+        console.log(`All services are running on port: ${port}`);
+      }, 1000); // Add a 1-second delay
+    });
+}
+
+module.exports = app; // Export the app instance for unit testing via supertest.
